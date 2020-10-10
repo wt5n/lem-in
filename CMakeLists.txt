@@ -10,6 +10,7 @@ set(SRC_OPERATIONS main.c)
 
 
 add_executable(lem-in lem_in.h ${SRC_OPERATIONS})
+add_executable(test test.c)
 
 add_subdirectory(libft)
 target_link_libraries(lem-in libft)
