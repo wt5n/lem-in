@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/hlikely/Desktop/lem-in/libft/libft.h
+string.h
+-
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+fcntl.h
+-
+
+/Users/hlikely/Desktop/lem-in/main.c
+libft/libft.h
+/Users/hlikely/Desktop/lem-in/libft/libft.h
+
