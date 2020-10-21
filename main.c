@@ -1,27 +1,16 @@
+
 #include "libft/libft.h"
 
-struct map
-{
-	/*
-	 * struct room->next;
-	 *
-	 */
-};
 
-struct room
-{
-	/*
-	 * bool наличия муравьев
-	 * char* номер комнаты
-	 * волна
-	 */
-};
+
 
 1. пройтись по комнатам и напистаь их волну
 
 
-int main()
+int main(int ac, char **av)
 {
+
+
 	/* Инициализация:
 	 * - структура для карты:
 	 * 		int ants;
