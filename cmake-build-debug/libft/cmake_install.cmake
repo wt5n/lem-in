@@ -1,4 +1,4 @@
-# Install script for directory: /Users/hlikely/Desktop/lem-in/libft
+# Install script for directory: /Users/ksenaida/Desktop/lem-in/libft
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

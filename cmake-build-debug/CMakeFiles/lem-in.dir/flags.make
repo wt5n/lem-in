@@ -6,5 +6,5 @@ C_FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacO
 
 C_DEFINES = 
 
-C_INCLUDES = -I/Users/hlikely/Desktop/lem-in/inc 
+C_INCLUDES = -I/Users/ksenaida/Desktop/lem-in/inc 
 
