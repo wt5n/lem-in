@@ -1,6 +1,8 @@
 #ifndef LEM_IN_LEM_IN_H
 #define LEM_IN_LEM_IN_H
 
+#include "libft/libft.h"
+
 typedef struct		s_link
 {
 	char 			*name;
@@ -12,8 +14,8 @@ typedef struct		s_room
 	int				CheckAnt;
 	char			*name_room;
 	int				hash;
-	t_link			links;
-	struct room		*next ;
+	t_link			*links;
+	struct s_room	*next ;
 }					t_room;
 
 typedef struct s_room_keeper
