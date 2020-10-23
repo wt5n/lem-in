@@ -1,16 +1,16 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.17)
+project(lem_in)
 
-project(push_swap)
-
-set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD 11)
 
 include_directories(inc)
 
-set(SRC_OPERATIONS main.c queue.c)
+set(SRC_OPERATIONS main.c)
 
 
-add_executable(lem-in lem_in.h ${SRC_OPERATIONS})
-add_executable(test test.c)
+add_executable(lem_in
+        lem_in.h
+        ${SRC_OPERATIONS})
 
 add_subdirectory(libft)
-target_link_libraries(lem-in libft)
+target_link_libraries(lem_in libft)

@@ -15,20 +15,12 @@ int	create_hash(char *name)
 	return hash;
 }
 
-void	add_link(t_room master, t_room link)
+void	add_link(t_room *master, char *link)
 {
-	t_link *newlin;
+	int i;
 
-	int i = 0;
-	int count_of_link = ();
-	newlin = (t_link*)malloc(sizeof(t_list) * (count_of_link + (count_of_link / 2)));
-	while (i < count_of_link)
-	{
-		newlin[i] = master->link[i];
-		free(master->link[i]);
-		i++
-	}
-	master->link = newlin;
+	i = 0;
+	while
 }
 
 t_room	*create_room(char *name)
@@ -39,8 +31,13 @@ t_room	*create_room(char *name)
 	room->CheckAnt = 0;
 	room->name_room = name;
 	room->hash = create_hash(name);
-	room->links = (t_link*)malloc(sizeof(t_link) * 10);
-	ft_bzero(room->links);
+	// room->links = (t_li'nk*)malloc(sizeof(t_link) * 10);
+	room->links = (char**)malloc(sizeof(char*) * 1);
+	int i = 0;
+	room->links[0] = (char*)malloc(sizeof(char));
+	room->links[0] = '\0';
+	room->links = NULL;
+	// ft_bzero(room->links);
 	room->next = NULL;
 	return room;
 }

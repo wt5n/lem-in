@@ -1,5 +1,7 @@
 #include "lem_in.h"
 
+void increase_links(t_room *pRoom);
+
 int	create_hash(char *name)
 {
 	int hash;
@@ -37,8 +39,15 @@ t_room	*create_room(char *name)
 	room->name_room = name;
 	room->hash = create_hash(name);
 	room->next = NULL;
-	room->links = (t_queue*)malloc(sizeof(t_queue));
-	room->links = NULL;
+	room->links = (char**)malloc(sizeof(char*) * 10);
+	int i = 0;
+	while (i < 10)
+	{
+        room->links[i] = (char*)malloc(sizeof(char));
+		room->links[i] = NULL;
+		i++;
+	}
+	room->links_len = 10;
 	return room;
 }
 
@@ -64,35 +73,118 @@ void	print_all_next(t_room *room)
 		tmp = tmp->next;
 	}
 	printf("\nEnd of master`s rooms\n");
+}
 
-}
-// 6-5
-void    add_links(t_room *room, t_room_keeper *keeper, char *link)
+void	print_all_links(t_room *room)
 {
-	t_room *tmp;
-	tmp = keeper->n[room->hash];
-	printf("%d\n", room->hash);
-	ft_printf("%s\n", keeper->n[room->hash]->name_room);
-	while (ft_strcmp(keeper->n[room->hash]->name_room, tmp->name_room) != 0)
-		tmp = tmp->next;
-	in_queue(keeper->n[room->hash]->links, link);
+    int i;
+
+    i = 0;
+    printf("Links of master %s\n", room->name_room);
+    while (i < room->links_len)
+    {
+        if (room->links[i] == NULL)
+            break;
+        printf("%s ", room->links[i]);
+        i++;
+    }
+    printf("\nEnd of master`s rooms\n");
 }
+
+void    increase_links(t_room *room)
+{
+    char  **new_links;
+    int i;
+
+    i = 0;
+    new_links = (char**)malloc((sizeof(char*) * (room->links_len * 2)));
+    while (i < room->links_len)
+    {
+        new_links[i] = (char*)malloc(sizeof(ft_strlen(room->links[i]) + 1));
+        ft_strcpy(new_links[i], room->links[i]);
+        free(room->links[i]);
+        i++;
+    }
+    while (i <  (room->links_len * 2))
+    {
+        new_links[i] = (char*)malloc(sizeof(char));
+        new_links[i] = NULL;
+        i++;
+    }
+    free(room->links);
+    room->links = new_links;
+    room->links_len = room->links_len * 2;
+}
+
+// 6-5
+void    add_links(t_room *room, char *link)
+{
+	int i;
+
+	i = 0;
+	while (i < room->links_len)
+    {
+	    if (room->links[i] == NULL) {
+            room->links[i] = (char*)malloc(sizeof(ft_strlen(link) + 1));
+            room->links[i] = ft_strcpy(room->links[i], link);
+            return;
+        }
+	    i++;
+    }
+	increase_links(room);
+	add_links(room, link);
+}
+
+
+
+//t_link  *create_link(char *name)
+//{
+//    char *link;
+//
+//    link = (t_link*)malloc(sizeof(t_link));
+//    link->name = (char*)malloc(sizeof(ft_strlen(name) + 1));
+//    ft_strcpy(link->name, name);
+//    return link;
+//}
 
 int		main(void)
 {
 	t_room_keeper *rooms = (t_room_keeper*)malloc(sizeof(t_room_keeper));
 	rooms->n = (t_room**)malloc(sizeof(t_room*) * 3000);
+
 	t_room *you = create_room("You");
 	t_room *anuj = create_room("Anuj");
+
 	anuj->hash = 173;
 	rooms->n[173] = you;
-	add_links(you, rooms, "Alice");
-	add_links(anuj, rooms, "BB");
-	while (rooms->n[173]->links != NULL)
-	{
-		printf("%s ", rooms->n[173]->links->stack1->name);
-		rooms->n[173]->links->stack1->next;
-	}
+
+	add_links(you, "Alice");
+    add_links(you, "2");
+    add_links(you, "3");
+    add_links(you, "4");
+    add_links(you, "5");
+    add_links(you, "6");
+    add_links(you, "7");
+    add_links(you, "8");
+    add_links(you, "9");
+    add_links(you, "10");
+
+    add_links(anuj, "BB");
+
+	print_all_links(you);
+    print_all_links(anuj);
+
+    add_links(you, "11");
+    print_all_links(you);
+    ft_printf("%d\n", you->links_len);
+
+//    add_links(you, "Alice");
+
+	// while (rooms->n[173]->links != NULL)
+	// {
+	// 	printf("%s ", rooms->n[173]->links->stack1->name);
+	// 	rooms->n[173]->links->stack1->next;
+	// }
 //	in_queue(rooms->n[0].links, "Bob");
 //	in_queue(rooms->n[0].links, "Clair");
 //	in_queue(rooms->n[0].next->links, "1");
