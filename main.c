@@ -38,6 +38,7 @@ t_room	*create_room(char *name)
 	room->hash = create_hash(name);
 	room->next = NULL;
 	room->links = (t_queue*)malloc(sizeof(t_queue));
+	room->links = NULL;
 	return room;
 }
 
@@ -65,34 +66,39 @@ void	print_all_next(t_room *room)
 	printf("\nEnd of master`s rooms\n");
 
 }
-
-void    add_links(int hash, const char *name, t_room_keeper *rooms, char *link)
+// 6-5
+void    add_links(t_room *room, t_room_keeper *keeper, char *link)
 {
-	int i = 0;
-
-	while (rooms->n[i].name_room != name)
-	{
-		while (rooms->n[i].hash != hash)
-			i++;
-		rooms->n[i].next;
-	}
-	in_queue(rooms->n[i].links, link);
+	t_room *tmp;
+	tmp = keeper->n[room->hash];
+	printf("%d\n", room->hash);
+	ft_printf("%s\n", keeper->n[room->hash]->name_room);
+	while (ft_strcmp(keeper->n[room->hash]->name_room, tmp->name_room) != 0)
+		tmp = tmp->next;
+	in_queue(keeper->n[room->hash]->links, link);
 }
 
 int		main(void)
 {
 	t_room_keeper *rooms = (t_room_keeper*)malloc(sizeof(t_room_keeper));
+	rooms->n = (t_room**)malloc(sizeof(t_room*) * 3000);
 	t_room *you = create_room("You");
-	rooms->n[0] = *you;
-	printf("%s\n", rooms->n[0].name_room);
 	t_room *anuj = create_room("Anuj");
-	add_next(&rooms->n[0], anuj);
-	add_links(173, "You", rooms, "Alice");
-	add_links(206, "Anuj", rooms, "Alice");
+	anuj->hash = 173;
+	rooms->n[173] = you;
+	add_links(you, rooms, "Alice");
+	add_links(anuj, rooms, "BB");
+	while (rooms->n[173]->links != NULL)
+	{
+		printf("%s ", rooms->n[173]->links->stack1->name);
+		rooms->n[173]->links->stack1->next;
+	}
 //	in_queue(rooms->n[0].links, "Bob");
 //	in_queue(rooms->n[0].links, "Clair");
-//	printf("master %s links: %s, %s, %s\n", rooms->n[0].name_room, out_queue(rooms->n[0].links),
-//		out_queue(rooms->n[0].links), out_queue(rooms->n[0].links));
+//	in_queue(rooms->n[0].next->links, "1");
+//	in_queue(rooms->n[0].next->links, "2");
+//	printf("master %s links: %s, %s\n", rooms->n[0].name_room, out_queue(rooms->n[0].links),
+//		out_queue(rooms->n[0].links));
 //	in_queue(rooms->n[0].next->links, "Alice");
 //	in_queue(rooms->n[0].next->links, "Clair");
 //	printf("slave %s links: %s, %s\n", rooms->n[0].next->name_room,
@@ -119,12 +125,12 @@ int		main(void)
 	// add_link(clair, jonny);
 
 
-	printf("%s %d\n", you->name_room, you->hash);
-	printf("%s %d\n", anuj->name_room, anuj->hash);
+//	printf("%s %d\n", you->name_room, you->hash);
+//	printf("%s %d\n", anuj->name_room, anuj->hash);
 //	printf("%s %d\n", alice->name_room, alice->hash);
 //	printf("%s %d\n", clair->name_room, clair->hash);
-
-	print_all_next(you);
+//
+//	print_all_next(you);
 
 	return (0);
 }
