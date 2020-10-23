@@ -1,7 +1,5 @@
 #include "lem_in.h"
 
-void increase_links(t_room *pRoom);
-
 int	create_hash(char *name)
 {
 	int hash;
@@ -151,6 +149,8 @@ int		main(void)
 {
 	t_room_keeper *rooms = (t_room_keeper*)malloc(sizeof(t_room_keeper));
 	rooms->n = (t_room**)malloc(sizeof(t_room*) * 3000);
+	ft_printf("%d\n", create_hash("Qwer"));
+	ft_printf("%d\n", create_hash("aeswrqwerqwegdasd213421erqwertyreg345gewrgwergwerhjwretwert"));
 
 	t_room *you = create_room("You");
 	t_room *anuj = create_room("Anuj");
