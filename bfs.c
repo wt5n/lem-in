@@ -24,7 +24,7 @@ void	add_link(t_room master, t_room link)
 	newlin = (t_link*)malloc(sizeof(t_list) * (count_of_link + (count_of_link / 2)));
 	while (i < count_of_link)
 	{
-		newlin[i] = master->lin[i];
+		newlin[i] = master->link[i];
 		free(master->link[i]);
 		i++
 	}
@@ -101,7 +101,7 @@ int		main(void)
     printf("%s %d\n", alice->name_room, alice->hash);
     printf("%s %d\n", clair->name_room, clair->hash);
 
-	print_all_links(you);
+	print_all_next(you);
 
 	return (1);
 }

@@ -6,7 +6,7 @@ set(CMAKE_C_STANDARD 99)
 
 include_directories(inc)
 
-set(SRC_OPERATIONS main.c)
+set(SRC_OPERATIONS main.c queue.c)
 
 
 add_executable(lem-in lem_in.h ${SRC_OPERATIONS})

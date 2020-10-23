@@ -1,28 +1,16 @@
-
 #include "libft/libft.h"
+#include "lem_in.h"
 
 
-
-
-1. пройтись по комнатам и напистаь их волну
-
-
-int main(int ac, char **av)
+int main()
 {
-
-
-	/* Инициализация:
-	 * - структура для карты:
-	 * 		int ants;
-	 * - обнуление структуры
-	 * Чтение карты:
-	 * -
-	 * Валидация
-	 * Алгоритм
-	 * Вывод:
-	 * Error management:
-	 * - чистка карты;
-	 */
-
+	t_queue *q = (t_queue *) malloc (sizeof (t_queue));
+	q->stack1 = NULL;
+	enQueue (q, "hello");
+	enQueue (q, "world");
+	ft_printf("%d\n", 1);
+	ft_printf ("%s ", deQueue (q));
+	ft_printf ("%s ", deQueue (q));
+	free(q);
 	return 0;
 }

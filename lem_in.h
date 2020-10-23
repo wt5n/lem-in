@@ -9,6 +9,11 @@ typedef struct		s_link
 	struct s_list	*next;
 }					t_link;
 
+typedef struct      s_queue
+{
+	t_link          *stack1;
+}                   t_queue;
+
 typedef struct		s_room
 {
 	int				CheckAnt;
@@ -21,7 +26,10 @@ typedef struct		s_room
 typedef struct s_room_keeper
 {
 	int RoomCounter;
-	t_room n[5000];
+	t_room n[3000];
 }				t_room_keeper;
+
+void    enQueue(t_queue *q, char *x);
+char     *deQueue(t_queue *q);
 
 #endif

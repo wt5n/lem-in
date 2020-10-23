@@ -4,6 +4,28 @@ project(libft)
 
 set(CMAKE_C_STANDARD 99)
 
+include_directories(libft/printf)
+set(PrintfSRC prinft/ft_printf.c
+        prinft/add_func.c
+        prinft/adv_itoa.c
+        prinft/ap_arith.c
+        prinft/ft_printf.c
+        prinft/handling_f.c
+        prinft/handling_lf.c
+        prinft/new_hf.c
+        prinft/parsing.c
+        prinft/type_b.c
+        prinft/type_c.c
+        prinft/type_di.c
+        prinft/type_di_add.c
+        prinft/type_f.c
+        prinft/type_f_add.c
+        prinft/type_o.c
+        prinft/type_other.c
+        prinft/type_p.c
+        prinft/type_s.c
+        prinft/type_u.c
+        prinft/type_x.c)
 set(SRC ft_atoi.c
         ft_atoi_wr.c
         ft_bzero.c
@@ -77,6 +99,7 @@ set(SRC ft_atoi.c
         ft_swap.c
         ft_tolower.c
         ft_toupper.c
-        get_next_line.c)
+        get_next_line.c
+        ${PrintfSRC})
 
 add_library(libft STATIC ${SRC})

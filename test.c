@@ -1,8 +1,6 @@
-#include "libft/libft.h"
+#include "lem_in.h"
 
-int main()
+int main ()
 {
-	int a = 1;
-	printf("%d\n", a);
-	return (0);
-}
+	return 0;
+} 
