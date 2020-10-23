@@ -8,7 +8,7 @@ int	create_hash(char *name)
 	while (*name != '\0')
 	{
 		hash += *name - '0';
-		*name++;
+		name++;
 	}
 	return hash;
 }
@@ -29,15 +29,15 @@ int	create_hash(char *name)
 //	master->link = newlin;
 //}
 
-t_room	create_room(char *name)
+t_room	*create_room(char *name)
 {
-	t_room room;
+	t_room *room = (t_room*)malloc(sizeof(t_room));
 
-	room.CheckAnt = 0;
-	room.name_room = name;
-	room.hash = create_hash(name);
-	room.next = NULL;
-	room.links = (t_queue*)malloc(sizeof(t_queue));
+	room->CheckAnt = 0;
+	room->name_room = name;
+	room->hash = create_hash(name);
+	room->next = NULL;
+	room->links = (t_queue*)malloc(sizeof(t_queue));
 	return room;
 }
 
@@ -66,23 +66,47 @@ void	print_all_next(t_room *room)
 
 }
 
+void    add_links(int hash, const char *name, t_room_keeper *rooms, char *link)
+{
+	int i = 0;
+
+	while (rooms->n[i].name_room != name)
+	{
+		while (rooms->n[i].hash != hash)
+			i++;
+		rooms->n[i].next;
+	}
+	in_queue(rooms->n[i].links, link);
+}
+
 int		main(void)
 {
 	t_room_keeper *rooms = (t_room_keeper*)malloc(sizeof(t_room_keeper));
-	t_room you = create_room("You");
-	t_room bob = create_room("Bob");
-	t_room alice = create_room("Alice");
-	t_room clair = create_room("Clair");
-	rooms->n[0] = you;
-	rooms->n[1] = bob;
-	rooms->n[2] = alice;
-	rooms->n[3] = clair;
-	in_queue(rooms->n[0].links, "Bob");
-	in_queue(rooms->n[1].links, "you");
-	in_queue(rooms->n[0].links, "Alice");
-	in_queue(rooms->n[0].links, "Clair");
+	t_room *you = create_room("You");
+	rooms->n[0] = *you;
+	printf("%s\n", rooms->n[0].name_room);
+	t_room *anuj = create_room("Anuj");
+	add_next(&rooms->n[0], anuj);
+	add_links(173, "You", rooms, "Alice");
+	add_links(206, "Anuj", rooms, "Alice");
+//	in_queue(rooms->n[0].links, "Bob");
+//	in_queue(rooms->n[0].links, "Clair");
+//	printf("master %s links: %s, %s, %s\n", rooms->n[0].name_room, out_queue(rooms->n[0].links),
+//		out_queue(rooms->n[0].links), out_queue(rooms->n[0].links));
+//	in_queue(rooms->n[0].next->links, "Alice");
+//	in_queue(rooms->n[0].next->links, "Clair");
+//	printf("slave %s links: %s, %s\n", rooms->n[0].next->name_room,
+//		out_queue(rooms->n[0].next->links), out_queue(rooms->n[0].next->links));
+//	t_room bob = create_room("Bob");
+//	t_room alice = create_room("Alice");
+//	t_room clair = create_room("Clair");
+//
+//	rooms->n[1] = bob;
+//	rooms->n[2] = alice;
+//	rooms->n[3] = clair;
 
-//	t_room *anuj = create_room("Anuj");
+
+
 //	t_room *peggy = create_room("Peggy");
 //	 add_link(bob, anuj);
 //	 add_link(bob, peggy);
@@ -95,12 +119,12 @@ int		main(void)
 	// add_link(clair, jonny);
 
 
-//	printf("%s %d\n", you->name_room, you->hash);
-//	printf("%s %d\n", bob->name_room, bob->hash);
+	printf("%s %d\n", you->name_room, you->hash);
+	printf("%s %d\n", anuj->name_room, anuj->hash);
 //	printf("%s %d\n", alice->name_room, alice->hash);
 //	printf("%s %d\n", clair->name_room, clair->hash);
-//
-//	print_all_next(you);
+
+	print_all_next(you);
 
 	return (0);
 }
