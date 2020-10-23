@@ -19,7 +19,7 @@ typedef struct		s_room
 	int				CheckAnt;
 	char			*name_room;
 	int				hash;
-	t_link			*links;
+	t_queue 		*links;
 	struct s_room	*next ;
 }					t_room;
 
@@ -29,7 +29,7 @@ typedef struct s_room_keeper
 	t_room n[3000];
 }				t_room_keeper;
 
-void    enQueue(t_queue *q, char *x);
-char     *deQueue(t_queue *q);
+void    in_queue(t_queue *q, char *x);
+char     *out_queue(t_queue *q);
 
 #endif

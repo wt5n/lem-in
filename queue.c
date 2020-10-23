@@ -1,12 +1,11 @@
 #include "lem_in.h"
 
-static void push (t_link **top_ref, char *new_data)
+static void push(t_link **top_ref, char *new_data)
 {
 	t_link *new_node = (t_link *) malloc (sizeof (t_link));
 	if (new_node == NULL)
 	{
-		printf ("Stack overflow \n");
-		getchar ();
+		ft_printf ("Stack overflow \n");
 		exit (0);
 	}
 	new_node->name = new_data;
@@ -14,14 +13,13 @@ static void push (t_link **top_ref, char *new_data)
 	(*top_ref) = new_node;
 }
 
-static char *pop (t_link **top_ref)
+static char *pop(t_link **top_ref)
 {
 	char *res;
 	t_link *top;
 	if (*top_ref == NULL)
 	{
-		printf ("Stack underflow \n");
-		getchar ();
+		ft_printf ("Stack underflow \n");
 		exit (0);
 	}
 	else
@@ -34,26 +32,24 @@ static char *pop (t_link **top_ref)
 	}
 }
 
-void enQueue(t_queue *q, char *x)
+void in_queue(t_queue *q, char *x)
 {
 	push (&q->stack1, x);
 }
 
-char *deQueue(t_queue *q)
+char *out_queue(t_queue *q)
 {
 	char *x, *res;
 	if (q->stack1 == NULL)
 	{
-		printf ("Q is empty");
-		getchar ();
-		exit (0);
+		return("Queue is empty");
 	}
 	else if (q->stack1->next == NULL)
 		return pop (&q->stack1);
 	else
 	{
 		x = pop (&q->stack1);
-		res = deQueue (q);
+		res = out_queue (q);
 		push (&q->stack1, x);
 		return res;
 	}
