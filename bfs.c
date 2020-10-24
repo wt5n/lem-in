@@ -2,88 +2,64 @@
 
 #include <stdio.h>
 
-int	create_hash(char *name)
-{
-	int hash;
-
-	hash = 0;
-	while (*name != '\0')
-	{
-		hash += *name - '0';
-		*name++;
-	}
-	return hash;
-}
-
-void	add_link(t_room *master, char *link)
+void	zero_int_mas(int **mas, int length)
 {
 	int i;
 
 	i = 0;
-	while
-}
-
-t_room	*create_room(char *name)
-{
-	t_room *room;
-
-	room = (t_room*)malloc(sizeof(t_room));
-	room->CheckAnt = 0;
-	room->name_room = name;
-	room->hash = create_hash(name);
-	// room->links = (t_li'nk*)malloc(sizeof(t_link) * 10);
-	room->links = (char**)malloc(sizeof(char*) * 1);
-	int i = 0;
-	room->links[0] = (char*)malloc(sizeof(char));
-	room->links[0] = '\0';
-	room->links = NULL;
-	// ft_bzero(room->links);
-	room->next = NULL;
-	return room;
-}
-
-void	add_next(t_room *master, t_room *slave)
-{
-	t_room *tmp;
-
-	tmp = master;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = slave;
-}
-
-
-
-void	print_all_next(t_room *room)
-{
-	t_room *tmp;
-
-	printf("master %s\n", room->name_room);
-	tmp = room->next;
-	while (tmp != NULL)
+	while (i < length)
 	{
-		printf("%s ", tmp->name_room);
-		tmp = tmp->next;
+		mas[i] = -1;
+		i++;
 	}
-	printf("\nEnd of master`s rooms\n");
-
 }
+
+
 
 int		main(void)
 {
-	t_room *you = create_room("You");
+	t_room_keeper *keeper = (t_room_keeper*)malloc(sizeof(t_room_keeper));
+	keeper->n = (t_room**)malloc(sizeof(t_room*) * 3000); // nado zanulit
 
+	t_room *you = create_room("You");
 	t_room *bob = create_room("Bob");
 	t_room *alice = create_room("Alice");
 	t_room *clair = create_room("Clair");
-//	add_link(you, bob);
-//	add_link(you, alice);
-//	add_link(you, clair);
+
+	keeper->n[get_hash(you->name_room)] = you;
+	keeper->n[get_hash(bob->name_room)] = bob;
+	keeper->n[get_hash(alice->name_room)] = alice;
+	keeper->n[get_hash(clair->name_room)] = clair;
+
+
+	ft_printf("%s %d\n", keeper->n[get_hash(you->name_room)]->name_room, keeper->n[get_hash(you->name_room)]->hash);
+
+	add_links(you, "Bob");
+	add_links(you, "Aiice");
+	add_links(you, "Clair");
 
 	 t_room *anuj = create_room("Anuj");
 	 t_room *peggy = create_room("Peggy");
-//	 add_link(bob, anuj);
-//	 add_link(bob, peggy);
+	keeper->n[get_hash(anuj->name_room)] = anuj;
+	keeper->n[get_hash(peggy->name_room)] = peggy;
+
+	 add_links(bob, "Anuj");
+	 add_links(bob, "Peggy");
+
+	 add_links(alice, "Peggy"); // dvoynaya ssilka
+
+	int **checked;
+	checked = (int**)malloc(sizeof(int*) * 3000);
+	zero_int_mas(checked, 3000);
+
+	int **not_checked;
+	not_checked = (int**)malloc(sizeof(int*) * 3000);
+	zero_int_mas(not_checked, 3000);
+
+	while (1)
+	{
+
+	}
 
 //	 add_link(alice, peggy);
 
@@ -93,12 +69,12 @@ int		main(void)
 	// add_link(clair, jonny);
 
 
-	printf("%s %d\n", you->name_room, you->hash);
-	printf("%s %d\n", bob->name_room, bob->hash);
-    printf("%s %d\n", alice->name_room, alice->hash);
-    printf("%s %d\n", clair->name_room, clair->hash);
+	// printf("%s %d\n", you->name_room, you->hash);
+	// printf("%s %d\n", bob->name_room, bob->hash);
+    // printf("%s %d\n", alice->name_room, alice->hash);
+    // printf("%s %d\n", clair->name_room, clair->hash);
 
-	print_all_next(you);
+	// print_all_next(you);
 
 	return (1);
 }

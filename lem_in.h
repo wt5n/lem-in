@@ -33,4 +33,11 @@ typedef struct s_room_keeper
 void    in_queue(t_queue *q, char *x);
 char     *out_queue(t_queue *q);
 
+int		get_hash(char *name);
+t_room	*create_room(char *name);
+void	add_next(t_room *master, t_room *slave);
+void	print_all_links(t_room *room);
+void    increase_links(t_room *room);
+void    add_links(t_room *room, char *link);
+
 #endif
