@@ -125,19 +125,27 @@ void	add_two_links(t_room *first, t_room *second)
 	add_links(second, first->name);
 }
 
-void	add_links_to_queue(t_room *room, t_queue *queue, t_room_keeper *keeper)
+int	add_links_to_queue(t_room *room, t_queue *queue, t_room_keeper *keeper)
 {
 	int i;
+	t_room *link;
 
 	i = 0;
-	while (room->links[i] != NULL && i < room->links_len)
+	while ((room->links[i] != NULL) && (i < room->links_len))
 	{
-		if (room->visited == 0)
+
+		link = keeper->n[get_hash(room->links[i])];
+		if (ft_strcmp(room->name, "H") == 0)
+			printf("%s\n", link->name);
+		if (ft_strcmp(link->name, keeper->finish->name) == 0)
+			return (1);
+		if (link->visited == 0)
 		{
 			in_queue(queue, room->links[i]);
-			keeper->n[get_hash(room->links[i])]->wave += 1;
+			link->wave = room->wave + 1;
 		}
 		// ft_printf("%d\n", keeper->n[get_hash(start->links[i])]);
 		i++;
 	}
+	return (0);
 }

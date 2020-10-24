@@ -46,6 +46,6 @@ void	print_all_links(t_room *room);
 void    increase_links(t_room *room);
 void    add_links(t_room *room, char *link);
 void	add_two_links(t_room *first, t_room *second);
-void	add_links_to_queue(t_room *room, t_queue *queue, t_room_keeper *keeper);
+int		add_links_to_queue(t_room *room, t_queue *queue, t_room_keeper *keeper);
 
 #endif
