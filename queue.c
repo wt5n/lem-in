@@ -34,23 +34,23 @@ static char *pop(t_link **top_ref)
 
 void in_queue(t_queue *q, char *x)
 {
-	push (&q->stack1, x);
+	push (&q->stack, x);
 }
 
 char *out_queue(t_queue *q)
 {
 	char *x, *res;
-	if (q->stack1 == NULL)
+	if (q->stack == NULL)
 	{
-		return("Queue is empty");
+		return NULL;
 	}
-	else if (q->stack1->next == NULL)
-		return pop (&q->stack1);
+	else if (q->stack->next == NULL)
+		return pop (&q->stack);
 	else
 	{
-		x = pop (&q->stack1);
+		x = pop (&q->stack);
 		res = out_queue (q);
-		push (&q->stack1, x);
+		push (&q->stack, x);
 		return res;
 	}
 }

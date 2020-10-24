@@ -4,11 +4,11 @@ void	print_all_next(t_room *room)
 {
 	t_room *tmp;
 
-	printf("master %s\n", room->name_room);
+	printf("master %s\n", room->name);
 	tmp = room->next;
 	while (tmp != NULL)
 	{
-		printf("%s ", tmp->name_room);
+		printf("%s ", tmp->name);
 		tmp = tmp->next;
 	}
 	printf("\nEnd of master`s rooms\n");
@@ -19,7 +19,7 @@ void	print_all_links(t_room *room)
     int i;
 
     i = 0;
-    printf("Links of master %s\n", room->name_room);
+    printf("Links of master %s\n", room->name);
     while (i < room->links_len)
     {
         if (room->links[i] == NULL)
@@ -48,7 +48,7 @@ t_room	*create_room(char *name)
 	t_room *room = (t_room*)malloc(sizeof(t_room));
 
 	room->CheckAnt = 0;
-	room->name_room = name;
+	room->name = name;
 	room->hash = get_hash(name);
 	room->next = NULL;
 	room->links = (char**)malloc(sizeof(char*) * 10);
@@ -60,6 +60,8 @@ t_room	*create_room(char *name)
 		i++;
 	}
 	room->links_len = 10;
+	room->visited = 0;
+	room->wave = 0;
 	return room;
 }
 
@@ -117,13 +119,25 @@ void    add_links(t_room *room, char *link)
 	add_links(room, link);
 }
 
-// void	print_all_rooms(t_room_keeper keeper)
-// {
-// 	int i;
+void	add_two_links(t_room *first, t_room *second)
+{
+	add_links(first, second->name);
+	add_links(second, first->name);
+}
 
-// 	i = 0;
-// 	while (i < 3000)
-// 	{
-// 		if ()
-// 	}
-// }
+void	add_links_to_queue(t_room *room, t_queue *queue, t_room_keeper *keeper)
+{
+	int i;
+
+	i = 0;
+	while (room->links[i] != NULL && i < room->links_len)
+	{
+		if (room->visited == 0)
+		{
+			in_queue(queue, room->links[i]);
+			keeper->n[get_hash(room->links[i])]->wave += 1;
+		}
+		// ft_printf("%d\n", keeper->n[get_hash(start->links[i])]);
+		i++;
+	}
+}
