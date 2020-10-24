@@ -93,8 +93,18 @@ int		main(void)
 			}
 		}
 	}
-	
 
+	printf("-----------------------------------------------------------------\n");
+	t_queue *min_path = (t_queue *)malloc(sizeof(t_queue));
+
+//	min_path = min_path_func(keeper);
+
+
+	final_countdown(keeper, finish->name, min_path);
+	printf("%s\n", out_queue(min_path));
+	printf("%s\n", out_queue(min_path));
+	printf("%s\n", out_queue(min_path));
+	printf("%s\n", out_queue(min_path));
 
 	return (1);
 }

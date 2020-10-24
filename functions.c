@@ -1,6 +1,6 @@
 #include "lem_in.h"
 
-void	print_all_next(t_room *room)
+void print_all_next(t_room *room)
 {
 	t_room *tmp;
 
@@ -14,23 +14,23 @@ void	print_all_next(t_room *room)
 	printf("\nEnd of master`s rooms\n");
 }
 
-void	print_all_links(t_room *room)
+void print_all_links(t_room *room)
 {
-    int i;
+	int i;
 
-    i = 0;
-    printf("Links of master %s\n", room->name);
-    while (i < room->links_len)
-    {
-        if (room->links[i] == NULL)
-            break;
-        printf("%s ", room->links[i]);
-        i++;
-    }
-    printf("\nEnd of master`s rooms\n");
+	i = 0;
+	printf("Links of master %s\n", room->name);
+	while (i < room->links_len)
+	{
+		if (room->links[i] == NULL)
+			break;
+		printf("%s ", room->links[i]);
+		i++;
+	}
+	printf("\nEnd of master`s rooms\n");
 }
 
-int	get_hash(char *name)
+int get_hash(char *name)
 {
 	int hash;
 
@@ -43,19 +43,19 @@ int	get_hash(char *name)
 	return hash;
 }
 
-t_room	*create_room(char *name)
+t_room *create_room(char *name)
 {
-	t_room *room = (t_room*)malloc(sizeof(t_room));
+	t_room *room = (t_room *) malloc(sizeof(t_room));
 
 	room->CheckAnt = 0;
 	room->name = name;
 	room->hash = get_hash(name);
 	room->next = NULL;
-	room->links = (char**)malloc(sizeof(char*) * 10);
+	room->links = (char **) malloc(sizeof(char *) * 10);
 	int i = 0;
 	while (i < 10)
 	{
-        room->links[i] = (char*)malloc(sizeof(char));
+		room->links[i] = (char *) malloc(sizeof(char));
 		room->links[i] = NULL;
 		i++;
 	}
@@ -65,7 +65,7 @@ t_room	*create_room(char *name)
 	return room;
 }
 
-void	add_next(t_room *master, t_room *slave)
+void add_next(t_room *master, t_room *slave)
 {
 	t_room *tmp;
 
@@ -75,57 +75,58 @@ void	add_next(t_room *master, t_room *slave)
 	tmp->next = slave;
 }
 
-void    increase_links(t_room *room)
+void increase_links(t_room *room)
 {
-    char  **new_links;
-    int i;
+	char **new_links;
+	int i;
 
-    i = 0;
-    new_links = (char**)malloc((sizeof(char*) * (room->links_len * 2)));
-    while (i < room->links_len)
-    {
-        new_links[i] = (char*)malloc(sizeof(ft_strlen(room->links[i]) + 1));
-        ft_strcpy(new_links[i], room->links[i]);
-        free(room->links[i]);
-        i++;
-    }
-    while (i <  (room->links_len * 2))
-    {
-        new_links[i] = (char*)malloc(sizeof(char));
-        new_links[i] = NULL;
-        i++;
-    }
-    free(room->links);
-    room->links = new_links;
-    room->links_len = room->links_len * 2;
+	i = 0;
+	new_links = (char **) malloc((sizeof(char *) * (room->links_len * 2)));
+	while (i < room->links_len)
+	{
+		new_links[i] = (char *) malloc(sizeof(ft_strlen(room->links[i]) + 1));
+		ft_strcpy(new_links[i], room->links[i]);
+		free(room->links[i]);
+		i++;
+	}
+	while (i < (room->links_len * 2))
+	{
+		new_links[i] = (char *) malloc(sizeof(char));
+		new_links[i] = NULL;
+		i++;
+	}
+	free(room->links);
+	room->links = new_links;
+	room->links_len = room->links_len * 2;
 }
 
 // 6-5
-void    add_links(t_room *room, char *link)
+void add_links(t_room *room, char *link)
 {
 	int i;
 
 	i = 0;
 	while (i < room->links_len)
-    {
-	    if (room->links[i] == NULL) {
-            room->links[i] = (char*)malloc(sizeof(ft_strlen(link) + 1));
-            room->links[i] = ft_strcpy(room->links[i], link);
-            return;
-        }
-	    i++;
-    }
+	{
+		if (room->links[i] == NULL)
+		{
+			room->links[i] = (char *) malloc(sizeof(ft_strlen(link) + 1));
+			room->links[i] = ft_strcpy(room->links[i], link);
+			return;
+		}
+		i++;
+	}
 	increase_links(room);
 	add_links(room, link);
 }
 
-void	add_two_links(t_room *first, t_room *second)
+void add_two_links(t_room *first, t_room *second)
 {
 	add_links(first, second->name);
 	add_links(second, first->name);
 }
 
-int	add_links_to_queue(t_room *room, t_queue *queue, t_room_keeper *keeper)
+int add_links_to_queue(t_room *room, t_queue *queue, t_room_keeper *keeper)
 {
 	int i;
 	t_room *link;
@@ -138,14 +139,84 @@ int	add_links_to_queue(t_room *room, t_queue *queue, t_room_keeper *keeper)
 		if (ft_strcmp(room->name, "H") == 0)
 			printf("%s\n", link->name);
 		if (ft_strcmp(link->name, keeper->finish->name) == 0)
-			return (1);
+			return (0);
 		if (link->visited == 0)
 		{
 			in_queue(queue, room->links[i]);
 			link->wave = room->wave + 1;
+			printf("%s = wave %d\n", link->name, link->wave);
 		}
 		// ft_printf("%d\n", keeper->n[get_hash(start->links[i])]);
 		i++;
 	}
 	return (0);
+}
+
+t_queue *min_path_func(t_room_keeper *keeper)
+{
+	int i = 0;
+	int min_wave = MAXINT;
+	t_queue *stack = (t_queue *)malloc(sizeof(t_queue));
+	t_queue *min_path = (t_queue *)malloc(sizeof(t_queue));
+	min_path->stack = NULL;
+	while (keeper->finish->links[i])
+	{
+		if (keeper->n[get_hash(keeper->finish->links[i])]->wave < min_wave)
+		{
+			min_wave = keeper->n[get_hash(keeper->finish->links[i])]->wave;
+			in_queue(stack,keeper->n[get_hash(keeper->finish->links[i])]->name);
+		}
+		i++;
+	}
+	i = 0;
+	in_queue(stack, keeper->finish->name);
+	t_room *current = keeper->n[get_hash(out_queue(stack))];
+	while (keeper->n[get_hash(current->links[i])]->wave != 1)
+	{
+		current = keeper->n[get_hash(out_queue(stack))];
+		while (keeper->n[get_hash(current->links[i])]->wave != 1)
+		{
+			if (keeper->n[get_hash(current->links[i])]->wave < min_wave)
+			{
+				out_queue(min_path);
+				out_queue(stack);
+				min_wave = keeper->n[get_hash(current->links[i])]->wave;
+				in_queue(stack, keeper->n[get_hash(current->links[i])]->name);
+				in_queue(min_path, keeper->n[get_hash(current->links[i])]->name);
+			}
+			i++;
+		}
+	}
+	return (min_path);
+}
+
+void 	final_countdown(t_room_keeper *keeper, char* name, t_queue *queue)
+{
+	int i;
+	t_room 	*room;
+	t_room 	*link;
+	char 	*min_link;
+	int 	min_wave;
+
+	i = 0;
+	min_wave = MAXINT;
+	room = keeper->n[get_hash(name)];
+	while ((room->links[i] != NULL) && (i < room->links_len))
+	{
+		link = keeper->n[get_hash(room->links[i])];
+		if (ft_strcmp(link->name, keeper->finish->name) != 0)
+		{
+			ft_printf("%s\n", link->name);
+			if (link->wave < min_wave)
+			{
+				min_wave = link->wave;
+				min_link = link->name;
+				if (min_wave == 1)
+					return ;
+			}
+		}
+		i++;
+	}
+	in_queue(queue, min_link);
+	final_countdown(keeper, min_link, queue);
 }

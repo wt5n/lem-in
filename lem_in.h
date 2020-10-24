@@ -47,5 +47,8 @@ void    increase_links(t_room *room);
 void    add_links(t_room *room, char *link);
 void	add_two_links(t_room *first, t_room *second);
 int		add_links_to_queue(t_room *room, t_queue *queue, t_room_keeper *keeper);
+t_queue *min_path_func(t_room_keeper *keeper);
+void 	final_countdown(t_room_keeper *keeper, char* name, t_queue *queue);
+
 
 #endif

@@ -34,7 +34,7 @@ static char *pop(t_link **top_ref)
 
 void in_queue(t_queue *q, char *x)
 {
-	push (&q->stack, x);
+	push(&q->stack, x);
 }
 
 char *out_queue(t_queue *q)
