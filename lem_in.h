@@ -6,7 +6,7 @@
 typedef struct		s_link
 {
 	char 			*name;
-	struct s_list	*next;
+	struct s_link   *next;
 }					t_link;
 
 typedef struct      s_queue
