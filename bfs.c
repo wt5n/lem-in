@@ -24,6 +24,12 @@ int		main(void)
 	keeper->finish = (t_room*)malloc(sizeof(t_room));
 
 	t_room *start = create_room("Start");
+	t_room *finish = create_room("Shavuha");
+	start->wave = 0;
+	start->visited = 1;
+	keeper->start = start;
+	keeper->finish = finish;
+
 	t_room *a = create_room("A");
 	t_room *b = create_room("B");
 	t_room *c = create_room("C");
@@ -32,16 +38,8 @@ int		main(void)
 	t_room *f = create_room("F");
 	t_room *g = create_room("G");
 	t_room *h = create_room("H");
-	t_room *finish = create_room("Shavuha");
 
-
-	keeper->start = start;
-	keeper->finish = finish;
-
-	start->wave = 0;
-	start->visited = 1;
-
-	keeper->n[get_hash(finish->name)] = finish;
+	// keeper->n[get_hash(finish->name)] = finish;
 	keeper->n[get_hash(a->name)] = a;
 	keeper->n[get_hash(b->name)] = b;
 	keeper->n[get_hash(c->name)] = c;
@@ -68,43 +66,30 @@ int		main(void)
 	queue = (t_queue*)malloc(sizeof(t_queue));
 	queue->stack = NULL;
 
-
-	add_links_to_queue(start, queue, keeper);
-
-	while (queue->stack != NULL)
+	if (add_links_to_queue(start, queue, keeper) == 1)
 	{
-		t_room *current;
+		ft_printf("You foun Finish already! Grz!\n");
+		return (1);
+	}
 
-		// char* nnn = ;
-		// printf("nnnn %s\n", nnn);
-
-		current = keeper->n[get_hash(out_queue(queue))];
-		printf("%s\n", current->name);
-		if (current->visited == 0)
-		{
-			current->visited = 1;
-
-//			ft_printf(("%s is not %s"), current->name, finish->name);
-			if (add_links_to_queue(current, queue, keeper) == 1)
-			{
-				ft_printf("WIN thw wave is %d", current->wave);
-				ft_printf(" thw name is %s\n", current->name);
-				break;
-			}
-		}
+	if (path_to_finish(queue, keeper) == 0)
+	{
+		ft_printf("there is no way to finish. So sad\n");
+		return (1);
 	}
 
 	printf("-----------------------------------------------------------------\n");
 	t_queue *min_path = (t_queue *)malloc(sizeof(t_queue));
 
+	path
+
 //	min_path = min_path_func(keeper);
 
 
-	final_countdown(keeper, finish->name, min_path);
-	printf("%s\n", out_queue(min_path));
-	printf("%s\n", out_queue(min_path));
-	printf("%s\n", out_queue(min_path));
-	printf("%s\n", out_queue(min_path));
+	// printf("%s\n", out_queue(min_path));
+	// printf("%s\n", out_queue(min_path));
+	// printf("%s\n", out_queue(min_path));
+	// printf("%s\n", out_queue(min_path));
 
 	return (1);
 }

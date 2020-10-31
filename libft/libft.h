@@ -114,6 +114,7 @@ int					ft_nwords(char const *s, char c);
 int					mod_n(int a);
 int					max_n(int a, int b);
 int					min_n(int a, int b);
+char				*ft_strcpy_wm(char *str);
 
 
 #endif

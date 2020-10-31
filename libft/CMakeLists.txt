@@ -26,6 +26,7 @@ set(PrintfSRC prinft/ft_printf.c
         prinft/type_s.c
         prinft/type_u.c
         prinft/type_x.c)
+
 set(SRC ft_atoi.c
         ft_atoi_wr.c
         ft_bzero.c
@@ -100,6 +101,7 @@ set(SRC ft_atoi.c
         ft_tolower.c
         ft_toupper.c
         get_next_line.c
+        ft_strcpy_wm.c
         ${PrintfSRC})
 
 add_library(libft STATIC ${SRC})
