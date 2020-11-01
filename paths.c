@@ -2,7 +2,7 @@
 
 void    add_map_to_map_keeper(t_map_keeper *mp, t_map *map)
 {
-    return ;
+    ;
 }
 
 int		is_link_used(t_room *room, char *target)
@@ -25,19 +25,20 @@ int		length_of_path(t_room_keeper *c_k2)
 	return (length);
 }
 
-void	mark_as_used(t_room_keeper *c_k1, t_room_keeper *c_k2, t_room *room, char *link)
+void	mark_as_used(t_room_keeper *c_k1, t_room_keeper *c_k2, t_link *links, char *link)
 {
-	t_room *r;
+	t_link *r;
 
-    print_all_links(c_k2->n[get_hash("F")]);
+//    r = c_k2->n[get_hash("F")];
+//    print_all_links(r->links);
 //    r = c_k1->n[get_hash(room)];
-    r = room;
-	ft_printf("links->name %s\n", room->links->name);
-	while (ft_strcmp(r->links->name, link) != 0)
+    r = links;
+	while (ft_strcmp(r->name, link) != 0)
 	{
-		r->links = r->links->next;
+		r = r->next;
 	}
-	r->links->used = 1;
+//    ft_printf("links->name %s\n", r->name);
+    r->used = 1;
 }
 
 void	path_to_start(t_room_keeper *c_k1, t_room_keeper *c_k2, t_map_keeper *mp)
@@ -47,7 +48,7 @@ void	path_to_start(t_room_keeper *c_k1, t_room_keeper *c_k2, t_map_keeper *mp)
 	t_map 	*map;
 	t_room	*room;
 
-//	print_all_links(c_k2->n[get_hash("F")]);
+	map = (t_map*)malloc(sizeof(t_map));
     length = length_of_path(c_k2);
 	map->length = length;
 	map->field = mp->field;
@@ -57,11 +58,15 @@ void	path_to_start(t_room_keeper *c_k1, t_room_keeper *c_k2, t_map_keeper *mp)
 	while (length > 0)
 	{
 		map->rooms[length] = ft_strcpy_wm(room->name);
+        if (ft_strcmp(room->name, c_k2->start->name) == 0)
+            break;
 		from = room->name;
 		room = c_k2->n[get_hash(room->prev_room)];
-//		mark_as_used(c_k1, c_k2, room, from);
+		mark_as_used(c_k1, c_k2, room->links, from);
 		length--;
-	}
+
+		print_all_links(room->name, room->links);
+    }
 	add_map_to_map_keeper(mp, map);
 }
 

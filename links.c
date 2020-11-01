@@ -39,6 +39,7 @@ void add_links(t_room *room, char *link)
 //            tmp_room->links = tmp_room->links->next;
         tmp_link = (t_link*)malloc(sizeof(t_link));
         tmp_link->name = ft_strcpy_wm(link);
+        tmp_link->used = 0;
         tmp_link->next = room->links;
         tmp_room->links = tmp_link;
     }

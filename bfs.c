@@ -66,7 +66,7 @@ int		main(void)
 	add_two_links(h, finish);
 
 //    print_all_links(f);
-    ft_printf("%d\n", f->num_of_links);
+//    ft_printf("%d\n", f->num_of_links);
 //    exit(1);
 
 	t_map_keeper *mp;

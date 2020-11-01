@@ -60,7 +60,7 @@ char	*out_queue(t_queue *q);
 int		get_hash(char *name);
 t_room	*create_room(char *name);
 void	add_next(t_room *master, t_room *slave);
-void	print_all_links(t_room *room);
+void	print_all_links(char *name, t_link *links);
 void    add_links(t_room *room, char *link);
 void	add_two_links(t_room *first, t_room *second);
 int 	add_links_to_queue(const t_room *room, t_queue *queue, t_room_keeper *c_k2);
