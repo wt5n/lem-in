@@ -61,13 +61,9 @@ int		main(void)
 	add_two_links(f, finish);
 	add_two_links(h, finish);
 
-	t_queue *queue;
-	queue = (t_queue*)malloc(sizeof(t_queue));
-	queue->stack = NULL;
 
-
-
-	main_loop()
+	
+	main_loop(keeper, mp);
 
 	// printf("-----------------------------------------------------------------\n");
 	// t_queue *min_path = (t_queue *)malloc(sizeof(t_queue));

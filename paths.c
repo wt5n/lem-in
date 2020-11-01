@@ -7,7 +7,7 @@ int	is_link_used(t_room *room, char *target)
 	return (0);
 }
 
-int	path_to_finish(t_room_keeper *keeper, t_room_keeper *c_k1, t_map_keeper *map_keeper)
+int	path_to_finish(t_room_keeper *c_k1, t_map_keeper *mp)
 {
 	char *prev;
 	t_queue			*queue;
@@ -17,10 +17,11 @@ int	path_to_finish(t_room_keeper *keeper, t_room_keeper *c_k1, t_map_keeper *map
 	c_k2 = c_k1;
 	queue = (t_queue*)malloc(sizeof(t_queue));
 	queue->stack = NULL;
-	if (add_links_to_queue(c_k2->start, queue, c_keeper) == 1)
+	if (add_links_to_queue(c_k2->start, queue, c_k2) == 1)
 	{
-		keeper->finish->prev_room = keeper->start->name;
-		path_to_start();
+		c_k2->finish->prev_room = c_k2->start->name;
+		path_to_start(c_k1, c_k2, mp);
+		return (1)
 	}
 	{
 		prev = c_k2->start->name;
@@ -32,10 +33,11 @@ int	path_to_finish(t_room_keeper *keeper, t_room_keeper *c_k1, t_map_keeper *map
 			{
 				current->visited = 1;
 				add_tmp_prev_room(current, prev);
-				if (add_links_to_queue(current, queue, keeper) == 1)
+				if (add_links_to_queue(current, queue, c_k2) == 1)
 				{
-					keeper->finish->prev_room = current->name;
-					path_to_start();
+					c_k2->finish->prev_room = current->name;
+					path_to_start(c_k1, c_k2, mp);
+					return (1);
 				}
 			}
 			prev = current->name;
@@ -44,17 +46,17 @@ int	path_to_finish(t_room_keeper *keeper, t_room_keeper *c_k1, t_map_keeper *map
 	return (0);
 }
 
-int		length_of_path(t_room_keeper *keeper)
+int		length_of_path(t_room_keeper *c_k2)
 {
 	int		length;
 	t_room	*current;
 
 	length = 0;
-	current = keeper->finish;
+	current = c_k2->finish;
 	while (current->tmp_prev_room != NULL)
 	{
 		length++;
-		current = keeper->n[get_hash(current->tmp_prev_room)];
+		current = c_k2->n[get_hash(current->tmp_prev_room)];
 	}
 	return (length);
 }
@@ -78,7 +80,7 @@ void	path_to_start(t_room_keeper *c_k1, t_room_keeper *c_k2, t_map_keeper *mp)
 	t_map 	*map;
 	t_room	*room;
 
-	map->length = length_of_path();
+	map->length = length_of_path(c_k2);
 	map->field = mp->field;
 	map->rooms = (char**)malloc(sizeof(char*) * map->length);
 	length--;

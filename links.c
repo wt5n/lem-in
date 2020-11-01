@@ -64,7 +64,7 @@ void add_two_links(t_room *first, t_room *second)
 	add_links(second, first->name);
 }
 
-void add_links_to_queue(t_room *room, t_queue *queue, t_room_keeper *keeper)
+void add_links_to_queue(t_room *room, t_queue *queue, t_room_keeper *c_k2)
 {
 	// int i;
 	// t_room *link;
@@ -78,10 +78,10 @@ void add_links_to_queue(t_room *room, t_queue *queue, t_room_keeper *keeper)
 	{
 		if (tmp_link->used == 0)
 		{
-			tmp_room = keeper->n[get_hash(tmp_link->name)];
+			tmp_room = c_k2->n[get_hash(tmp_link->name)];
 			// if (ft_strcmp(room->name, "H") == 0)
 			// 	printf("%s\n", link->name);
-			if (ft_strcmp(tmp_room->name, keeper->finish->name) == 0)
+			if (ft_strcmp(tmp_room->name, c_k2->finish->name) == 0)
 				return (1);
 			if (tmp_room->visited == 0)
 			{

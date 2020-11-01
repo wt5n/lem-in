@@ -1,9 +1,22 @@
 #include "lem_in.h"
 
-int		main_loop(t_room_keeper *keeper, t_map_keeper *map_keeper)
+
+int		delete_collisions(t_room_keeper *c_k1, t_map_keeper *keeper)
 {
-	t_room_keeper	*c_keeper;
+	return (0);
+}
 
-	c_keeper = keeper;
+int		main_loop(t_room_keeper *keeper, t_map_keeper *mp)
+{
+	t_room_keeper	*c_k1;
 
+	c_k1 = keeper;
+	while (1)
+		if (path_to_finish(c_k1, mp) == 0)
+			break;
+	if ((delete_collisions(c_k1, keeper)) == 1)
+	{
+		mp->field++;
+		main_loop(keeper, mp);
+	}
 }
