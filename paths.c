@@ -25,11 +25,14 @@ int		length_of_path(t_room_keeper *c_k2)
 	return (length);
 }
 
-void	mark_as_used(t_room_keeper *c_k1, char *room, char *link)
+void	mark_as_used(t_room_keeper *c_k1, t_room_keeper *c_k2, t_room *room, char *link)
 {
 	t_room *r;
 
-	r = c_k1->n[get_hash(r->name)];
+    print_all_links(c_k2->n[get_hash("F")]);
+//    r = c_k1->n[get_hash(room)];
+    r = room;
+	ft_printf("links->name %s\n", room->links->name);
 	while (ft_strcmp(r->links->name, link) != 0)
 	{
 		r->links = r->links->next;
@@ -44,7 +47,9 @@ void	path_to_start(t_room_keeper *c_k1, t_room_keeper *c_k2, t_map_keeper *mp)
 	t_map 	*map;
 	t_room	*room;
 
-	map->length = length_of_path(c_k2);
+//	print_all_links(c_k2->n[get_hash("F")]);
+    length = length_of_path(c_k2);
+	map->length = length;
 	map->field = mp->field;
 	map->rooms = (char**)malloc(sizeof(char*) * map->length);
 	length--;
@@ -54,7 +59,7 @@ void	path_to_start(t_room_keeper *c_k1, t_room_keeper *c_k2, t_map_keeper *mp)
 		map->rooms[length] = ft_strcpy_wm(room->name);
 		from = room->name;
 		room = c_k2->n[get_hash(room->prev_room)];
-		mark_as_used(c_k1, room->name, from);
+//		mark_as_used(c_k1, c_k2, room, from);
 		length--;
 	}
 	add_map_to_map_keeper(mp, map);
@@ -62,7 +67,7 @@ void	path_to_start(t_room_keeper *c_k1, t_room_keeper *c_k2, t_map_keeper *mp)
 
 int		path_to_finish(t_room_keeper *c_k1, t_map_keeper *mp)
 {
-    char 			*prev;
+//    char 			*prev;
     t_queue			*queue;
     t_room_keeper	*c_k2;
     t_room 			*current;
@@ -72,19 +77,21 @@ int		path_to_finish(t_room_keeper *c_k1, t_map_keeper *mp)
     queue->stack = NULL;
     if (add_links_to_queue(c_k2->start, queue, c_k2) == 1)
     {
-        c_k2->finish->prev_room = c_k2->start->name;
+//        c_k2->finish->prev_room = c_k2->start->name;
         path_to_start(c_k1, c_k2, mp);
         return (1);
     }
-    prev = c_k2->start->name;
+//    prev = c_k2->start->name;
     while (queue->stack != NULL)
     {
         current = c_k2->n[get_hash(out_queue(queue))];
-        printf("%s\n", current->name);
+        printf("current is %s\n", current->name);
+        if (ft_strcmp(current->name, "F") == 0)
+            ft_printf("\n");
         if (current->visited == 0)
         {
             current->visited = 1;
-            add_prev_room(current, prev);
+//            add_prev_room(current, prev);
             if (add_links_to_queue(current, queue, c_k2) == 1)
             {
                 c_k2->finish->prev_room = current->name;
@@ -92,7 +99,7 @@ int		path_to_finish(t_room_keeper *c_k1, t_map_keeper *mp)
                 return (1);
             }
         }
-        prev = current->name;
+//        prev = current->name;
     }
     return (0);
 }

@@ -26,4 +26,5 @@ void	add_prev_room(t_room *room, char *prev)
 		free(room->prev_room);
 	room_name = (char*)malloc(sizeof(char) * (ft_strlen(prev) + 1));
 	room->prev_room = ft_strcpy(room_name, prev);
+	ft_printf("     room %s has prev %s\n", room->name, prev);
 }

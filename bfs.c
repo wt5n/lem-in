@@ -42,7 +42,9 @@ int		main(void)
 
 	// func add room to keeper
 
-	keeper->n[get_hash(a->name)] = a;
+    keeper->n[get_hash(start->name)] = start;
+    keeper->n[get_hash(finish->name)] = finish;
+    keeper->n[get_hash(a->name)] = a;
 	keeper->n[get_hash(b->name)] = b;
 	keeper->n[get_hash(c->name)] = c;
 	keeper->n[get_hash(d->name)] = d;
@@ -51,11 +53,10 @@ int		main(void)
 	keeper->n[get_hash(g->name)] = g;
 	keeper->n[get_hash(h->name)] = h;
 
-	add_links(start, a->name);
-	add_links(start, b->name);
+    add_two_links(start, a);
+    add_two_links(start, b);
 	add_two_links(a, c);
 	add_two_links(b, d);
-	add_two_links(a, c);
 	add_two_links(c, f);
 	add_two_links(c, e);
 	add_two_links(d, f);
@@ -64,7 +65,9 @@ int		main(void)
 	add_two_links(f, finish);
 	add_two_links(h, finish);
 
-    print_all_links(f);
+//    print_all_links(f);
+    ft_printf("%d\n", f->num_of_links);
+//    exit(1);
 
 	t_map_keeper *mp;
 	mp = (t_map_keeper*)malloc(sizeof(t_map_keeper));
@@ -72,5 +75,6 @@ int		main(void)
 	mp->next = NULL;
 	main_loop(keeper, mp);
 
+	printf("finish");
 	return (1);
 }
