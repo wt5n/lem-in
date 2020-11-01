@@ -39,6 +39,9 @@ int		main(void)
 	t_room *h = create_room("H");
 
 	// keeper->n[get_hash(finish->name)] = finish;
+
+	// func add room to keeper
+
 	keeper->n[get_hash(a->name)] = a;
 	keeper->n[get_hash(b->name)] = b;
 	keeper->n[get_hash(c->name)] = c;
@@ -61,9 +64,9 @@ int		main(void)
 	add_two_links(f, finish);
 	add_two_links(h, finish);
 
+    print_all_links(f);
 
-	
-	main_loop(keeper, mp);
+	// main_loop(keeper, mp);
 
 	// printf("-----------------------------------------------------------------\n");
 	// t_queue *min_path = (t_queue *)malloc(sizeof(t_queue));

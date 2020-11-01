@@ -12,7 +12,6 @@ t_room *create_room(char *name)
 	room->links->name = NULL;
 	room->links->used = 0;
 	room->links->next = NULL;
-	// room->links_len = 0;
 	room->visited = 0;
 	room->prev_room = NULL;
 	return room;

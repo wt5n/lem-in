@@ -16,17 +16,16 @@ void print_all_next(t_room *room)
 
 void print_all_links(t_room *room)
 {
-	int i;
+	t_room *tmp_room;
 
-	i = 0;
-	printf("Links of master %s\n", room->name);
-	while (i < room->links_len)
+	tmp_room = room;
+	printf("Links of master %s\n", tmp_room->name);
+	while (tmp_room->links->next != NULL)
 	{
-		if (room->links[i] == NULL)
-			break;
-		printf("%s ", room->links[i]);
-		i++;
+		printf("%s ", tmp_room->links->name);
+		tmp_room->links = tmp_room->links->next;
 	}
+	printf("%s ", tmp_room->links->name);
 	printf("\nEnd of master`s rooms\n");
 }
 
@@ -51,74 +50,4 @@ void add_next(t_room *master, t_room *slave)
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = slave;
-}
-
-t_queue *min_path_func(t_room_keeper *keeper)
-{
-	int i = 0;
-	int min_wave = MAXINT;
-	t_queue *stack = (t_queue *)malloc(sizeof(t_queue));
-	t_queue *min_path = (t_queue *)malloc(sizeof(t_queue));
-	min_path->stack = NULL;
-	while (keeper->finish->links[i])
-	{
-		if (keeper->n[get_hash(keeper->finish->links[i])]->wave < min_wave)
-		{
-			min_wave = keeper->n[get_hash(keeper->finish->links[i])]->wave;
-			in_queue(stack,keeper->n[get_hash(keeper->finish->links[i])]->name);
-		}
-		i++;
-	}
-	i = 0;
-	in_queue(stack, keeper->finish->name);
-	t_room *current = keeper->n[get_hash(out_queue(stack))];
-	while (keeper->n[get_hash(current->links[i])]->wave != 1)
-	{
-		current = keeper->n[get_hash(out_queue(stack))];
-		while (keeper->n[get_hash(current->links[i])]->wave != 1)
-		{
-			if (keeper->n[get_hash(current->links[i])]->wave < min_wave)
-			{
-				out_queue(min_path);
-				out_queue(stack);
-				min_wave = keeper->n[get_hash(current->links[i])]->wave;
-				in_queue(stack, keeper->n[get_hash(current->links[i])]->name);
-				in_queue(min_path, keeper->n[get_hash(current->links[i])]->name);
-			}
-			i++;
-		}
-	}
-	return (min_path);
-}
-
-void 	final_countdown(t_room_keeper *keeper, char* name, t_queue *queue)
-{
-	int i;
-	t_room 	*room;
-	t_room 	*link;
-	char 	*min_link;
-	int 	min_wave;
-
-	i = 0;
-	min_wave = MAXINT;
-	room = keeper->n[get_hash(name)];
-	while ((room->links[i] != NULL) && (i < room->links_len))
-	{
-		link = keeper->n[get_hash(room->links[i])];
-		if (ft_strcmp(link->name, keeper->finish->name) != 0)
-		{
-			ft_printf("%s\n", link->name);
-			if (link->wave < min_wave)
-			{
-				min_wave = link->wave;
-				min_link = link->name;
-
-				if (min_wave == 1)
-					return ;
-			}
-		}
-		i++;
-	}
-	in_queue(queue, min_link);
-	final_countdown(keeper, min_link, queue);
 }
