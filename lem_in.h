@@ -5,7 +5,7 @@
 
 typedef struct				s_list_queue
 {
-   char						*content;
+   char						*name;
    struct s_list_queue		*next;
 }							t_list_queue;
 

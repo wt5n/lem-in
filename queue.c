@@ -1,8 +1,8 @@
 #include "lem_in.h"
 
-static void push(t_link **top_ref, char *new_data)
+static void push(t_list_queue **top_ref, char *new_data)
 {
-	t_link *new_node = (t_link *) malloc (sizeof (t_link));
+	t_list_queue *new_node = (t_list_queue *) malloc (sizeof (t_list_queue));
 	if (new_node == NULL)
 	{
 		ft_printf ("Stack overflow \n");
@@ -13,10 +13,10 @@ static void push(t_link **top_ref, char *new_data)
 	(*top_ref) = new_node;
 }
 
-static char *pop(t_link **top_ref)
+static char *pop(t_list_queue **top_ref)
 {
 	char *res;
-	t_link *top;
+	t_list_queue *top;
 	if (*top_ref == NULL)
 	{
 		ft_printf ("Stack underflow \n");
