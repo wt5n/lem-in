@@ -3,10 +3,17 @@
 
 #include "libft/libft.h"
 
-typedef	struct 	s_map_keeper
+typedef struct				s_list_queue
 {
+   char						*content;
+   struct s_list_queue		*next;
+}							t_list_queue;
 
-};
+typedef	struct 		s_map_keeper
+{
+	struct s_map	*next;
+	int				field;
+}					t_map_keeper;
 
 
 typedef		struct	s_map
@@ -20,13 +27,13 @@ typedef		struct	s_map
 typedef 	struct	s_link
 {
 	char 			*name;
-	struct 	s_link  *next;
+	struct 	s_link  *next; // nuzna dlya queue
 	int				used;
 }					t_link;
 
 typedef struct      s_queue
 {
-	t_link          *stack;
+   t_list_queue    *stack;
 }                   t_queue;
 
 typedef struct		s_room
@@ -34,8 +41,8 @@ typedef struct		s_room
 	int				CheckAnt;
 	char			*name;
 	int				hash;
-	char          	**links;
-	int				links_len;
+	struct	s_link 	*links;
+	// int				links_len;
 	struct s_room	*next ;
 	int				visited;
 	// int				wave;
@@ -43,7 +50,6 @@ typedef struct		s_room
 	// int				in_completed;
 	// int				forward;
 	// int				back;
-	char			*tmp_prev_room;
 	char			*prev_room;
 }					t_room;
 

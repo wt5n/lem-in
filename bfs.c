@@ -25,7 +25,6 @@ int		main(void)
 
 	t_room *start = create_room("Start");
 	t_room *finish = create_room("Shavuha");
-	start->wave = 0;
 	start->visited = 1;
 	keeper->start = start;
 	keeper->finish = finish;
@@ -66,22 +65,14 @@ int		main(void)
 	queue = (t_queue*)malloc(sizeof(t_queue));
 	queue->stack = NULL;
 
-	if (add_links_to_queue(start, queue, keeper) == 1)
-	{
-		ft_printf("You foun Finish already! Grz!\n");
-		return (1);
-	}
 
-	if (path_to_finish(queue, keeper) == 0)
-	{
-		ft_printf("there is no way to finish. So sad\n");
-		return (1);
-	}
 
-	printf("-----------------------------------------------------------------\n");
-	t_queue *min_path = (t_queue *)malloc(sizeof(t_queue));
+	main_loop()
 
-	path
+	// printf("-----------------------------------------------------------------\n");
+	// t_queue *min_path = (t_queue *)malloc(sizeof(t_queue));
+
+
 
 //	min_path = min_path_func(keeper);
 
