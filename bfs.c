@@ -66,20 +66,11 @@ int		main(void)
 
     print_all_links(f);
 
-	// main_loop(keeper, mp);
-
-	// printf("-----------------------------------------------------------------\n");
-	// t_queue *min_path = (t_queue *)malloc(sizeof(t_queue));
-
-
-
-//	min_path = min_path_func(keeper);
-
-
-	// printf("%s\n", out_queue(min_path));
-	// printf("%s\n", out_queue(min_path));
-	// printf("%s\n", out_queue(min_path));
-	// printf("%s\n", out_queue(min_path));
+	t_map_keeper *mp;
+	mp = (t_map_keeper*)malloc(sizeof(t_map_keeper));
+	mp->field = 1;
+	mp->next = NULL;
+	main_loop(keeper, mp);
 
 	return (1);
 }

@@ -41,6 +41,7 @@ void add_links(t_room *room, char *link)
         tmp_link->next = NULL;
         tmp_room->links->next = tmp_link;
     }
+	room->num_of_links++;
 }
 
 void add_two_links(t_room *first, t_room *second)
@@ -51,32 +52,25 @@ void add_two_links(t_room *first, t_room *second)
 
 int     add_links_to_queue(t_room *room, t_queue *queue, t_room_keeper *c_k2)
 {
-	// int i;
-	// t_room *link;
-
-	// i = 0;
-	t_link *tmp_link;
 	t_room	*tmp_room;
+	t_room	*tmp_room2;
 
-	tmp_link = room->links;
-	while (tmp_link->next != NULL)
+	tmp_room = room;
+	while (tmp_room->num_of_links > 0)
 	{
-		if (tmp_link->used == 0)
+		if (tmp_room->links->used == 0)
 		{
-			tmp_room = c_k2->n[get_hash(tmp_link->name)];
-			// if (ft_strcmp(room->name, "H") == 0)
-			// 	printf("%s\n", link->name);
-			if (ft_strcmp(tmp_room->name, c_k2->finish->name) == 0)
+			tmp_room2 = c_k2->n[get_hash(tmp_room->links->name)];
+			if (ft_strcmp(tmp_room2->name, c_k2->finish->name) == 0)
 				return (1);
-			if (tmp_room->visited == 0)
+			if (tmp_room2->visited == 0)
 			{
-				in_queue(queue, tmp_link->name);
-				printf("%s = \n", tmp_link->name);
+				in_queue(queue, tmp_room2->name);
+				printf("%s = \n", tmp_room2->name);
 			}
-			// ft_printf("%d\n", keeper->n[get_hash(start->links[i])]);
-			// i++;
+		tmp_room->links = tmp_room->links->next;
 		}
-//		tmp_link = ...
+		tmp_room->num_of_links--;
 	}
 	return (0);
 }

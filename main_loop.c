@@ -6,14 +6,13 @@ int		delete_collisions(t_room_keeper *c_k1, t_map_keeper *keeper)
 	return (0);
 }
 
-int		main_loop(t_room_keeper *keeper, t_map_keeper *mp)
+void	main_loop(t_room_keeper *keeper, t_map_keeper *mp)
 {
 	t_room_keeper	*c_k1;
 
 	c_k1 = keeper;
-	while (1)
-		if (path_to_finish(c_k1, mp) == 0)
-			break;
+	while (path_to_finish(c_k1, mp) != 0)
+		;
 	if ((delete_collisions(c_k1, keeper)) == 1)
 	{
 		mp->field++;

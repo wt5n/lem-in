@@ -41,6 +41,7 @@ typedef struct		s_room
 	char			*name;
 	int				hash;
 	struct	s_link 	*links;
+	int				num_of_links;
 	struct s_room	*next ;
 	int				visited;
 	char			*prev_room;
@@ -64,7 +65,7 @@ void    add_links(t_room *room, char *link);
 void	add_two_links(t_room *first, t_room *second);
 int 	add_links_to_queue(t_room *room, t_queue *queue, t_room_keeper *c_k2);
 int		path_to_finish(t_room_keeper *c_k1, t_map_keeper *mp);
-void	add_prev_room(t_room *room, char **prev);
-
+void	add_prev_room(t_room *room, char *prev);
+void	main_loop(t_room_keeper *keeper, t_map_keeper *mp);
 
 #endif

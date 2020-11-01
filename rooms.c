@@ -12,12 +12,13 @@ t_room *create_room(char *name)
 	room->links->name = NULL;
 	room->links->used = 0;
 	room->links->next = NULL;
+	room->num_of_links = 0;
 	room->visited = 0;
 	room->prev_room = NULL;
 	return room;
 }
 
-void	add_prev_room(t_room *room, char **prev)
+void	add_prev_room(t_room *room, char *prev)
 {
 	char *room_name;
 

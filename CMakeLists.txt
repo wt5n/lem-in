@@ -21,6 +21,8 @@ add_executable(bfs
         bfs.c
         rooms.c
         links.c
+        main_loop.c
+        paths.c
         ${SRC_OPERATIONS})
 
 add_subdirectory(libft)
