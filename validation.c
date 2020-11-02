@@ -100,7 +100,6 @@ void    parse_rooms(t_validation *validation, char* line)
 
 void    parse_links(t_validation *validation, char* line)
 {
-	t_link  *link;
 	char    *str;
 	char    *minus;
 	char    *room1;
@@ -113,7 +112,7 @@ void    parse_links(t_validation *validation, char* line)
 	minus = ft_strchr(str, '-');
 	room1 = ft_strndup(str, minus - str);
 	room2 = ft_strdup(minus + 1);
-	add_links(validation->n[get_hash(room1)], room2);
+	add_two_links(validation->n[get_hash(room1)], validation->n[get_hash(room2)]);
 	if (ft_strcmp(room1, room2) == 0)
 		ft_error();
 }
