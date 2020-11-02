@@ -1,12 +1,17 @@
 cmake_minimum_required(VERSION 3.17)
 project(lem_in)
 
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD 99)
 
 include_directories(inc)
 
-set(SRC_OPERATIONS queue.c
-        functions.c)
+set(SRC_OPERATIONS
+        queue.c
+        functions.c
+        validation.c
+        rooms.c
+        links.c
+        )
 
 add_executable(lem_in
         lem_in.h
@@ -24,6 +29,7 @@ add_executable(bfs
         main_loop.c
         paths.c
         ${SRC_OPERATIONS})
+
 
 add_subdirectory(libft)
 target_link_libraries(lem_in libft)

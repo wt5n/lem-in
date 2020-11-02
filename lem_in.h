@@ -55,6 +55,18 @@ typedef struct 	s_room_keeper
 	t_room		*finish;
 }				t_room_keeper;
 
+typedef struct  s_validation
+{
+	int         room_nums;
+	int         start_com;
+	int         end_com;
+	int         ants;
+	t_room      **n;
+	t_room      *start;
+	t_room      *finish;
+}               t_validation;
+
+
 void    in_queue(t_queue *q, char *x);
 char	*out_queue(t_queue *q);
 int		get_hash(char *name);
@@ -67,5 +79,13 @@ int 	add_links_to_queue(const t_room *room, t_queue *queue, t_room_keeper *c_k2)
 int		path_to_finish(t_room_keeper *c_k1, t_map_keeper *mp);
 void	add_prev_room(t_room *room, char *prev);
 void	main_loop(t_room_keeper *keeper, t_map_keeper *mp);
+void    add_room(t_validation *validation, t_room *room);
+void    start_end_rooms(t_validation *validation, t_room *room);
+void    init_room_keeper(t_validation **validation);
+void    parse_ants(t_validation *validation, char *line);
+void    parse_comms(t_validation *validation, char *line);
+void    parse_rooms(t_validation *validation, char* line);
+void    parse_links(t_validation *validation, char* line);
+void    parser_input(t_validation *validation);
 
 #endif
