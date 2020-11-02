@@ -52,12 +52,12 @@ int get_hash(char *name)
 	return hash;
 }
 
-//void add_next(t_room *master, t_room *slave)
-//{
-//	t_room *tmp;
-//
-//	tmp = master;
-//	while (tmp->next != NULL)
-//		tmp = tmp->next;
-//	tmp->next = slave;
-//}
+void add_next(t_room *master, t_room *slave)
+{
+	t_room *tmp;
+
+	tmp = master;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = slave;
+}
