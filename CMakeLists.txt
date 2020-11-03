@@ -8,7 +8,6 @@ include_directories(inc)
 set(SRC_OPERATIONS
         queue.c
         functions.c
-        validation.c
         rooms.c
         links.c
         )

@@ -1,6 +1,6 @@
 #include "lem_in.h"
 
-static void push(t_list_queue **top_ref, char *new_data)
+static void push(t_list_queue **top_ref, int new_data)
 {
 	t_list_queue *new_node = (t_list_queue *) malloc (sizeof (t_list_queue));
 	if (new_node == NULL)
@@ -8,14 +8,14 @@ static void push(t_list_queue **top_ref, char *new_data)
 		ft_printf ("Stack overflow \n");
 		exit (0);
 	}
-	new_node->name = new_data;
+	new_node->id = new_data;
 	new_node->next = (*top_ref);
 	(*top_ref) = new_node;
 }
 
-static char *pop(t_list_queue **top_ref)
+static int pop(t_list_queue **top_ref)
 {
-	char *res;
+	int res;
 	t_list_queue *top;
 	if (*top_ref == NULL)
 	{
@@ -25,25 +25,23 @@ static char *pop(t_list_queue **top_ref)
 	else
 	{
 		top = *top_ref;
-		res = top->name;
+		res = top->id;
 		*top_ref = top->next;
 		free (top);
 		return res;
 	}
 }
 
-void in_queue(t_queue *q, char *x)
+void in_queue(t_queue *q, int x)
 {
 	push(&q->stack, x);
 }
 
-char *out_queue(t_queue *q)
+int out_queue(t_queue *q)
 {
-	char *x, *res;
+	int x, res;
 	if (q->stack == NULL)
-	{
 		return NULL;
-	}
 	else if (q->stack->next == NULL)
 		return pop (&q->stack);
 	else

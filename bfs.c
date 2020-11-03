@@ -19,39 +19,43 @@
 int		main(void)
 {
 	t_room_keeper *keeper = (t_room_keeper*)malloc(sizeof(t_room_keeper));
-	keeper->n = (t_room**)malloc(sizeof(t_room*) * 3000); // nado zanulit
-	keeper->start = (t_room*)malloc(sizeof(t_room));
-	keeper->finish = (t_room*)malloc(sizeof(t_room));
+	keeper->n = (t_room**)ft_memalloc(sizeof(t_room*) * 3000); // nado zanulit
+	// keeper->start = (t_room*)malloc(sizeof(t_room));
+	// keeper->finish = (t_room*)malloc(sizeof(t_room));
 
-	t_room *start = create_room("Start");
-	t_room *finish = create_room("Shavuha");
-	start->visited = 1;
-	keeper->start = start;
-	keeper->finish = finish;
+	t_room *start = create_room("Start", 1);
+	t_room *finish = create_room("Shavuha", 2);
 
-	t_room *a = create_room("A");
-	t_room *b = create_room("B");
-	t_room *c = create_room("C");
-	t_room *d = create_room("D");
-	t_room *e = create_room("E");
-	t_room *f = create_room("F");
-	t_room *g = create_room("G");
-	t_room *h = create_room("H");
+//	start->visited = 1;
+	// keeper->start = start;
+	// keeper->finish = finish;
+
+	t_room *a = create_room("A", 3);
+	t_room *b = create_room("B", 4);
+	t_room *c = create_room("C", 5);
+	t_room *d = create_room("D", 6);
+	t_room *e = create_room("E", 7);
+	t_room *f = create_room("F", 8);
+	t_room *g = create_room("G", 9);
+	t_room *h = create_room("H", 10);
+
 
 	// keeper->n[get_hash(finish->name)] = finish;
 
 	// func add room to keeper
 
-    keeper->n[get_hash(start->name)] = start;
-    keeper->n[get_hash(finish->name)] = finish;
-    keeper->n[get_hash(a->name)] = a;
-	keeper->n[get_hash(b->name)] = b;
-	keeper->n[get_hash(c->name)] = c;
-	keeper->n[get_hash(d->name)] = d;
-	keeper->n[get_hash(e->name)] = e;
-	keeper->n[get_hash(f->name)] = f;
-	keeper->n[get_hash(g->name)] = g;
-	keeper->n[get_hash(h->name)] = h;
+    keeper->n[start->id] = start;
+    keeper->n[finish->id] = finish;
+    keeper->n[a->id] = a;
+	keeper->n[b->id] = b;
+	keeper->n[c->id] = c;
+	keeper->n[d->id] = d;
+	keeper->n[e->id] = e;
+	keeper->n[f->id] = f;
+	keeper->n[g->id] = g;
+	keeper->n[h->id] = h;
+
+	keeper->RoomCounter = 10;
 
     add_two_links(start, a);
     add_two_links(start, b);

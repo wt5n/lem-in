@@ -5,7 +5,7 @@
 
 typedef struct				s_list_queue
 {
-   char						*name;
+   int						id;
    struct s_list_queue		*next;
 }							t_list_queue;
 
@@ -20,7 +20,7 @@ typedef		struct	s_map
 {
 	int				length;
 	int				field;
-	char			**rooms;
+	int				*rooms;
 }					t_map;
 
 typedef 	struct	s_link
@@ -39,20 +39,22 @@ typedef struct		s_room
 {
 	int				CheckAnt;
 	char			*name;
-	int				hash;
-	struct	s_link 	*links;
-	int				num_of_links;
-	struct s_room	*next ;
+	int				id;
+	// struct	s_link 	*links;
+	int				*links_id;
+	int				*links_used;
+	int				links_count;
+	// struct s_room	*next ;
 	int				visited;
-	char			*prev_room;
+	int				prev_room;
 }					t_room;
 
 typedef struct 	s_room_keeper
 {
 	int 		RoomCounter; // a on nuzen?
 	t_room 		**n;
-	t_room		*start;
-	t_room		*finish;
+	// t_room		*start;
+	// t_room		*finish;
 }				t_room_keeper;
 
 typedef struct  s_validation
@@ -67,17 +69,17 @@ typedef struct  s_validation
 }               t_validation;
 
 
-void    in_queue(t_queue *q, char *x);
-char	*out_queue(t_queue *q);
-int		get_hash(char *name);
-t_room	*create_room(char *name);
+void    in_queue(t_queue *q, int x);
+int		out_queue(t_queue *q);
+// int		get_hash(char *name);
+t_room	*create_room(char *name, int id);
 void	add_next(t_room *master, t_room *slave);
 void	print_all_links(char *name, t_link *links);
-void    add_links(t_room *room, char *link);
+void    add_links(t_room *room, int link);
 void	add_two_links(t_room *first, t_room *second);
-int 	add_links_to_queue(const t_room *room, t_queue *queue, t_room_keeper *c_k2);
-int		path_to_finish(t_room_keeper *c_k1, t_map_keeper *mp);
-void	add_prev_room(t_room *room, char *prev);
+int 	add_links_to_queue(int id, t_queue *queue, t_room_keeper *keeper);
+int		path_to_finish(t_room_keeper *keeper, t_map_keeper *mp);
+void	add_prev_room(t_room *room, int prev);
 void	main_loop(t_room_keeper *keeper, t_map_keeper *mp);
 void    add_room(t_validation *validation, t_room *room);
 void    start_end_rooms(t_validation *validation, t_room *room);
