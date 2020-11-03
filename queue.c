@@ -41,7 +41,7 @@ int out_queue(t_queue *q)
 {
 	int x, res;
 	if (q->stack == NULL)
-		return NULL;
+		return 0;
 	else if (q->stack->next == NULL)
 		return pop (&q->stack);
 	else

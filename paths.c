@@ -2,7 +2,16 @@
 
 void    add_map_to_map_keeper(t_map_keeper *mp, t_map *map)
 {
-    ;
+    t_map  *tmp_map;
+
+    tmp_map = mp->next;
+    if (tmp_map != NULL)
+    {
+        tmp_map = mp->next;
+        mp->next = tmp_map;
+    }
+    map->next = NULL;
+    mp->next = map;
 }
 
 int		is_link_used(t_room *room, char *target)
@@ -59,21 +68,22 @@ void	path_to_start(t_room_keeper *keeper, t_map_keeper *mp)
 	t_map 	*map;
 	t_room	*room;
 
-    length = length_of_path(keeper);
+    length = length_of_path(keeper) + 1;
     map = create_map(length, mp->field);
-	length--;
-	room = keeper->n[2];
-	while (length > 0)
+    map->rooms[0] = 1;
+    room = keeper->n[2];
+	while (--length > 0)
 	{
 		map->rooms[length] = room->id;
+		ft_printf("length=%d room=%s ", length, room->name);
         if (room->id == 1)
             break;
 		from = room->id;
 		room = keeper->n[room->prev_room];
 		// mark_as_used(c_k1, c_k2, room->links, from);
-		length--;
 		// print_all_links(room->name, room->links);
     }
+	ft_printf("\n");
 	add_map_to_map_keeper(mp, map);
 }
 

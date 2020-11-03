@@ -22,10 +22,8 @@ t_room *create_room(char *name, int id)
 	return room;
 }
 
-void	add_prev_room(t_room *room, int prev)
+void	add_prev_room(t_room  *room, int prev)
 {
-	// char *room_name;
-
 	// if (room->prev_room != NULL)
 		// free(room->prev_room);
 	// room_name = (char*)malloc(sizeof(char) * (ft_strlen(prev) + 1));

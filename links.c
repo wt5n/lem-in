@@ -53,13 +53,13 @@ int     add_links_to_queue(int id, t_queue *queue, t_room_keeper *keeper)
 			ft_printf("link id is %d\n", tmp_room->links_id[i]);
 			if (tmp_room->links_id[i] == 2)
 			{
-				add_prev_room(tmp_room, tmp_room->links_id[i]);
+				add_prev_room(keeper->n[tmp_room->links_id[i]], tmp_room->id);
 			    ft_printf("the kraynaya komnata is %s\n", tmp_room->name);
                 return (1);
             }
 			if (keeper->n[tmp_room->links_id[i]]->visited == 0)
 			{
-				add_prev_room(tmp_room, tmp_room->links_id[i]);
+				add_prev_room(keeper->n[tmp_room->links_id[i]], tmp_room->id);
 				in_queue(queue, tmp_room->links_id[i]);
 //				printf("%s  \n", tmp_room2->name);
 			}
