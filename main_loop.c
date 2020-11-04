@@ -13,10 +13,9 @@ void    print_maps(t_map_keeper *mp, t_room_keeper *keeper)
     int     *tmp_id;
     int     i;
 
-    i = 0;
-
     while (mp->rl != NULL)
     {
+        i = 0;
         while ((mp->rl->data->rooms[i] != 0) && (i < mp->rl->data->length))
         {
             ft_printf("%d ", mp->rl->data->rooms[i]);
@@ -43,6 +42,19 @@ void    print_maps(t_map_keeper *mp, t_room_keeper *keeper)
 //    }
 }
 
+void    clear_rooms(t_room_keeper *keeper)
+{
+    int i;
+    t_room  *room;
+
+    i = 2;
+    while (++i < keeper->RoomCounter)
+    {
+        room = keeper->n[i];
+        room->visited = 0;
+    }
+}
+
 void	main_loop(t_room_keeper *keeper, t_map_keeper *mp)
 {
     int             i;
@@ -51,11 +63,12 @@ void	main_loop(t_room_keeper *keeper, t_map_keeper *mp)
 	while (i != 0)
 	{
         i = path_to_finish(keeper, mp);
-        print_maps(mp, keeper);
+        clear_rooms(keeper);
     }
-	if ((delete_collisions(keeper, mp)) == 1)
-	{
-		mp->field++;
-		main_loop(keeper, mp);
-	}
+    print_maps(mp, keeper);
+    // if ((delete_collisions(keeper, mp)) == 1)
+	// {
+	// 	mp->field++;
+	// 	main_loop(keeper, mp);
+	// }
 }

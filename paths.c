@@ -5,6 +5,9 @@ void    add_map_to_map_keeper(t_map_keeper *mp, t_map *map)
     t_room_links *tmp_link;
     t_room_links *t;
 
+    t = (t_room_links*)malloc(sizeof(t_room_links));
+    t->data = NULL;
+    t->next = NULL;
     tmp_link = (t_room_links*)malloc(sizeof(t_room_links));
     tmp_link->data = map;
     tmp_link->next = NULL;
@@ -15,13 +18,13 @@ void    add_map_to_map_keeper(t_map_keeper *mp, t_map *map)
         // mp->rl->next = tmp_link;
         return ;
     }
-    t = mp->rl->next;
+    t->next = mp->rl->next;
     while (t->next != NULL)
     {
         t->data = t->next->data;
     }
-    t->next = tmp_link;
-    // tmp_map->data = map;
+    t = tmp_link;
+    mp->rl->next = t;
 }
 
 int		is_link_used(t_room *room, char *target)
@@ -50,8 +53,8 @@ void	mark_as_used(t_room_keeper *keeper, int to, int from)
         int     i;
 
         i = 0;
-        room = keeper->n[from];
-        while ((i != room->links_id[0][i]) && (i < room->links_count))
+        room = keeper->n[to];
+        while ((from != room->links_id[0][i]) && (i < room->links_count))
             i++;
         room->links_id[1][i] = 1;
 }
