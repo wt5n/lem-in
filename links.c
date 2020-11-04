@@ -2,14 +2,13 @@
 
 void increase_links(t_room *room)
 {
-	int	*new_links;
-	int	*new_used;
+	int	**new_links;
 	int i;
 
 	i = -1;
 	new_links = (int**)ft_memalloc((sizeof(int*) * 2));
-	new_links[0] = (int*)ft_memalloc((sizeof(int*) * (room->links_count * 2)));
-	new_links[1] = (int*)ft_memalloc((sizeof(int*) * (room->links_count * 2)));
+	new_links[0] = (int*)ft_memalloc((sizeof(int) * (room->links_count * 2)));
+	new_links[1] = (int*)ft_memalloc((sizeof(int) * (room->links_count * 2)));
 	while (++i < room->links_count)
 		new_links[0][i] = room->links_id[0][i];
 	free(room->links_id[0]);
@@ -24,9 +23,9 @@ void add_links(t_room *room, int link)
 	i = -1;
 	while (++i < room->links_count)
 	{
-		if (room->links_id[i] == 0)
+		if (room->links_id[0][i] == 0)
 		{
-			room->links_id[i] = link;
+			room->links_id[0][i] = link;
 			return ;
 		}
 	}
@@ -51,19 +50,20 @@ int     add_links_to_queue(int id, t_queue *queue, t_room_keeper *keeper)
 	num_of_links = tmp_room->links_count;
 	while (++i < num_of_links)
 	{
-		if ((tmp_room->links_id[i] != 0) && (tmp_room->links_used[i] == 0))
+		// mark_as_used
+		if ((tmp_room->links_id[0][i] != 0) && (tmp_room->links_id[1][i] == 0))
 		{
-			ft_printf("link id is %d\n", tmp_room->links_id[i]);
-			if (tmp_room->links_id[i] == 2)
+			ft_printf("link id is %d\n", tmp_room->links_id[0][i]);
+			if (tmp_room->links_id[0][i] == 2)
 			{
-				add_prev_room(keeper->n[tmp_room->links_id[i]], tmp_room->id);
+				add_prev_room(keeper->n[tmp_room->links_id[0][i]], tmp_room->id);
 			    ft_printf("the kraynaya komnata is %s\n", tmp_room->name);
                 return (1);
             }
-			if (keeper->n[tmp_room->links_id[i]]->visited == 0)
+			if (keeper->n[tmp_room->links_id[0][i]]->visited == 0)
 			{
-				add_prev_room(keeper->n[tmp_room->links_id[i]], tmp_room->id);
-				in_queue(queue, tmp_room->links_id[i]);
+				add_prev_room(keeper->n[tmp_room->links_id[0][i]], tmp_room->id);
+				in_queue(queue, tmp_room->links_id[0][i]);
 //				printf("%s  \n", tmp_room2->name);
 			}
 		}

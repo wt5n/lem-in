@@ -51,9 +51,9 @@ void	mark_as_used(t_room_keeper *keeper, int to, int from)
 
         i = 0;
         room = keeper->n[from];
-        while ((i != room->links_id[i]) && (i < room->links_count))
+        while ((i != room->links_id[0][i]) && (i < room->links_count))
             i++;
-        room->links_used[i] = 1;
+        room->links_id[1][i] = 1;
 }
 
 t_map    *create_map(int length, int field)
