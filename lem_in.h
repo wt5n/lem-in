@@ -9,18 +9,24 @@ typedef struct				s_list_queue
    struct s_list_queue		*next;
 }							t_list_queue;
 
-typedef	struct 		s_map_keeper
-{
-	struct s_map	*next;
-	int				field;
-}					t_map_keeper;
-
 typedef		struct	s_map
 {
-	int				length;
-	int				field;
-	int				*rooms;
+    int				length;
+    int				field;
+    int				*rooms;
 }					t_map;
+
+typedef	struct		s_room_links
+{
+	t_map				*data;
+	struct s_room_links	*next;
+}					t_room_links;
+
+typedef	struct 		s_map_keeper
+{
+	t_room_links	*rl;
+	int				field;
+}					t_map_keeper;
 
 typedef 	struct	s_link
 {
@@ -40,8 +46,8 @@ typedef struct		s_room
 	char			*name;
 	int				id;
 	// struct	s_link 	*links;
-	int				*links_id;
-	int				*links_used;
+	int				**links_id;
+	// int				*links_used;
 	int				links_count;
 	int				visited;
 	int				prev_room;
@@ -56,8 +62,8 @@ typedef struct 	s_room_keeper
 	int         ants;
 	int         s_c;
 	int         e_c;
-	 t_room		*start;
-	 t_room		*finish;
+	t_room		*start;
+	t_room		*finish;
 }				t_room_keeper;
 
 

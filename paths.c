@@ -2,16 +2,26 @@
 
 void    add_map_to_map_keeper(t_map_keeper *mp, t_map *map)
 {
-    t_map  *tmp_map;
+    t_room_links *tmp_link;
+    t_room_links *t;
 
-    tmp_map = mp->next;
-    if (tmp_map != NULL)
+    tmp_link = (t_room_links*)malloc(sizeof(t_room_links));
+    tmp_link->data = map;
+    tmp_link->next = NULL;
+
+    if (mp->rl->data == NULL)
     {
-        tmp_map = mp->next;
-        mp->next = tmp_map;
+        mp->rl = tmp_link;
+        // mp->rl->next = tmp_link;
+        return ;
     }
-    map->next = NULL;
-    mp->next = map;
+    t = mp->rl->next;
+    while (t->next != NULL)
+    {
+        t->data = t->next->data;
+    }
+    t->next = tmp_link;
+    // tmp_map->data = map;
 }
 
 int		is_link_used(t_room *room, char *target)
@@ -34,20 +44,16 @@ int		length_of_path(t_room_keeper *keeper)
 	return (length);
 }
 
-void	mark_as_used(t_room_keeper *c_k1, t_room_keeper *c_k2, t_link *links, char *link)
+void	mark_as_used(t_room_keeper *keeper, int to, int from)
 {
-	t_link *r;
+        t_room *room;
+        int     i;
 
-//    r = c_k2->n[get_hash("F")];
-//    print_all_links(r->links);
-//    r = c_k1->n[get_hash(room)];
-    r = links;
-	while (ft_strcmp(r->name, link) != 0)
-	{
-		r = r->next;
-	}
-//    ft_printf("links->name %s\n", r->name);
-    r->used = 1;
+        i = 0;
+        room = keeper->n[from];
+        while ((i != room->links_id[i]) && (i < room->links_count))
+            i++;
+        room->links_used[i] = 1;
 }
 
 t_map    *create_map(int length, int field)
@@ -80,7 +86,7 @@ void	path_to_start(t_room_keeper *keeper, t_map_keeper *mp)
             break;
 		from = room->id;
 		room = keeper->n[room->prev_room];
-		// mark_as_used(c_k1, c_k2, room->links, from);
+		mark_as_used(keeper, room->id, from);
 		// print_all_links(room->name, room->links);
     }
 	ft_printf("\n");

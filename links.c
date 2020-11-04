@@ -3,13 +3,16 @@
 void increase_links(t_room *room)
 {
 	int	*new_links;
+	int	*new_used;
 	int i;
 
 	i = -1;
-	new_links = (int*)ft_memalloc((sizeof(int) * (room->links_count * 2)));
+	new_links = (int**)ft_memalloc((sizeof(int*) * 2));
+	new_links[0] = (int*)ft_memalloc((sizeof(int*) * (room->links_count * 2)));
+	new_links[1] = (int*)ft_memalloc((sizeof(int*) * (room->links_count * 2)));
 	while (++i < room->links_count)
-		new_links[i] = room->links_id[i];
-	free(room->links_id);
+		new_links[0][i] = room->links_id[0][i];
+	free(room->links_id[0]);
 	room->links_id = new_links;
 	room->links_count = room->links_count * 2;
 }

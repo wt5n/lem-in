@@ -14,23 +14,33 @@ void    print_maps(t_map_keeper *mp, t_room_keeper *keeper)
     int     i;
 
     i = 0;
-    tmp_map = (t_map*)malloc(sizeof(t_map));
-    tmp_map = mp->next;
-    while (tmp_map != NULL)
-    {
 
-        tmp_id = tmp_map->rooms;
-        while (i < tmp_map->length)
+    while (mp->rl != NULL)
+    {
+        while ((mp->rl->data->rooms[i] != 0) && (i < mp->rl->data->length))
         {
-            tmp_room = keeper->n[tmp_id[i]];
-            ft_printf("%s(%d) - ", tmp_room->name, tmp_room->id);
+            ft_printf("%d ", mp->rl->data->rooms[i]);
             i++;
         }
         ft_printf("\n");
-        tmp_map = mp->next;
+        mp->rl = mp->rl->next;
     }
 
 
+//    tmp_map = mp->rl->next;
+//    while (tmp_map != NULL)
+//    {
+//
+//        tmp_id = tmp_map->rooms;
+//        while (i < tmp_map->length)
+//        {
+//            tmp_room = keeper->n[tmp_id[i]];
+//            ft_printf("%s(%d) - ", tmp_room->name, tmp_room->id);
+//            i++;
+//        }
+//        ft_printf("\n");
+//        tmp_map = mp->rl->next;
+//    }
 }
 
 void	main_loop(t_room_keeper *keeper, t_map_keeper *mp)

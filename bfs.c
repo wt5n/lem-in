@@ -76,7 +76,10 @@ int		main(void)
 	t_map_keeper *mp;
 	mp = (t_map_keeper*)malloc(sizeof(t_map_keeper));
 	mp->field = 1;
-	mp->next = NULL;
+	mp->rl = (t_room_links*)ft_memalloc(sizeof(t_room_links));
+	// mp->rl->data = NULL;
+	// mp->rl->next = NULL;
+	// mp->next = NULL;
 	main_loop(keeper, mp);
 
 	printf("finish");
