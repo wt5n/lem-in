@@ -39,25 +39,23 @@ void print_all_links(char *name, t_link *links)
 //	printf("\nEnd of master`s rooms\n");
 }
 
-int get_hash(char *name)
+long get_hash(char *name)
 {
-	int hash;
+	long hash = 1000;
+	int c;
 
-	hash = 0;
-	while (*name != '\0')
-	{
-		hash += *name - '0';
-		name++;
-	}
-	return hash;
+	while (c = *name++)
+		hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+
+	return hash % 1000;
 }
 
-// void add_next(t_room *master, t_room *slave)
-// {
-// 	t_room *tmp;
+ void add_next(t_room *master, t_room *slave)
+ {
+ 	t_room *tmp;
 
-// 	tmp = master;
-// 	while (tmp->next != NULL)
-// 		tmp = tmp->next;
-// 	tmp->next = slave;
-// }
+ 	tmp = master;
+ 	while (tmp->next != NULL)
+ 		tmp = tmp->next;
+ 	tmp->next = slave;
+ }

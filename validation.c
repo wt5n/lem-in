@@ -1,43 +1,37 @@
 #include "lem_in.h"
 
-void    start_end_rooms(t_validation *validation, t_room *room)
+void    add_room(t_room_keeper *keeper, t_room *room)
 {
-	if (validation->start_com == 1)
+	if (keeper->n_hash[get_hash(room->name)])
 	{
-		validation->start = room;
-		validation->start_com++;
-	}
-	if (validation->end_com == 1)
-	{
-		validation->finish = room;
-		validation->end_com++;
-	}
-}
-
-void    add_room(t_validation *validation, t_room *room)
-{
-	if (validation->n[get_hash(room->name)])
-	{
-		add_next(validation->n[get_hash(room->name)], room);
+		add_next(keeper->n_hash[get_hash(room->name)], room);
 	}
 	else
-		validation->n[get_hash(room->name)] = room;
+		keeper->n_hash[get_hash(room->name)] = room;
 }
 
-void    init_room_keeper(t_validation **validation)
+void    start_end_rooms(t_room_keeper *keeper, t_room *room)
 {
-	if (!(*validation = (t_validation*)ft_memalloc(sizeof(t_validation))))
-		exit(-1);
+	if (keeper->s_c == 1)
+	{
+		keeper->start = room;
+		keeper->s_c++;
+	}
+	if (keeper->e_c == 1)
+	{
+		keeper->finish = room;
+		keeper->e_c++;
+	}
 }
 
-void    parse_ants(t_validation *validation, char *line)
+void    parse_ants(t_room_keeper *keeper, char *line)
 {
 	int i;
 
 	i = 0;
 	while (*line)
 	{
-		if (validation->ants)
+		if (keeper->ants)
 			break ;
 		if (*line && (*line == ' '))
 			ft_error();
@@ -45,22 +39,22 @@ void    parse_ants(t_validation *validation, char *line)
 			ft_error();
 		while (*(line + i) && *(line + i) == '+' || ft_isdigit(*(line + i)))
 			i++;
-		validation->ants = ft_atoi_wr(line);
-		if (validation->ants <= 0 || line[i] != '\0')
+		keeper->ants = ft_atoi_wr(line);
+		if (keeper->ants <= 0 || line[i] != '\0')
 			ft_error();
 	}
 }
 
-void    parse_comms(t_validation *validation, char *line)
+void    parse_comms(t_room_keeper *keeper, char *line)
 {
 	int i;
 
 	i = 0;
 	if (ft_strcmp(line, "##start") == 0)
-		validation->start_com++;
+		keeper->s_c++;
 	else if (ft_strcmp(line, "##end") == 0)
-		validation->end_com++;
-	else if (line[i] == '#' && (validation->start_com || validation->end_com)
+		keeper->e_c++;
+	else if (line[i] == '#' && (keeper->s_c || keeper->e_c)
 	         && (ft_strcmp(line, "##start") != 0)
 	         && (ft_strcmp(line, "##end") != 0))
 		ft_error();
@@ -69,7 +63,7 @@ void    parse_comms(t_validation *validation, char *line)
 		;
 }
 
-void    parse_rooms(t_validation *validation, char* line)
+void    parse_rooms(t_room_keeper *keeper, char* line)
 {
 	char    *name;
 	char    *str;
@@ -90,49 +84,57 @@ void    parse_rooms(t_validation *validation, char* line)
 		str--;
 	name = ft_strndup(start, str - start);
 	ft_strchr(name, ' ') ? ft_error() : 0;
-	room = create_room(name);
-	add_room(validation, room);
-	validation->room_nums++;
-	if (validation->start_com == 1 || validation->end_com == 1)
-		start_end_rooms(validation, room);
-	validation->start_com > 2 || validation->end_com > 2 ? ft_error() : 0;
+	if (keeper->s_c == 1)
+		room = create_room(name, 1);
+	else if (keeper->e_c == 1)
+		room = create_room(name, 2);
+	else
+	{
+		keeper->RoomCounter++;
+		room = create_room (name, keeper->RoomCounter - 1);
+	}
+	add_room(keeper, room);
+
+	if (keeper->s_c == 1 || keeper->e_c == 1)
+		start_end_rooms(keeper, room);
+	keeper->s_c > 2 || keeper->e_c > 2 ? ft_error() : 0;
 }
 
-void    parse_links(t_validation *validation, char* line)
+void    parse_links(t_room_keeper *keeper, char* line)
 {
 	char    *str;
 	char    *minus;
 	char    *room1;
 	char    *room2;
 
-	validation->room_nums == 0 ? ft_error() : 0;
-	(!validation->start || !validation->finish) ? ft_error() : 0;
-	(validation->start == validation->finish) ? ft_error() : 0;
+	keeper->RoomCounter == 0 ? ft_error() : 0;
+	(!keeper->start || !keeper->finish) ? ft_error() : 0;
+	(keeper->start == keeper->finish) ? ft_error() : 0;
 	str = line;
 	minus = ft_strchr(str, '-');
 	room1 = ft_strndup(str, minus - str);
 	room2 = ft_strdup(minus + 1);
-	add_two_links(validation->n[get_hash(room1)], validation->n[get_hash(room2)]);
+	add_two_links(keeper->n_hash[get_hash(room1)], keeper->n_hash[get_hash(room2)]);
 	if (ft_strcmp(room1, room2) == 0)
 		ft_error();
 }
 
-void    parser_input(t_validation *validation)
+void    parse_input(t_room_keeper *keeper)
 {
 	char *line;
 
 	line = NULL;
 	while (get_next_line(STDIN_FILENO, &line) == 1)
 	{
-		if ((ft_isdigit(line[0]) || ft_isdigit(line[1])) && !validation->ants)
-			parse_ants(validation, line);
+		if ((ft_isdigit(line[0]) || ft_isdigit(line[1])) && !keeper->ants)
+			parse_ants(keeper, line);
 		else if (line[0] == '#')
-			parse_comms(validation, line);
+			parse_comms(keeper, line);
 		else if (ft_strchr(line, ' ') && !(ft_strchr(line, '-'))
 		         && !(ft_strchr(line, '#')))
-			parse_rooms(validation, line);
+			parse_rooms(keeper, line);
 		else if (ft_strchr(line, '-'))
-			parse_links(validation, line);
+			parse_links(keeper, line);
 		else
 			ft_error();
 		free(line);
