@@ -9,10 +9,15 @@ int main (void)
 	keeper->n = (t_room**)ft_memalloc(sizeof(t_room*) * keeper->RoomCounter);
 
 	printf("%s  id = %d\n", keeper->start->name, keeper->start->id);
-	printf("%s  id = %d\n", keeper->n_hash[get_hash("room3")]->name, keeper->n_hash[get_hash("room3")]->id);
-	printf("%s  id = %d\n", keeper->n_hash[get_hash("room1")]->name, keeper->n_hash[get_hash("room1")]->id);
-	printf("%d\n", keeper->n_hash[(get_hash("room1"))]->links_id[1]);
-	printf("%d\n", keeper->n_hash[(get_hash("room1"))]->links_id[0]);
-	printf("%d\n", keeper->n_hash[(get_hash("room1"))]->links_id[2]);
+	printf("%s  id = %d\n", keeper->n_hash[get_hash("Shavuha")]->name, keeper->n_hash[get_hash("Shavuha")]->id);
+	printf("%s  id = %d\n", keeper->n_hash[get_hash("H")]->name, keeper->n_hash[get_hash("H")]->id);
+	printf("%d\n", keeper->RoomCounter);
+	pass_to_n(keeper);
+	for(int i = 0; i < keeper->RoomCounter; i++)
+	{
+		if (keeper->n[i])
+			printf ("id = %d - name -> %s\n hash = %lu\n", keeper->n[i]->id, keeper->n[i]->name, get_hash(keeper->n[i]->name));
+	}
+
 	return 0;
 } 

@@ -39,12 +39,12 @@ void print_all_links(char *name, t_link *links)
 //	printf("\nEnd of master`s rooms\n");
 }
 
-long get_hash(char *name)
+unsigned long get_hash(unsigned char *name)
 {
-	long hash = 1000;
+	unsigned long hash = 1000;
 	int c;
 
-	while (c = *name++)
+	while ((c = *name++))
 		hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
 
 	return hash % 1000;

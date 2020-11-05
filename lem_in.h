@@ -69,7 +69,7 @@ typedef struct 	s_room_keeper
 
 void    in_queue(t_queue *q, int x);
 int		out_queue(t_queue *q);
-long	get_hash(char *name);
+unsigned long     get_hash(unsigned char *name);
 t_room	*create_room(char *name, int id);
 void	add_next(t_room *master, t_room *slave);
 void	print_all_links(char *name, t_link *links);
@@ -86,5 +86,6 @@ void    parse_comms(t_room_keeper *keeper, char *line);
 void    parse_rooms(t_room_keeper *keeper, char* line);
 void    parse_links(t_room_keeper *keeper, char* line);
 void    parse_input(t_room_keeper *keeper);
+void    pass_to_n(t_room_keeper *keeper);
 
 #endif

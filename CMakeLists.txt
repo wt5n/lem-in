@@ -10,6 +10,7 @@ set(SRC_OPERATIONS
         functions.c
         rooms.c
         links.c
+        validation.c
         )
 
 add_executable(lem_in

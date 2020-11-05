@@ -1,5 +1,16 @@
 #include "lem_in.h"
 
+void    pass_to_n(t_room_keeper *keeper)
+{
+	int i = -1;
+
+	while (++i < 3000)
+	{
+		if (keeper->n_hash[i] != NULL)
+			keeper->n[keeper->n_hash[i]->id] = keeper->n_hash[i];
+	}
+}
+
 void    add_room(t_room_keeper *keeper, t_room *room)
 {
 	if (keeper->n_hash[get_hash(room->name)])
@@ -50,14 +61,16 @@ void    parse_comms(t_room_keeper *keeper, char *line)
 	int i;
 
 	i = 0;
+	if ((keeper->s_c || keeper->e_c) && !keeper->ants)
+		ft_error();
 	if (ft_strcmp(line, "##start") == 0)
 		keeper->s_c++;
 	else if (ft_strcmp(line, "##end") == 0)
 		keeper->e_c++;
-	else if (line[i] == '#' && (keeper->s_c || keeper->e_c)
-	         && (ft_strcmp(line, "##start") != 0)
-	         && (ft_strcmp(line, "##end") != 0))
-		ft_error();
+//	else if (line[i] == '#' && (keeper->s_c || keeper->e_c)
+//	         && (ft_strcmp(line, "##start") != 0)
+//	         && (ft_strcmp(line, "##end") != 0))
+//		ft_error();
 	else if (line[i] == '#' && (ft_strcmp(line, "##start") != 0
 	                            && (ft_strcmp(line, "##end") != 0)))
 		;
@@ -90,8 +103,8 @@ void    parse_rooms(t_room_keeper *keeper, char* line)
 		room = create_room(name, 2);
 	else
 	{
+		room = create_room (name, keeper->RoomCounter);
 		keeper->RoomCounter++;
-		room = create_room (name, keeper->RoomCounter - 1);
 	}
 	add_room(keeper, room);
 
