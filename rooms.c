@@ -22,6 +22,7 @@ void	add_prev_room(t_room  *room, int prev)
 		// free(room->prev_room);
 	// room_name = (char*)malloc(sizeof(char) * (ft_strlen(prev) + 1));
 	// room->prev_room = ft_strcpy(room_name, prev);
-	room->prev_room = prev;
+	if (room->prev_room == 0)
+	    room->prev_room = prev;
 	ft_printf("     room %d has prev %d\n", room->id, prev);
 }

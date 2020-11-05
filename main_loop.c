@@ -52,6 +52,7 @@ void    clear_rooms(t_room_keeper *keeper)
     {
         room = keeper->n[i];
         room->visited = 0;
+        room->prev_room = 0;
     }
 }
 

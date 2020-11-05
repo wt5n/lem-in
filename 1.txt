@@ -13,6 +13,7 @@ H 9 9
 Shavuha 10 10
 start-A
 start-B
+start-C
 A-C
 B-D
 C-F
@@ -20,5 +21,6 @@ C-E
 D-F
 E-H
 F-G
+C-Shavuha
 F-Shavuha
 H-Shavuha
