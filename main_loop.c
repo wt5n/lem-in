@@ -1,11 +1,7 @@
 #include "lem_in.h"
 
 
-int		delete_collisions(t_room_keeper *keeper, t_map_keeper *mp)
-{
-    
-	return (0);
-}
+
 
 void    print_maps(t_map_keeper *mp, t_room_keeper *keeper)
 {
@@ -58,6 +54,8 @@ void	main_loop(t_room_keeper *keeper, t_map_keeper *mp)
 	while (1)
 	{
         i = path_to_finish(keeper, mp);
+        if (min_n(keeper->s_links, keeper->f_links) == i)
+            pritnf("hvatit plz\n");
         if (i != 0)
             if (delete_collisions(keeper, mp) == 0)
                 break;;

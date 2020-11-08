@@ -64,6 +64,8 @@ typedef struct 	s_room_keeper
 	int         e_c;
 	t_room		*start;
 	t_room		*finish;
+	int			s_links;
+	int			f_links;
 }				t_room_keeper;
 
 

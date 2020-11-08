@@ -12,7 +12,25 @@
 //	}
 //}
 
+void		find_count_s_f(t_room_keeper *keeper)
+{
+	t_room 	room;
+	int		i;
+	int		j;
 
+	i = -1;
+	j = 0;
+	while (++i < keeper->n[1]->links_count)
+		if (keeper->n[1]->links_id[0][i] != 0)
+			j++;
+	keeper->s_links = j;
+	j = 0;
+	i = -1;
+	while (++i < keeper->n[2]->links_count)
+		if (keeper->n[2]->links_id[0][i] != 0)
+			j++;
+	keeper->f_links = j;
+}
 
 int		main(void)
 {
@@ -24,12 +42,11 @@ int		main(void)
 	pass_to_n(keeper);
 
 	t_map_keeper *mp;
-	mp = (t_map_keeper*)malloc(sizeof(t_map_keeper));
+	mp = (t_map_keeper*)ft_memalloc(sizeof(t_map_keeper));
 	mp->field = 1;
 	mp->rl = (t_room_links*)ft_memalloc(sizeof(t_room_links));
-	// mp->rl->data = NULL;
-	// mp->rl->next = NULL;
-	// mp->next = NULL;
+	find_count_s_f(keeper);
+	printf("%d %d\n", keeper->s_links, keeper->f_links);
 	main_loop(keeper, mp);
 
 	printf("finish");
