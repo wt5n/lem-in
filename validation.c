@@ -45,14 +45,23 @@ void    parse_ants(t_room_keeper *keeper, char *line)
 		if (keeper->ants)
 			break ;
 		if (*line && (*line == ' '))
+		{
+			ft_printf("parse_ants\n");
 			ft_error();
+		}
 		if (*line && (*line == '-'))
+		{
+			ft_printf("parse_ants\n");
 			ft_error();
+		}
 		while (*(line + i) && *(line + i) == '+' || ft_isdigit(*(line + i)))
 			i++;
 		keeper->ants = ft_atoi_wr(line);
 		if (keeper->ants <= 0 || line[i] != '\0')
+		{
+			ft_printf("parse_ants\n");
 			ft_error();
+		}
 	}
 }
 
@@ -62,7 +71,10 @@ void    parse_comms(t_room_keeper *keeper, char *line)
 
 	i = 0;
 	if ((keeper->s_c || keeper->e_c) && !keeper->ants)
+	{
+		ft_printf("parse_comms\n");
 		ft_error();
+	}
 	if (ft_strcmp(line, "##start") == 0)
 		keeper->s_c++;
 	else if (ft_strcmp(line, "##end") == 0)
@@ -129,7 +141,10 @@ void    parse_links(t_room_keeper *keeper, char* line)
 	room2 = ft_strdup(minus + 1);
 	add_two_links(keeper->n_hash[get_hash(room1)], keeper->n_hash[get_hash(room2)]);
 	if (ft_strcmp(room1, room2) == 0)
+	{
+		ft_printf("parse_links\n");
 		ft_error();
+	}
 }
 
 void    parse_input(t_room_keeper *keeper)
@@ -149,7 +164,12 @@ void    parse_input(t_room_keeper *keeper)
 		else if (ft_strchr(line, '-'))
 			parse_links(keeper, line);
 		else
+		{
+		    printf("%s\n", line);
+			printf("%d\n", keeper->ants);
+			ft_printf("parse_input\n");
 			ft_error();
+		}
 		free(line);
 	}
 }

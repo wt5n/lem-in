@@ -28,6 +28,7 @@ add_executable(bfs
         links.c
         main_loop.c
         paths.c
+        map.c
         ${SRC_OPERATIONS})
 
 

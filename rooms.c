@@ -12,7 +12,6 @@ t_room *create_room(char *name, int id)
 	room->links_id[1] = (int*)ft_memalloc(sizeof(int) * room->links_count);
 	// room->links_used = (int*)ft_memalloc(sizeof(int) * 10);
 	room->links_count = 10;
-
 	return room;
 }
 

@@ -16,7 +16,7 @@
 
 int		main(void)
 {
-	t_room_keeper *keeper = (t_room_keeper*)malloc(sizeof(t_room_keeper));
+	t_room_keeper *keeper = (t_room_keeper*)ft_memalloc(sizeof(t_room_keeper));
 	keeper->n_hash = (t_room**)ft_memalloc(sizeof(t_room*) * 3000);
 	keeper->RoomCounter = 3;
 	parse_input(keeper);

@@ -1,0 +1,20 @@
+100
+##start
+start 1 1
+A 2 2
+B 3 3
+C 4 4
+D 5 5
+E 6 6
+F 7 7
+##end
+Shavuha 10 10
+start-A
+start-B
+A-D
+A-C
+B-E
+C-F
+D-Shavuha
+E-D
+F-Shavuha

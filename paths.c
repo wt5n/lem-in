@@ -1,34 +1,24 @@
 #include "lem_in.h"
 
-void    add_map_to_map_keeper(t_map_keeper *mp, t_map *map)
+int		is_link_used(t_room *room, int target)
 {
-    t_room_links *tmp_link;
-    t_room_links *t;
+    int i;
 
-    t = (t_room_links*)malloc(sizeof(t_room_links));
-    t->data = NULL;
-    t->next = NULL;
-    tmp_link = (t_room_links*)malloc(sizeof(t_room_links));
-    tmp_link->data = map;
-    tmp_link->next = NULL;
-
-    if (mp->rl->data == NULL)
+    i = 0;
+    if (room->id == 1)
+        return (0);
+    while (i < room->links_count)
     {
-        mp->rl = tmp_link;
-        // mp->rl->next = tmp_link;
-        return ;
+        // printf("i=%d [0][i]=%d\n", i, room->links_id[0][i]);
+        if (room->links_id[0][i] == target)
+        {
+            if (room->links_id[1][i] == 1) {
+                ft_printf("the link is used\n");
+                return (1);
+            }
+        }
+        i++;
     }
-    t->next = mp->rl->next;
-    while (t->next != NULL)
-    {
-        t->data = t->next->data;
-    }
-    t = tmp_link;
-    mp->rl->next = t;
-}
-
-int		is_link_used(t_room *room, char *target)
-{
 	return (0);
 }
 
@@ -41,10 +31,12 @@ int		length_of_path(t_room_keeper *keeper)
 	current = keeper->n[2];
 	while (current->prev_room != 0)
 	{
+       if (is_link_used(current, current->prev_room))
+           return (-1);
 		length++;
 		current = keeper->n[current->prev_room];
 	}
-	return (length);
+	return (length + 1);
 }
 
 void	mark_as_used(t_room_keeper *keeper, int to, int from)
@@ -59,30 +51,21 @@ void	mark_as_used(t_room_keeper *keeper, int to, int from)
         room->links_id[1][i] = 1;
 }
 
-t_map    *create_map(int length, int field)
-{
-	t_map 	*map;
-
-	map = (t_map*)ft_memalloc(sizeof(t_map));
-    map->length = length;
-	map->field = field;
-	map->rooms = (int*)malloc(sizeof(int) * map->length);
-    return (map);
-}
-
-void	path_to_start(t_room_keeper *keeper, t_map_keeper *mp)
+int 	path_to_start(t_room_keeper *keeper, t_map_keeper *mp)
 {
 	int 	from;
 	int		length;
 	t_map 	*map;
 	t_room	*room;
 
-    length = length_of_path(keeper) + 1;
+    if ((length = length_of_path(keeper)) == -1)
+        return (1);
     map = create_map(length, mp->field);
     map->rooms[0] = 1;
     room = keeper->n[2];
 	while (--length > 0)
 	{
+        room->visited = 2;
 		map->rooms[length] = room->id;
 		ft_printf("length=%d room=%s ", length, room->name);
         if (room->id == 1)
@@ -94,6 +77,7 @@ void	path_to_start(t_room_keeper *keeper, t_map_keeper *mp)
     }
 	ft_printf("\n");
 	add_map_to_map_keeper(mp, map);
+    return (0);
 }
 
 int		path_to_finish(t_room_keeper *keeper, t_map_keeper *mp)
@@ -122,11 +106,10 @@ int		path_to_finish(t_room_keeper *keeper, t_map_keeper *mp)
             if (add_links_to_queue(current->id, queue, keeper) == 1)
             {
                 keeper->n[2]->prev_room = current->id;
-                path_to_start(keeper, mp);
-                return (1);
+                return (path_to_start(keeper, mp));
             }
         }
 //        prev = current->name;
     }
-    return (0);
+    return (-1);
 }
