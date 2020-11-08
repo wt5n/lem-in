@@ -89,7 +89,7 @@ void    parse_input(t_room_keeper *keeper);
 void    pass_to_n(t_room_keeper *keeper);
 t_map    *create_map(int length, int field);
 void    add_map_to_map_keeper(t_map_keeper *mp, t_map *map);
-void    clear_rooms(t_room_keeper *keeper, int all);
+void    clear_rooms(t_room_keeper *keeper);
 
 
 #endif

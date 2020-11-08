@@ -50,7 +50,6 @@ int     add_links_to_queue(int id, t_queue *queue, t_room_keeper *keeper)
 	num_of_links = tmp_room->links_count;
 	while (++i < num_of_links)
 	{
-		// mark_as_used
 		if (tmp_room->links_id[0][i] != 0)
              ft_printf("room=%d link_id=%d link_usd=%d\n", tmp_room->id,
                          tmp_room->links_id[0][i], tmp_room->links_id[1][i]);
@@ -67,7 +66,6 @@ int     add_links_to_queue(int id, t_queue *queue, t_room_keeper *keeper)
 			{
 				add_prev_room(keeper->n[tmp_room->links_id[0][i]], tmp_room->id);
 				in_queue(queue, tmp_room->links_id[0][i]);
-//				printf("%s  \n", tmp_room2->name);
 			}
 		}
 	}

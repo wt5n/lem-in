@@ -1,8 +1,9 @@
 #include "lem_in.h"
 
 
-int		delete_collisions(t_room_keeper *c_k1, t_map_keeper *keeper)
+int		delete_collisions(t_room_keeper *keeper, t_map_keeper *mp)
 {
+    
 	return (0);
 }
 
@@ -26,7 +27,7 @@ void    print_maps(t_map_keeper *mp, t_room_keeper *keeper)
     }
 }
 
-void    clear_rooms(t_room_keeper *keeper, int all)
+void    clear_rooms(t_room_keeper *keeper)
 {
     int     i;
     int     j;
@@ -37,33 +38,33 @@ void    clear_rooms(t_room_keeper *keeper, int all)
     {
         j = -1;
         room = keeper->n[i];
-        if (room->visited == 1)
-            room->visited = 0;
+        room->visited = 0;
         room->prev_room = 0;
-        if (all == 1)
-        {
-            room->visited = 0;
-            while (j++ < room->links_count)
-                room->links_id[1][j] = 0;
-
-        }
+        while (j++ < room->links_count)
+            room->links_id[1][j] = 0;
     }
 }
+
+void    free_all()
+{
+
+};
 
 void	main_loop(t_room_keeper *keeper, t_map_keeper *mp)
 {
     int             i;
 
     i = 1;
-	while (1 == 1)
+	while (1)
 	{
         i = path_to_finish(keeper, mp);
-        if (i == -1)
-            break;
-        clear_rooms(keeper, i);
-        if (i == 1)
-            mp->field++;
+        if (i != 0)
+            if (delete_collisions(keeper, mp) == 0)
+                break;;
+        clear_rooms(keeper);
+        mp->field++;
     }
+    free_all();
     print_maps(mp, keeper);
     // if ((delete_collisions(keeper, mp)) == 1)
 	// {
