@@ -39,6 +39,7 @@ void    clear_rooms(t_room_keeper *keeper)
         while (j++ < room->links_count)
             room->links_id[1][j] = 0;
     }
+    keeper->v_limit = 0;
 }
 
 void    free_all()
@@ -46,22 +47,29 @@ void    free_all()
 
 };
 
-void	main_loop(t_room_keeper *keeper, t_map_keeper *mp)
+void	master_loop(t_room_keeper *keeper, t_map_keeper *mp)
 {
-    int             i;
+    int     i;
 
     i = 1;
-	while (1)
-	{
-        i = path_to_finish(keeper, mp);
-        if (min_n(keeper->s_links, keeper->f_links) == i)
-            printf("hvatit plz\n");
-        if (i != 0)
-            if (delete_collisions(keeper) == 0)
-                break;;
+    keeper->n[1]->visited = 1000000;
+    while (1)
+    {
+        while (i != 0)
+        {
+            i = path_to_finish(keeper, mp);
+            if (min_n(keeper->s_links, keeper->f_links) == i)
+            {
+                printf("hvatit plz\n");
+                break;
+            }
+            keeper->v_limit++;
+        }
+        if (delete_collisions(keeper) == 0)
+            break;
         clear_rooms(keeper);
         mp->field++;
-        break;
+        i = 1;
     }
     free_all();
     print_maps(mp, keeper);

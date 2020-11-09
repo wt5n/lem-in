@@ -71,7 +71,7 @@ int 	path_to_start(t_room_keeper *keeper, t_map_keeper *mp)
 		room = keeper->n[room->prev_room];
 		mark_as_used(keeper, from, room->id);
         if (room->id != 2)
-            room->visited = 1;
+            room->visited = 1000000;
 		// print_all_links(room->name, room->links);
     }
 	ft_printf("\n");
@@ -81,75 +81,120 @@ int 	path_to_start(t_room_keeper *keeper, t_map_keeper *mp)
 
 int		path_to_finish(t_room_keeper *keeper, t_map_keeper *mp)
 {
-    int             res;
     t_queue			*queue;
     t_room 			*current;
 
-    res = 0;
     queue = (t_queue*)ft_memalloc(sizeof(t_queue));
     if (add_links_to_queue(keeper->n[1]->id, queue, keeper) == 1)
-    {
-        res += path_to_start(keeper, mp);
-        if (min_n(keeper->s_links, keeper->f_links) == res)
-            return (res);
-    }
-    keeper->n[1]->visited = 1;
+        return (path_to_start(keeper, mp));
     while (queue->stack != NULL)
     {
         current = keeper->n[out_queue(queue)];
         printf("current is %s\n", current->name);
-        if (current->visited == 0)
+        if (current->visited <= keeper->v_limit)
         {
-            current->visited = 1;
+            current->visited++;
             if (add_links_to_queue(current->id, queue, keeper) == 1)
             {
                 keeper->n[2]->prev_room = current->id;
-                res += (path_to_start(keeper, mp));
-                if (min_n(keeper->s_links, keeper->f_links) == res)
-                    return (res);
+                return (path_to_start(keeper, mp));
             }
         }
     }
-    return (res);
+    return (0);
 }
 
-int		delete_collisions(t_room_keeper *keeper)
+void    print_links(t_room_keeper *keeper, int id)
 {
-   int res;
-   t_queue			*queue;
+    t_room *room;
+    int i;
 
-   res = 0;
-   queue = (t_queue*)ft_memalloc(sizeof(t_queue));
-   add_links_to_queue(keeper->n[1]->id, queue, keeper);
+    room = keeper->n[id];
+    i = -1;
+    printf("links of room %s\n", room->name);
+    while (++i < room->links_count)
+    {
+        if (room->links_id[0][i] != 0 )
+            printf("%d %d\n", room->links_id[0][i], room->links_id[1][i]);
+    }
+    printf("\n");
+}
 
-   int     num_of_links;
-	t_room	*tmp_room;
-	int		i;
+int    del_cols(t_room_keeper *keeper, int room, int linked_room, int num_lrm)
+{
+    t_room *rm;
+    t_room *l_rm;
 
-	i = -1;
-	tmp_room = keeper->n[id];
-	num_of_links = tmp_room->links_count;
-	while (++i < num_of_links)
-	{
-		if (tmp_room->links_id[0][i] != 0)
-            ft_printf("room=%d link_id=%d link_usd=%d\n", tmp_room->id,
-                        tmp_room->links_id[0][i], tmp_room->links_id[1][i]);
-		if ((tmp_room->links_id[0][i] != 0) && (tmp_room->links_id[1][i] == 0))
-		{
-//			ft_printf("link id is %d\n", tmp_room->links_id[0][i]);
-			if (tmp_room->links_id[0][i] == 2) // check chto eto finish
-			{
-				add_prev_room(keeper->n[tmp_room->links_id[0][i]], tmp_room->id);
-			    ft_printf("the kraynaya komnata is %s\n", tmp_room->name);
-               return (1);
-           }
-			if (keeper->n[tmp_room->links_id[0][i]]->visited == 0)
-			{
-				add_prev_room(keeper->n[tmp_room->links_id[0][i]], tmp_room->id);
-				in_queue(queue, tmp_room->links_id[0][i]);
-			}
-		}
-	}
-	return (0);
+    int i = -1;
+    rm = keeper->n[room];
+    l_rm = keeper->n[linked_room];
+    while (++i < rm->links_count)
+    {
+        if (rm->links_id[0][i] == linked_room && rm->links_id[1][i] != 1)
+        {
+            print_links(keeper, rm->id);
+            print_links(keeper, l_rm->id);
+            printf("%s rm->links_id[0][i] %d  ,%s l_rm->links_id[0][num_lrm] %d\n",
+                rm->name, rm->links_id[0][i],
+                l_rm->name, l_rm->links_id[0][num_lrm]);
+            rm->links_id[0][i] = 0;
+            l_rm->links_id[0][num_lrm] = 0;
+            printf("collision is deleted\n");
+            return (1);
+        }
+    }
+    return (0);
+}
 
+int     find_room(t_room_keeper *keeper, int r, int find)
+{
+    t_room  *room;
+    int     i;
+
+    room = keeper->n[r];
+    i = -1;
+    while (++i< room->links_count)
+        if (room->links_id[0][i] == find)
+            return i;
+    return (-1);
+}
+
+int     delete_collisions(t_room_keeper *keeper)
+{
+    t_queue *queue;
+    t_room *room;
+    t_room *linked_room;
+    int i;
+    int     tmp;
+
+    queue = (t_queue *)ft_memalloc(sizeof (t_queue));
+    in_queue(queue, 2);
+    printf("Ya zdes' =)\n");
+    while (queue->stack != NULL)
+    {
+        room = keeper->n[out_queue(queue)];
+        i = -1;
+        while (++i < room->links_count)
+        {
+            if (room->links_id[0][i] != 0)
+                printf("%d\n", room->links_id[0][i]);
+            if (room->visited < 1000001 && room->links_id[0][i] > 0)
+            {
+//                printf("room->links_id[0][i] %d\n", room->links_id[0][i]);
+                linked_room = keeper->n[room->links_id[0][i]];
+                tmp = find_room(keeper, linked_room->id, room->id);
+                if (tmp == -1)
+                    continue;
+                if (linked_room->links_id[1][tmp] == 1)
+                    if (del_cols(keeper, room->id, linked_room->id, i))
+                        return (1);
+                print_links(keeper, room->id);
+                print_links(keeper, linked_room->id);
+                if (room->links_id[1][i] != 1 && linked_room->visited < 1000001)
+                    in_queue(queue, room->links_id[0][i]);
+            }
+        }
+        room->visited = 1000001;
+    }
+    return (0);
 }

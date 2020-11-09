@@ -23,5 +23,5 @@ void	add_prev_room(t_room  *room, int prev)
 	// room->prev_room = ft_strcpy(room_name, prev);
 	if (room->prev_room == 0)
 	    room->prev_room = prev;
-	ft_printf("     room %d has prev %d\n", room->id, prev);
+	// ft_printf("     room %d has prev %d\n", room->id, prev);
 }

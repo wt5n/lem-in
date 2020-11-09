@@ -50,9 +50,9 @@ int     add_links_to_queue(int id, t_queue *queue, t_room_keeper *keeper)
 	num_of_links = tmp_room->links_count;
 	while (++i < num_of_links)
 	{
-		if (tmp_room->links_id[0][i] != 0)
-             ft_printf("room=%d link_id=%d link_usd=%d\n", tmp_room->id,
-                         tmp_room->links_id[0][i], tmp_room->links_id[1][i]);
+		// if (tmp_room->links_id[0][i] != 0)
+        //      ft_printf("room=%d link_id=%d link_usd=%d\n", tmp_room->id,
+        //                  tmp_room->links_id[0][i], tmp_room->links_id[1][i]);
 		if ((tmp_room->links_id[0][i] != 0) && (tmp_room->links_id[1][i] == 0))
 		{
 //			ft_printf("link id is %d\n", tmp_room->links_id[0][i]);
@@ -62,7 +62,7 @@ int     add_links_to_queue(int id, t_queue *queue, t_room_keeper *keeper)
 			    ft_printf("the kraynaya komnata is %s\n", tmp_room->name);
                 return (1);
             }
-			if (keeper->n[tmp_room->links_id[0][i]]->visited == 0)
+			if (keeper->n[tmp_room->links_id[0][i]]->visited <= keeper->v_limit)
 			{
 				add_prev_room(keeper->n[tmp_room->links_id[0][i]], tmp_room->id);
 				in_queue(queue, tmp_room->links_id[0][i]);
