@@ -55,12 +55,13 @@ void	main_loop(t_room_keeper *keeper, t_map_keeper *mp)
 	{
         i = path_to_finish(keeper, mp);
         if (min_n(keeper->s_links, keeper->f_links) == i)
-            pritnf("hvatit plz\n");
+            printf("hvatit plz\n");
         if (i != 0)
-            if (delete_collisions(keeper, mp) == 0)
+            if (delete_collisions(keeper) == 0)
                 break;;
         clear_rooms(keeper);
         mp->field++;
+        break;
     }
     free_all();
     print_maps(mp, keeper);
