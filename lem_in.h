@@ -66,6 +66,7 @@ typedef struct 	s_room_keeper
 	t_room		*finish;
 	int			s_links;
 	int			f_links;
+	int			v_limit;
 }				t_room_keeper;
 
 
@@ -80,7 +81,7 @@ void	add_two_links(t_room *first, t_room *second);
 int 	add_links_to_queue(int id, t_queue *queue, t_room_keeper *keeper);
 int		path_to_finish(t_room_keeper *keeper, t_map_keeper *mp);
 void	add_prev_room(t_room *room, int prev);
-void	main_loop(t_room_keeper *keeper, t_map_keeper *mp);
+void	master_loop(t_room_keeper *keeper, t_map_keeper *mp);
 void    add_room(t_room_keeper *keeper, t_room *room);
 void    start_end_rooms(t_room_keeper *keeper, t_room *room);
 void    parse_ants(t_room_keeper *keeper, char *line);
@@ -92,6 +93,7 @@ void    pass_to_n(t_room_keeper *keeper);
 t_map    *create_map(int length, int field);
 void    add_map_to_map_keeper(t_map_keeper *mp, t_map *map);
 void    clear_rooms(t_room_keeper *keeper);
+int     delete_collisions(t_room_keeper *keeper);
 
 
 #endif

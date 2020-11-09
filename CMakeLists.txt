@@ -26,7 +26,7 @@ add_executable(bfs
         bfs.c
         rooms.c
         links.c
-        main_loop.c
+        master_loop.c
         paths.c
         map.c
         ${SRC_OPERATIONS})
