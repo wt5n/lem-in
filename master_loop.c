@@ -1,13 +1,7 @@
 #include "lem_in.h"
 
-
-
-
-void    print_maps(t_map_keeper *mp, t_room_keeper *keeper)
+void    print_maps(t_map_keeper *mp)
 {
-    t_map   *tmp_map;
-    t_room *tmp_room;
-    int     *tmp_id;
     int     i;
 
     while (mp->rl != NULL)
@@ -72,10 +66,5 @@ void	master_loop(t_room_keeper *keeper, t_map_keeper *mp)
         i = 1;
     }
     free_all();
-    print_maps(mp, keeper);
-    // if ((delete_collisions(keeper, mp)) == 1)
-	// {
-	// 	mp->field++;
-	// 	main_loop(keeper, mp);
-	// }
+    print_maps(mp);
 }

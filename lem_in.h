@@ -91,9 +91,10 @@ void    parse_links(t_room_keeper *keeper, char* line);
 void    parse_input(t_room_keeper *keeper);
 void    pass_to_n(t_room_keeper *keeper);
 t_map    *create_map(int length, int field);
-void    add_map_to_map_keeper(t_map_keeper *mp, t_map *map);
+void    add_map_to_map_keeper(t_room_links *links, t_map *map);
 void    clear_rooms(t_room_keeper *keeper);
 int     delete_collisions(t_room_keeper *keeper);
+void    print_maps(t_map_keeper *mp);
 
 
 #endif
