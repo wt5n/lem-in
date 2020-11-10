@@ -11,14 +11,19 @@ t_map    *create_m(int length, int field)
 	return (map);
 }
 
-void    add_map_to_mk(t_room_links *links, t_map *map)
+void    add_map_to_mk(t_room_links *rl, t_map *map)
 {
 	t_room_links *tmp = (t_room_links *)ft_memalloc(sizeof (t_room_links));
-	while (links->next)
-		links = links->next;
+	if (rl->data == NULL)
+    {
+	    rl->data = map;
+        return ;
+    }
+	while (rl->next)
+        rl = rl->next;
 	tmp->data = map;
 	tmp->next = NULL;
-	links->next = tmp;
+    rl->next = tmp;
 }
 
 void    print_maps(t_map_keeper *mp)
@@ -43,8 +48,8 @@ int main (void)
 	t_map_keeper *mk = (t_map_keeper *)ft_memalloc(sizeof(t_map_keeper));
 	mk->rl = (t_room_links *)ft_memalloc(sizeof(t_room_links));
 	int ar[5] = {1, 3, 5, 6, 2};
-	int ar2[4] = {1, 4, 7, 2};
-	int ar3[7] = {1, 3, 4, 5, 6, 7, 2};
+	int ar2[4] = {22, 44, 77, 33};
+	int ar3[7] = {333, 334, 401, 506, 643, 778, 299};
 	t_map *map = create_m (5, 1);
 	t_map *map2 = create_m (4, 1);
 	t_map *map3 = create_m (7, 2);
@@ -53,10 +58,10 @@ int main (void)
 	for (int i = 0; i < map2->length; i++)
 		map2->rooms[i] = ar2[i];
 	for (int i = 0; i < map3->length; i++)
-		map2->rooms[i] = ar3[i];
-	add_map_to_mk(mk->rl, map);
+		map3->rooms[i] = ar3[i];
+    add_map_to_mk(mk->rl, map);
 	add_map_to_mk(mk->rl, map2);
 	add_map_to_mk(mk->rl, map3);
 	print_maps(mk);
 	return (0);
-} 
+}

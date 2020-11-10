@@ -115,7 +115,7 @@ void    parse_rooms(t_room_keeper *keeper, char* line)
 		room = create_room(name, 2);
 	else
 	{
-		room = create_room (name, keeper->RoomCounter);
+		room = create_room(name, keeper->RoomCounter);
 		keeper->RoomCounter++;
 	}
 	add_room(keeper, room);
@@ -154,6 +154,8 @@ void    parse_input(t_room_keeper *keeper)
 	line = NULL;
 	while (get_next_line(STDIN_FILENO, &line) == 1)
 	{
+	    if (ft_strcmp(line, "L 14 14") == 0)
+	        ft_printf("");
 		if ((ft_isdigit(line[0]) || ft_isdigit(line[1])) && !keeper->ants)
 			parse_ants(keeper, line);
 		else if (line[0] == '#')
@@ -165,8 +167,8 @@ void    parse_input(t_room_keeper *keeper)
 			parse_links(keeper, line);
 		else
 		{
-		    printf("%s\n", line);
-			printf("%d\n", keeper->ants);
+		    ft_printf("%s\n", line);
+			ft_printf("%d\n", keeper->ants);
 			ft_printf("parse_input\n");
 			ft_error();
 		}

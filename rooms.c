@@ -15,13 +15,20 @@ t_room *create_room(char *name, int id)
 	return room;
 }
 
-void	add_prev_room(t_room  *room, int prev)
+void	add_prev_room(t_room_keeper *keeper, t_room *room, int prev)
 {
 	// if (room->prev_room != NULL)
 		// free(room->prev_room);
 	// room_name = (char*)malloc(sizeof(char) * (ft_strlen(prev) + 1));
 	// room->prev_room = ft_strcpy(room_name, prev);
-	if (room->prev_room == 0)
-	    room->prev_room = prev;
+	// if (room->prev_room == 0)
+	// if (room->prev_room == 0 || room->visited < keeper->v_limit)
+	ft_printf("** r->p=%d r->v=%d v_l=%d room=%d prev=%d\n", room->prev_room, room->visited, keeper->v_limit, room->id, prev);
+	// if (room->visited <= keeper->v_limit)
+	// if (room->prev_room == 0)
+	if (room->visited < keeper->v_limit)
+    	room->prev_room = prev;
+	ft_printf("r->p=%d **\n", room->prev_room);
+
 	// ft_printf("     room %d has prev %d\n", room->id, prev);
 }

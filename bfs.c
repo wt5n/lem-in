@@ -47,8 +47,10 @@ int		main(void)
 	mp->rl = (t_room_links*)ft_memalloc(sizeof(t_room_links));
 	find_count_s_f(keeper);
 //	printf("%d %d\n", keeper->s_links, keeper->f_links);
-	master_loop(keeper, mp);
+    ft_printf("");
+    ft_printf("");
+    master_loop(keeper, mp);
 
-	printf("finish");
+	ft_printf("finish");
 	return (1);
 }

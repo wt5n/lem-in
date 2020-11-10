@@ -80,7 +80,7 @@ void    add_links(t_room *room, int link);
 void	add_two_links(t_room *first, t_room *second);
 int 	add_links_to_queue(int id, t_queue *queue, t_room_keeper *keeper);
 int		path_to_finish(t_room_keeper *keeper, t_map_keeper *mp);
-void	add_prev_room(t_room *room, int prev);
+void	add_prev_room(t_room_keeper *keeper, t_room *room, int prev);
 void	master_loop(t_room_keeper *keeper, t_map_keeper *mp);
 void    add_room(t_room_keeper *keeper, t_room *room);
 void    start_end_rooms(t_room_keeper *keeper, t_room *room);
@@ -91,10 +91,11 @@ void    parse_links(t_room_keeper *keeper, char* line);
 void    parse_input(t_room_keeper *keeper);
 void    pass_to_n(t_room_keeper *keeper);
 t_map    *create_map(int length, int field);
-void    add_map_to_map_keeper(t_room_links *links, t_map *map);
+void    add_map_to_map_keeper(t_room_links *rl, t_map *map);
 void    clear_rooms(t_room_keeper *keeper);
 int     delete_collisions(t_room_keeper *keeper);
 void    print_maps(t_map_keeper *mp);
-
+int     delete_collisions(t_room_keeper *keeper);
+void    print_links(t_room_keeper *keeper, int id);
 
 #endif

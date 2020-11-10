@@ -7,6 +7,7 @@ void    print_maps(t_map_keeper *mp)
     while (mp->rl != NULL)
     {
         i = 0;
+        ft_printf("field is %d\n", mp->rl->data->field);
         while ((mp->rl->data->rooms[i] != 0) && (i < mp->rl->data->length))
         {
             ft_printf("%d ", mp->rl->data->rooms[i]);
@@ -54,7 +55,7 @@ void	master_loop(t_room_keeper *keeper, t_map_keeper *mp)
             i = path_to_finish(keeper, mp);
             if (min_n(keeper->s_links, keeper->f_links) == i)
             {
-                printf("hvatit plz\n");
+                ft_printf("hvatit plz\n");
                 break;
             }
             keeper->v_limit++;

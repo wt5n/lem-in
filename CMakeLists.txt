@@ -29,6 +29,7 @@ add_executable(bfs
         master_loop.c
         paths.c
         map.c
+        collisions.c
         ${SRC_OPERATIONS})
 
 
