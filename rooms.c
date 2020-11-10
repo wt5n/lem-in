@@ -23,12 +23,13 @@ void	add_prev_room(t_room_keeper *keeper, t_room *room, int prev)
 	// room->prev_room = ft_strcpy(room_name, prev);
 	// if (room->prev_room == 0)
 	// if (room->prev_room == 0 || room->visited < keeper->v_limit)
-	ft_printf("** r->p=%d r->v=%d v_l=%d room=%d prev=%d\n", room->prev_room, room->visited, keeper->v_limit, room->id, prev);
+	// ft_printf("** r->p=%d r->v=%d v_l=%d room=%d prev=%d\n", room->prev_room, room->visited, keeper->v_limit, room->id, prev);
 	// if (room->visited <= keeper->v_limit)
 	// if (room->prev_room == 0)
-	if (room->visited < keeper->v_limit)
-    	room->prev_room = prev;
-	ft_printf("r->p=%d **\n", room->prev_room);
+	// if (room->visited < keeper->v_limit)
+    room->prev_room = prev;
+	room->in_q = keeper->v_limit;
+	// ft_printf("r->p=%d **\n", room->prev_room);
 
 	// ft_printf("     room %d has prev %d\n", room->id, prev);
 }

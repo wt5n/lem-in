@@ -24,14 +24,15 @@ void    clear_rooms(t_room_keeper *keeper)
     int     j;
     t_room  *room;
 
-    i = 2;
+    i = 0;
     while (++i < keeper->RoomCounter)
     {
         j = -1;
         room = keeper->n[i];
         room->visited = 0;
         room->prev_room = 0;
-        while (j++ < room->links_count)
+        room->in_q = 0;
+        while (++j < room->links_count)
             room->links_id[1][j] = 0;
     }
     keeper->v_limit = 0;
@@ -63,6 +64,8 @@ void	master_loop(t_room_keeper *keeper, t_map_keeper *mp)
         if (delete_collisions(keeper) == 0)
             break;
         clear_rooms(keeper);
+        keeper->n[1]->visited = 1000000;
+        keeper->v_limit = 1;
         mp->field++;
         i = 1;
     }

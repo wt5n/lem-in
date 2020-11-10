@@ -39,6 +39,7 @@ int		main(void)
 	keeper->RoomCounter = 3;
 	parse_input(keeper);
 	keeper->n = (t_room**)ft_memalloc(sizeof(t_room*) * keeper->RoomCounter);
+	keeper->v_limit = 1;
 	pass_to_n(keeper);
 
 	t_map_keeper *mp;

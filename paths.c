@@ -91,9 +91,9 @@ int		path_to_finish(t_room_keeper *keeper, t_map_keeper *mp)
     {
         current = keeper->n[out_queue(queue)];
         // ft_printf("current is %s\n", current->name);
-        if (current->visited <= keeper->v_limit)
+        if (current->visited < keeper->v_limit)
         {
-            current->visited++;
+            current->visited = keeper->v_limit;
             if (add_links_to_queue(current->id, queue, keeper) == 1)
             {
                 keeper->n[2]->prev_room = current->id;

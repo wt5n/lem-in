@@ -41,14 +41,12 @@ void add_two_links(t_room *first, t_room *second)
 
 int     add_links_to_queue(int id, t_queue *queue, t_room_keeper *keeper)
 {
-	int     num_of_links;
 	t_room	*tmp_room;
 	int		i;
 
 	i = -1;
 	tmp_room = keeper->n[id];
-	num_of_links = tmp_room->links_count;
-	while (++i < num_of_links)
+	while (++i < tmp_room->links_count)
 	{
 		// if (tmp_room->links_id[0][i] != 0)
         //      ft_printf("room=%d link_id=%d link_usd=%d\n", tmp_room->id,
@@ -62,7 +60,8 @@ int     add_links_to_queue(int id, t_queue *queue, t_room_keeper *keeper)
 			    ft_printf("the kraynaya komnata is %s\n", tmp_room->name);
                 return (1);
             }
-			if (keeper->n[tmp_room->links_id[0][i]]->visited <= keeper->v_limit)
+			if (keeper->n[tmp_room->links_id[0][i]]->visited < keeper->v_limit &&
+				keeper->n[tmp_room->links_id[0][i]]->in_q < keeper->v_limit)
 			{
 				add_prev_room(keeper, keeper->n[tmp_room->links_id[0][i]], tmp_room->id);
 				in_queue(queue, tmp_room->links_id[0][i]);

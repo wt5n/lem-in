@@ -1,87 +1,18 @@
-/home/tony/Desktop/lem-in2/cmake-build-debug/bfs
-** r->p=0 r->v=0 v_l=0 room=3 prev=1
-r->p=1 **
-** r->p=0 r->v=0 v_l=0 room=4 prev=1
-r->p=1 **
-** r->p=0 r->v=0 v_l=0 room=5 prev=1
-r->p=1 **
-** r->p=1 r->v=0 v_l=0 room=5 prev=3
-r->p=1 **
-** r->p=0 r->v=0 v_l=0 room=6 prev=4
-r->p=4 **
-** r->p=0 r->v=0 v_l=0 room=8 prev=5
-r->p=5 **
-** r->p=0 r->v=0 v_l=0 room=7 prev=5
-r->p=5 **
-** r->p=0 r->v=0 v_l=0 room=2 prev=5
-r->p=5 **
-the kraynaya komnata is C
-length=2 room=Shavuha length=1 room=C
-** r->p=1 r->v=1 v_l=1 room=3 prev=1
-r->p=1 **
-** r->p=1 r->v=1 v_l=1 room=4 prev=1
-r->p=1 **
-** r->p=4 r->v=0 v_l=1 room=6 prev=4
-r->p=4 **
-** r->p=5 r->v=0 v_l=1 room=8 prev=6
-r->p=5 **
-** r->p=4 r->v=1 v_l=1 room=6 prev=8
-r->p=4 **
-** r->p=0 r->v=0 v_l=1 room=9 prev=8
-r->p=8 **
-** r->p=5 r->v=0 v_l=1 room=2 prev=8
-r->p=5 **
-the kraynaya komnata is F
-length=3 room=Shavuha length=2 room=F length=1 room=C
-** r->p=1 r->v=2 v_l=2 room=3 prev=1
-r->p=1 **
-** r->p=1 r->v=2 v_l=2 room=4 prev=1
-r->p=1 **
-** r->p=4 r->v=1 v_l=2 room=6 prev=4
-r->p=4 **
-Ya zdes' =)
-C rm->links_id[0][i] 8  ,F l_rm->links_id[0][num_lrm] 9
-collision is deleted
-** r->p=0 r->v=0 v_l=0 room=3 prev=1
-r->p=1 **
-** r->p=0 r->v=0 v_l=0 room=4 prev=1
-r->p=1 **
-** r->p=0 r->v=0 v_l=0 room=5 prev=1
-r->p=1 **
-** r->p=1 r->v=0 v_l=0 room=5 prev=3
-r->p=1 **
-** r->p=0 r->v=0 v_l=0 room=6 prev=4
-r->p=4 **
-** r->p=0 r->v=0 v_l=0 room=7 prev=5
-r->p=5 **
-** r->p=8 r->v=1000001 v_l=0 room=2 prev=5
-r->p=8 **
-the kraynaya komnata is C
-length=2 room=Shavuha length=1 room=C
-** r->p=1 r->v=1 v_l=1 room=3 prev=1
-r->p=1 **
-** r->p=1 r->v=1 v_l=1 room=4 prev=1
-r->p=1 **
-** r->p=4 r->v=0 v_l=1 room=6 prev=4
-r->p=4 **
-** r->p=0 r->v=0 v_l=1 room=8 prev=6
-r->p=6 **
-** r->p=4 r->v=1 v_l=1 room=6 prev=8
-r->p=4 **
-** r->p=5 r->v=1000001 v_l=1 room=2 prev=8
-r->p=5 **
-the kraynaya komnata is F
-length=4 room=Shavuha length=3 room=F length=2 room=D length=1 room=B
-** r->p=1 r->v=2 v_l=2 room=3 prev=1
-r->p=1 **
-Ya zdes' =)
-field is 1
-1 5 2
-field is 1
-1 5 8 2
-field is 2
-1 5 2
-field is 2
-1 4 6 8 2
-finish
-Process finished with exit code 1
+v = 0
+v_l = 1
+room-v
+	v < v_l
+	1. зашли
+	2. посмотрели соседей
+	v = v_l
+
+	Посмотрели соседей
+	-> while(links < count)
+		-> !USD !0
+			-> 2
+				2-p = room
+				finish
+			l->v < v_l
+				if l-in_q < v_l
+					l-p = room
+					l-in_q = v_l

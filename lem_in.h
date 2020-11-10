@@ -45,12 +45,11 @@ typedef struct		s_room
 	int				CheckAnt;
 	char			*name;
 	int				id;
-	// struct	s_link 	*links;
 	int				**links_id;
-	// int				*links_used;
 	int				links_count;
 	int				visited;
 	int				prev_room;
+	int				in_q;
 	struct s_room	*next;
 }					t_room;
 

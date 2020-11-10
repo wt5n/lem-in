@@ -32,11 +32,13 @@ int     find_room(t_room_keeper *keeper, int r, int find)
     t_room  *room;
     int     i;
 
+    //  print_links(keeper, r);
+    //  print_links(keeper, find);	
     room = keeper->n[r];
     i = -1;
     while (++i< room->links_count)
         if (room->links_id[0][i] == find)
-            return i;
+            return (i);
     return (-1);
 }
 
@@ -54,6 +56,8 @@ int     delete_collisions(t_room_keeper *keeper)
     while (queue->stack != NULL)
     {
         room = keeper->n[out_queue(queue)];
+		// ft_printf("room=%d %d\n", room->id, room->visited);
+    	// print_links(keeper, room->id);
         i = -1;
         while (++i < room->links_count)
         {
@@ -67,10 +71,13 @@ int     delete_collisions(t_room_keeper *keeper)
                 if (tmp == -1)
                     continue;
                 if (linked_room->links_id[1][tmp] == 1)
-                    if (del_cols(keeper, room->id, linked_room->id, i))
+                    if (del_cols(keeper, room->id, linked_room->id, tmp))
                         return (1);
+				// ft_printf("//");
                 // print_links(keeper, room->id);
                 // print_links(keeper, linked_room->id);
+				// ft_printf("%d %d", room->links_id[1][i], linked_room->visited);
+				// ft_printf("\\\\\n");
                 if (room->links_id[1][i] != 1 && linked_room->visited < 1000001)
                     in_queue(queue, room->links_id[0][i]);
             }
