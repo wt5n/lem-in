@@ -28,6 +28,8 @@ void    clear_rooms(t_room_keeper *keeper)
     while (++i < keeper->RoomCounter)
     {
         j = -1;
+        if (keeper->n[i] == 0)
+            continue;
         room = keeper->n[i];
         room->visited = 0;
         room->prev_room = 0;

@@ -1,16 +1,15 @@
 #include "lem_in.h"
 
-//void	zero_int_mas(int **mas, int length)
-//{
-//	int i;
-//
-//	i = 0;
-//	while (i < length)
-//	{
-//		mas[i] = -1;
-//		i++;
-//	}
-//}
+void        print_keeper_rooms(t_room_keeper *keeper)
+{
+    int i;
+
+    i = -1;
+    ft_printf("RoomCounter %d\n", keeper->RoomCounter);
+    while (++i < keeper->RoomCounter)
+        ft_printf("%d\n", keeper->n[i]->id);
+}
+
 
 void		find_count_s_f(t_room_keeper *keeper)
 {
@@ -37,8 +36,10 @@ int		main(void)
 	t_room_keeper *keeper = (t_room_keeper*)ft_memalloc(sizeof(t_room_keeper));
 	keeper->n_hash = (t_room**)ft_memalloc(sizeof(t_room*) * 3000);
 	keeper->RoomCounter = 3;
+//	ft_printf("keeper->RoomCounter = %d\n", keeper->RoomCounter);
 	parse_input(keeper);
-	keeper->n = (t_room**)ft_memalloc(sizeof(t_room*) * keeper->RoomCounter);
+//    ft_printf("keeper->RoomCounter = %d\n", keeper->RoomCounter);
+    keeper->n = (t_room**)ft_memalloc(sizeof(t_room*) * keeper->RoomCounter);
 	keeper->v_limit = 1;
 	pass_to_n(keeper);
 
@@ -47,9 +48,13 @@ int		main(void)
 	mp->field = 1;
 	mp->rl = (t_room_links*)ft_memalloc(sizeof(t_room_links));
 	find_count_s_f(keeper);
-//	printf("%d %d\n", keeper->s_links, keeper->f_links);
+//	ft_printf("%d %d\n", keeper->s_links, keeper->f_links);
     ft_printf("");
     ft_printf("");
+
+//    print_keeper_rooms(keeper);
+//    exit(1);
+
     master_loop(keeper, mp);
 
 	ft_printf("finish");
