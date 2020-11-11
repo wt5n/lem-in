@@ -96,5 +96,6 @@ int     delete_collisions(t_room_keeper *keeper);
 void    print_maps(t_map_keeper *mp);
 int     delete_collisions(t_room_keeper *keeper);
 void    print_links(t_room_keeper *keeper, int id);
+int     find_room(t_room_keeper *keeper, int r, int find);
 
 #endif
