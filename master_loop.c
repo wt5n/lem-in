@@ -166,7 +166,7 @@ void    prepare_ants(t_room_keeper *keeper, t_map_keeper *mp, int field)
 		tmp = start;
 		ant_num++;
 		while (tmp->next != NULL && tmp->data->length + tmp->data->ants_counter >
-		                            tmp->next->data->length + tmp->next->data->ants_counter)
+		                            tmp->next->data->length + tmp->next->data->ants_counter && tmp->next->data->field == field)
 			tmp = tmp->next;
 		in_queue(tmp->data->queue, ant_num);
 		tmp->data->ants_counter++;
@@ -214,14 +214,25 @@ void	master_loop(t_room_keeper *keeper, t_map_keeper *mp)
         clear_rooms(keeper);
         keeper->n[1]->visited = 1000000;
         keeper->v_limit = 1;
-        if (mp->field == 20)
+        if (mp->field == 200)
 	        break ;
         mp->field++;
         k = 0;
         i = 1;
     }
 	prepare_ants(keeper, mp, min_field[2]);
-    solver(keeper, mp, min_field[2]);
+//	ft_printf("");
+//	ft_printf("");
+    while (mp->rl != NULL)
+    {
+    	while (mp->rl->data->field < min_field[2])
+    		mp->rl = mp->rl->next;
+    	while (mp->rl->data->queue->stack != NULL)
+    		ft_printf(" %d", out_queue(mp->rl->data->queue));
+    	ft_printf("\n");
+    	mp->rl = mp->rl->next;
+    }
+//    solver(keeper, mp, min_field[2]);
 //    free_all();
 //    print_maps(mp);
 }

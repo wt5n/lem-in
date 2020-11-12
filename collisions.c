@@ -15,12 +15,12 @@ int    del_cols(t_room_keeper *keeper, int room, int linked_room, int num_lrm)
         {
             // print_links(keeper, rm->id);
             // print_links(keeper, l_rm->id);
-            ft_printf("%s rm->links_id[0][i] %d  ,%s l_rm->links_id[0][num_lrm] %d\n",
-                rm->name, rm->links_id[0][i],
-                l_rm->name, l_rm->links_id[0][num_lrm]);
+//            ft_printf("%s rm->links_id[0][i] %d  ,%s l_rm->links_id[0][num_lrm] %d\n",
+//                rm->name, rm->links_id[0][i],
+//                l_rm->name, l_rm->links_id[0][num_lrm]);
             rm->links_id[0][i] = 0;
             l_rm->links_id[0][num_lrm] = 0;
-            ft_printf("collision is deleted\n");
+//            ft_printf("collision is deleted\n");
             return (1);
         }
     }
@@ -52,7 +52,7 @@ int     delete_collisions(t_room_keeper *keeper)
 
     queue = (t_queue *)ft_memalloc(sizeof (t_queue));
     in_queue(queue, 2);
-    ft_printf("Ya zdes' =)\n");
+//    ft_printf("Ya zdes' =)\n");
     while (queue->stack != NULL)
     {
         room = keeper->n[out_queue(queue)];

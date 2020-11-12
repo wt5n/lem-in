@@ -13,7 +13,7 @@ int		is_link_used(t_room *room, int target)
         if (room->links_id[0][i] == target)
         {
             if (room->links_id[1][i] == 1) {
-                ft_printf("the link is used\n");
+//                ft_printf("the link is used\n");
                 return (1);
             }
         }
@@ -64,7 +64,7 @@ int 	path_to_start(t_room_keeper *keeper, t_map_keeper *mp)
 	while (--length > 0)
 	{
 		map->rooms[length] = room->id;
-		ft_printf("length=%d room=%s ", length, room->name);
+//		ft_printf("length=%d room=%s ", length, room->name);
         if (room->id == 1)
             break;
 		from = room->id;
@@ -74,7 +74,7 @@ int 	path_to_start(t_room_keeper *keeper, t_map_keeper *mp)
             room->visited = 1000000;
 		// print_all_links(room->name, room->links);
     }
-	ft_printf("\n");
+//	ft_printf("\n");
 	add_map_to_map_keeper(mp->rl, map);
     return (1);
 }

@@ -58,7 +58,7 @@ int     add_links_to_queue(int id, t_queue *queue, t_room_keeper *keeper)
 			if (tmp_room->links_id[0][i] == 2) // check chto eto finish
 			{
 				add_prev_room(keeper, keeper->n[tmp_room->links_id[0][i]], tmp_room->id);
-			    ft_printf("the kraynaya komnata is %s\n", tmp_room->name);
+//			    ft_printf("the kraynaya komnata is %s\n", tmp_room->name);
 			    if (tmp_room->id == 1 && tmp_room->links_id[0][i] == 2)
 			    {
 			    	tmp_room->links_id[0][i] = 0;
