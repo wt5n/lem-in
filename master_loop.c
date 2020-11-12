@@ -45,35 +45,83 @@ void    free_all()
 
 };
 
-int     ant_move(t_room_links *tmp, int ant_num)
+void     ant_move(t_room_keeper *keeper, t_room_links *tmp, int inc_ant, int i)
 {
+    int throw_ant;
+
+    ft_printf("inc_ant=%d i=%d\n", inc_ant, i);
+    if (tmp->data->rooms[i] == 2)
+        tmp->data->ants_counter--;
+    else if (keeper->n[tmp->data->rooms[i]]->ant_num > 0)
+    {
+        throw_ant = keeper->n[tmp->data->rooms[i]]->ant_num;
+        keeper->n[tmp->data->rooms[i]]->ant_num = inc_ant;
+        ant_move(keeper, tmp, throw_ant, i + 1);
+    }
+    else
+    {
+        keeper->n[tmp->data->rooms[i]]->ant_num = inc_ant;
+        tmp->data->ants_counter++;
+    }
+}
+
+void     ant_move_2(t_room_keeper *keeper, t_room_links *tmp, int inc_ant, int i)
+{
+    int throw_ant;
+
+    ft_printf("inc_ant=%d i=%d\n", inc_ant, i);
+    // else (tmp->data->ants_counter == 0)
+        // return ;
+    if (tmp->data->rooms[i] == 2)
+        tmp->data->ants_counter--;
+    else if (keeper->n[tmp->data->rooms[i]]->ant_num > 0)
+    {
+        throw_ant = keeper->n[tmp->data->rooms[i]]->ant_num;
+        keeper->n[tmp->data->rooms[i]]->ant_num = inc_ant;
+        ant_move(keeper, tmp, throw_ant, i + 1);
+    }
+    else
+    {
+        // keeper->n[tmp->data->rooms[i]]->ant_num = inc_ant;
+        // tmp->data->ants_counter++;
+        ant_move(keeper, tmp, throw_ant, i + 1);
+    }
 
 }
 
-void    solver(t_map_keeper *mp, t_room_keeper *keeper, int field)
+void    ant_goto_finish(t_room_keeper *keeper, t_map_keeper *mp, int field, t_room_links start)
+{
+    t_room_links *tmp;
+
+    while (1)
+    {
+        if (tmp->data->ants_counter != 0)
+        {
+
+        }
+    }
+}
+
+void    solver(t_room_keeper *keeper, t_map_keeper *mp, int field)
 {
 	int ant_num;
 	t_room_links *start;
 	t_room_links *tmp;
-	int i = 0;
+
 	ant_num = 0;
 	start = mp->rl;
 	while (start->data->field < field)
 		start = start->next;
 	while (keeper->ants--)
 	{
-		i = 0;
 		tmp = start;
 		ant_num++;
 		while (tmp->data->length + tmp->data->ants_counter >
-		tmp->next->data->length + tmp->next->data->ants_counter && tmp->next != NULL)
+		    tmp->next->data->length + tmp->next->data->ants_counter && tmp->next != NULL)
 			tmp = tmp->next;
-		tmp->data->ants_counter++;
-		if (keeper->n[tmp->data->rooms[i]]->ant_num > 0)
-
-			i++;
-		ant_num++;
+		ant_move(keeper, tmp, ant_num, 0);
 	}
+    ant_goto_finish(keeper, mp, field, start);
 }
 
 int     *check_paths(t_map_keeper *mp, int ants)
@@ -98,8 +146,6 @@ int     *check_paths(t_map_keeper *mp, int ants)
 	res[2] = mp->field;
 	return (res);
 }
-
-void    solve(t_room_keeper *keeper, t_map_keeper *mp);
 
 void	master_loop(t_room_keeper *keeper, t_map_keeper *mp)
 {
@@ -136,7 +182,7 @@ void	master_loop(t_room_keeper *keeper, t_map_keeper *mp)
 	        min_field[1] = best_field[1];
 	        min_field[2] = best_field[2];
         }
-        printf("%d, %d, %d\n", min_field[0], min_field[1], min_field[2]);
+        ft_printf("%d, %d, %d\n", min_field[0], min_field[1], min_field[2]);
         if (min == k || delete_collisions(keeper) == 0)
             break;
         clear_rooms(keeper);
@@ -148,6 +194,7 @@ void	master_loop(t_room_keeper *keeper, t_map_keeper *mp)
         k = 0;
         i = 1;
     }
-    free_all();
-    print_maps(mp);
+    solver(keeper, mp, min_field[2]);
+//    free_all();
+//    print_maps(mp);
 }

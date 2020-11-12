@@ -108,10 +108,10 @@ int main (void)
 	add_map_to_mk(mk->rl, map3);
 	mk->field = 1;
 	best = check_paths(mk);
-	printf("%d  %d\n", best[0], best[1]);
+	ft_printf("%d  %d\n", best[0], best[1]);
 	mk->field = 2;
 	best = check_paths(mk);
-	printf("%d  %d\n", best[0], best[1]);
+	ft_printf("%d  %d\n", best[0], best[1]);
 //	print_m(mk);
 	return (0);
 }
