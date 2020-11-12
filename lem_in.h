@@ -44,7 +44,6 @@ typedef struct      s_queue
 
 typedef struct		s_room
 {
-	int				CheckAnt;
 	char			*name;
 	int				id;
 	int             ant_num;

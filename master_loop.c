@@ -49,9 +49,12 @@ void     ant_move(t_room_keeper *keeper, t_room_links *tmp, int inc_ant, int i)
 {
     int throw_ant;
 
-    ft_printf("inc_ant=%d i=%d\n", inc_ant, i);
+	ft_printf("id = %d, ant_num =%d\n", keeper->n[tmp->data->rooms[i]]->id, keeper->n[tmp->data->rooms[i]]->ant_num);
     if (tmp->data->rooms[i] == 2)
-        tmp->data->ants_counter--;
+    {
+	    tmp->data->ants_counter--;
+	    keeper->finish->ant_num++;
+    }
     else if (keeper->n[tmp->data->rooms[i]]->ant_num > 0)
     {
         throw_ant = keeper->n[tmp->data->rooms[i]]->ant_num;
@@ -63,43 +66,41 @@ void     ant_move(t_room_keeper *keeper, t_room_links *tmp, int inc_ant, int i)
         keeper->n[tmp->data->rooms[i]]->ant_num = inc_ant;
         tmp->data->ants_counter++;
     }
+    ft_printf("id = %d, ant_num =%d\n", keeper->n[tmp->data->rooms[i]]->id, keeper->n[tmp->data->rooms[i]]->ant_num);
 }
 
 void     ant_move_2(t_room_keeper *keeper, t_room_links *tmp, int inc_ant, int i)
 {
     int throw_ant;
 
-    ft_printf("inc_ant=%d i=%d\n", inc_ant, i);
-    // else (tmp->data->ants_counter == 0)
-        // return ;
     if (tmp->data->rooms[i] == 2)
-        tmp->data->ants_counter--;
+    {
+	    tmp->data->ants_counter--;
+	    keeper->finish->ant_num++;
+    }
     else if (keeper->n[tmp->data->rooms[i]]->ant_num > 0)
     {
         throw_ant = keeper->n[tmp->data->rooms[i]]->ant_num;
-        keeper->n[tmp->data->rooms[i]]->ant_num = inc_ant;
+        keeper->n[tmp->data->rooms[i]]->ant_num = 0;
         ant_move(keeper, tmp, throw_ant, i + 1);
     }
     else
-    {
-        // keeper->n[tmp->data->rooms[i]]->ant_num = inc_ant;
-        // tmp->data->ants_counter++;
-        ant_move(keeper, tmp, throw_ant, i + 1);
-    }
-
+        ant_move(keeper, tmp, 0, i + 1);
 }
 
-void    ant_goto_finish(t_room_keeper *keeper, t_map_keeper *mp, int field, t_room_links start)
+void    ant_goto_finish(t_room_keeper *keeper, t_map_keeper *mp, int field, t_room_links *start)
 {
     t_room_links *tmp;
 
-    while (1)
-    {
-        if (tmp->data->ants_counter != 0)
-        {
-
-        }
-    }
+    tmp = start;
+	while (keeper->ants != keeper->finish->ant_num)
+	{
+		if (tmp == NULL)
+			tmp = start;
+		if (tmp->data->ants_counter != 0)
+			ant_move_2(keeper, tmp, 0, 0);
+		tmp = tmp->next;
+	}
 }
 
 void    solver(t_room_keeper *keeper, t_map_keeper *mp, int field)
@@ -112,14 +113,14 @@ void    solver(t_room_keeper *keeper, t_map_keeper *mp, int field)
 	start = mp->rl;
 	while (start->data->field < field)
 		start = start->next;
-	while (keeper->ants--)
+	while (keeper->start->ant_num--)
 	{
 		tmp = start;
 		ant_num++;
-		while (tmp->data->length + tmp->data->ants_counter >
-		    tmp->next->data->length + tmp->next->data->ants_counter && tmp->next != NULL)
+		while (tmp->next != NULL && tmp->data->length + tmp->data->ants_counter >
+		    tmp->next->data->length + tmp->next->data->ants_counter)
 			tmp = tmp->next;
-		ant_move(keeper, tmp, ant_num, 0);
+		ant_move(keeper, tmp, ant_num, 1);
 	}
     ant_goto_finish(keeper, mp, field, start);
 }
