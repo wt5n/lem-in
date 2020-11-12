@@ -52,21 +52,24 @@ void     ant_move(t_room_keeper *keeper, t_room_links *tmp, int inc_ant, int i)
 	ft_printf("id = %d, ant_num =%d\n", keeper->n[tmp->data->rooms[i]]->id, keeper->n[tmp->data->rooms[i]]->ant_num);
     if (tmp->data->rooms[i] == 2)
     {
+	    ft_printf("id = %d, ant_num =%d\n", keeper->n[tmp->data->rooms[i]]->id, keeper->n[tmp->data->rooms[i]]->ant_num);
 	    tmp->data->ants_counter--;
 	    keeper->finish->ant_num++;
     }
     else if (keeper->n[tmp->data->rooms[i]]->ant_num > 0)
     {
+	    ft_printf("id = %d, ant_num =%d\n", keeper->n[tmp->data->rooms[i]]->id, keeper->n[tmp->data->rooms[i]]->ant_num);
         throw_ant = keeper->n[tmp->data->rooms[i]]->ant_num;
         keeper->n[tmp->data->rooms[i]]->ant_num = inc_ant;
+	    ft_printf("id = %d, ant_num =%d\n", keeper->n[tmp->data->rooms[i]]->id, keeper->n[tmp->data->rooms[i]]->ant_num);
         ant_move(keeper, tmp, throw_ant, i + 1);
     }
     else
     {
         keeper->n[tmp->data->rooms[i]]->ant_num = inc_ant;
+	    ft_printf("id = %d, ant_num =%d\n", keeper->n[tmp->data->rooms[i]]->id, keeper->n[tmp->data->rooms[i]]->ant_num);
         tmp->data->ants_counter++;
     }
-    ft_printf("id = %d, ant_num =%d\n", keeper->n[tmp->data->rooms[i]]->id, keeper->n[tmp->data->rooms[i]]->ant_num);
 }
 
 void     ant_move_2(t_room_keeper *keeper, t_room_links *tmp, int inc_ant, int i)
@@ -148,6 +151,28 @@ int     *check_paths(t_map_keeper *mp, int ants)
 	return (res);
 }
 
+void    prepare_ants(t_room_keeper *keeper, t_map_keeper *mp, int field)
+{
+	t_room_links *start;
+	t_room_links *tmp;
+	int ant_num;
+
+	ant_num = 0;
+	start = mp->rl;
+	while (start->data->field < field)
+		start = start->next;
+	while (keeper->start->ant_num--)
+	{
+		tmp = start;
+		ant_num++;
+		while (tmp->next != NULL && tmp->data->length + tmp->data->ants_counter >
+		                            tmp->next->data->length + tmp->next->data->ants_counter)
+			tmp = tmp->next;
+		in_queue(tmp->data->queue, ant_num);
+		tmp->data->ants_counter++;
+	}
+}
+
 void	master_loop(t_room_keeper *keeper, t_map_keeper *mp)
 {
     int     i;
@@ -195,6 +220,7 @@ void	master_loop(t_room_keeper *keeper, t_map_keeper *mp)
         k = 0;
         i = 1;
     }
+	prepare_ants(keeper, mp, min_field[2]);
     solver(keeper, mp, min_field[2]);
 //    free_all();
 //    print_maps(mp);

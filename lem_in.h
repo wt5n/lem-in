@@ -9,12 +9,18 @@ typedef struct				s_list_queue
    struct s_list_queue		*next;
 }							t_list_queue;
 
+typedef struct      s_queue
+{
+	t_list_queue    *stack;
+}                   t_queue;
+
 typedef		struct	s_map
 {
     int				length;
     int				field;
     int             ants_counter;
     int				*rooms;
+    t_queue         *queue;
 }					t_map;
 
 typedef	struct		s_room_links
@@ -36,11 +42,6 @@ typedef 	struct	s_link
 	struct 	s_link  *next;
 	int				used;
 }					t_link;
-
-typedef struct      s_queue
-{
-   t_list_queue    *stack;
-}                   t_queue;
 
 typedef struct		s_room
 {

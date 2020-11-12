@@ -8,6 +8,7 @@ t_map    *create_map(int length, int field)
     map->length = length;
 	map->field = field;
 	map->rooms = (int*)ft_memalloc(sizeof(int) * map->length);
+	map->queue = (t_queue *)ft_memalloc(sizeof(t_queue));
     return (map);
 }
 
