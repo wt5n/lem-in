@@ -48,15 +48,8 @@ int		main(void)
 	mp->field = 1;
 	mp->rl = (t_room_links*)ft_memalloc(sizeof(t_room_links));
 	find_count_s_f(keeper);
-//	ft_printf("%d %d\n", keeper->s_links, keeper->f_links);
-    ft_printf("");
-    ft_printf("");
-
-//    print_keeper_rooms(keeper);
-//    exit(1);
-
+	// если количество комнат в пути  + количество муравьев в пути меньше чем количество комнат/муравьев в пути в следующей комнате ставим муравья в следующий путь
     master_loop(keeper, mp);
-
-	ft_printf("finish");
+	ft_printf("finish\n");
 	return (1);
 }

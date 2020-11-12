@@ -43,6 +43,7 @@ int     add_links_to_queue(int id, t_queue *queue, t_room_keeper *keeper)
 {
 	t_room	*tmp_room;
 	int		i;
+	int     index;
 
 	i = -1;
 	tmp_room = keeper->n[id];
@@ -58,12 +59,13 @@ int     add_links_to_queue(int id, t_queue *queue, t_room_keeper *keeper)
 			{
 				add_prev_room(keeper, keeper->n[tmp_room->links_id[0][i]], tmp_room->id);
 			    ft_printf("the kraynaya komnata is %s\n", tmp_room->name);
-			    if (tmp_room->id == 1)
+			    if (tmp_room->id == 1 && tmp_room->links_id[0][i] == 2)
 			    {
-			    	keeper->n[1]->links_id[0][i] = 0;
-				    keeper->n[1]->links_id[1][i] = 0;
-				    keeper->n[2]->links_id[0][find_room(keeper,  2, 1)] = 0;
-				    keeper->n[2]->links_id[1][find_room(keeper,  2, 1)] = 0;
+			    	tmp_room->links_id[0][i] = 0;
+				    tmp_room->links_id[1][i] = 0;
+				    index = find_room(keeper,  2, 1);
+				    keeper->n[2]->links_id[0][index] = 0;
+				    keeper->n[2]->links_id[1][index] = 0;
 			    }
                 return (1);
             }

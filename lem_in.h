@@ -13,6 +13,7 @@ typedef		struct	s_map
 {
     int				length;
     int				field;
+    int             ants_counter;
     int				*rooms;
 }					t_map;
 
@@ -26,6 +27,7 @@ typedef	struct 		s_map_keeper
 {
 	t_room_links	*rl;
 	int				field;
+	int             ants;
 }					t_map_keeper;
 
 typedef 	struct	s_link
@@ -45,6 +47,7 @@ typedef struct		s_room
 	int				CheckAnt;
 	char			*name;
 	int				id;
+	int             ant_num;
 	int				**links_id;
 	int				links_count;
 	int				visited;
@@ -94,7 +97,6 @@ void    add_map_to_map_keeper(t_room_links *rl, t_map *map);
 void    clear_rooms(t_room_keeper *keeper);
 int     delete_collisions(t_room_keeper *keeper);
 void    print_maps(t_map_keeper *mp);
-int     delete_collisions(t_room_keeper *keeper);
 void    print_links(t_room_keeper *keeper, int id);
 int     find_room(t_room_keeper *keeper, int r, int find);
 
