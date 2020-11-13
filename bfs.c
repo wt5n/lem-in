@@ -36,9 +36,7 @@ int		main(void)
 	t_room_keeper *keeper = (t_room_keeper*)ft_memalloc(sizeof(t_room_keeper));
 	keeper->n_hash = (t_room**)ft_memalloc(sizeof(t_room*) * 3000);
 	keeper->RoomCounter = 3;
-//	ft_printf("keeper->RoomCounter = %d\n", keeper->RoomCounter);
 	parse_input(keeper);
-//    ft_printf("keeper->RoomCounter = %d\n", keeper->RoomCounter);
     keeper->n = (t_room**)ft_memalloc(sizeof(t_room*) * keeper->RoomCounter);
 	keeper->v_limit = 1;
 	pass_to_n(keeper);
@@ -49,7 +47,6 @@ int		main(void)
 	mp->rl = (t_room_links*)ft_memalloc(sizeof(t_room_links));
 	find_count_s_f(keeper);
 	keeper->start->ant_num = keeper->ants;
-	// если количество комнат в пути  + количество муравьев в пути меньше чем количество комнат/муравьев в пути в следующей комнате ставим муравья в следующий путь
     master_loop(keeper, mp);
 	ft_printf("finish\n");
 	return (1);
