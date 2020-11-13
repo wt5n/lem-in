@@ -53,6 +53,15 @@ void    ant_move(t_room_keeper *keeper, t_room_links *tmp, int inc_ant, int i)
     cur = keeper->n[tmp->data->rooms[i]];
     if (i == 1)
     {
+	    if (i == tmp->data->length - 2)
+	    {
+		    if (cur->ant_num > 0)
+		    {
+			    tmp->data->ants_counter--;
+			    keeper->finish->ant_num++;
+		    }
+		    cur->ant_num = 0;
+	    }
         cur->ant_num = inc_ant;
         if (cur->ant_num > 0)
 			ft_printf("L%d-%s ", inc_ant, cur->name);
