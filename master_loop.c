@@ -45,31 +45,39 @@ void free_all()
 
 };
 
-void ant_move(t_room_keeper *keeper, t_room_links *tmp, int inc_ant, int i)
+void    ant_move(t_room_keeper *keeper, t_room_links *tmp, int inc_ant, int i)
 {
-	int throw_ant;
+    t_room  *cur;
+    t_room  *prev;
 
-	if (tmp->data->rooms[i] == 2)
-	{
-		tmp->data->ants_counter--;
-		keeper->finish->ant_num++;
-	}
-	else if (keeper->n[tmp->data->rooms[i]]->ant_num > 0)
-	{
-		throw_ant = keeper->n[tmp->data->rooms[i]]->ant_num;
-		keeper->n[tmp->data->rooms[i]]->ant_num = inc_ant;
-		if (inc_ant > 0)
-			ft_printf("L%d-%s ", inc_ant, keeper->n[tmp->data->rooms[i]]->name);
-		ant_move(keeper, tmp, throw_ant, i + 1);
-	}
-	else if (inc_ant == 0 && tmp->data->ants_counter > 0)
-		ant_move(keeper, tmp, 0, i + 1);
-	else
-	{
-		keeper->n[tmp->data->rooms[i]]->ant_num = inc_ant;
-		if (inc_ant > 0)
-			ft_printf("L%d-%s ", inc_ant, keeper->n[tmp->data->rooms[i]]->name);
-	}
+    cur = keeper->n[tmp->data->rooms[i]];
+    if (i == 1)
+    {
+        cur->ant_num = inc_ant;
+        if (cur->ant_num > 0)
+			ft_printf("L%d-%s ", inc_ant, cur->name);
+    }
+    else
+    {
+        if (i == tmp->data->length - 2)
+        {
+            if (cur->ant_num > 0)
+            {
+                tmp->data->ants_counter--;
+                keeper->finish->ant_num++;
+            }
+            cur->ant_num = 0;
+        }
+        prev = keeper->n[tmp->data->rooms[i - 1]];
+        if (prev->ant_num != 0)
+        {
+            cur->ant_num = prev->ant_num;
+            prev->ant_num = 0;
+        }
+        if (cur->ant_num > 0)
+			ft_printf("L%d-%s ", cur->ant_num, cur->name);
+        ant_move(keeper, tmp, inc_ant, i - 1);
+    }
 }
 
 int *check_paths(t_map_keeper *mp, int ants)
@@ -134,7 +142,7 @@ void move_ants(t_room_keeper *keeper, t_map_keeper *mp, int field)
 		while (tmp != NULL && tmp->data->field == field)
 		{
 			if (tmp->data->ants_counter > 0)
-				ant_move(keeper, tmp, out_queue(tmp->data->queue), 1);
+				ant_move(keeper, tmp, out_queue(tmp->data->queue), tmp->data->length - 2);
 			tmp = tmp->next;
 		}
 		ft_printf("\n");
