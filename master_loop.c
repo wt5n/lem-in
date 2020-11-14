@@ -59,7 +59,8 @@ void    ant_move(t_room_keeper *keeper, t_room_links *tmp, int inc_ant, int i)
 		    {
 			    tmp->data->ants_counter--;
 			    keeper->finish->ant_num++;
-		    }
+				ft_printf("L%d-%s ", cur->ant_num, keeper->finish->name);
+			}
 		    cur->ant_num = 0;
 	    }
         cur->ant_num = inc_ant;
@@ -74,15 +75,19 @@ void    ant_move(t_room_keeper *keeper, t_room_links *tmp, int inc_ant, int i)
             {
                 tmp->data->ants_counter--;
                 keeper->finish->ant_num++;
-            }
+				ft_printf("L%d-%s ", cur->ant_num, keeper->finish->name);
+			}
             cur->ant_num = 0;
         }
-        prev = keeper->n[tmp->data->rooms[i - 1]];
-        if (prev->ant_num != 0)
-        {
-            cur->ant_num = prev->ant_num;
-            prev->ant_num = 0;
-        }
+        if (i > 1)
+		{
+			prev = keeper->n[tmp->data->rooms[i - 1]];
+			if (prev->ant_num != 0)
+			{
+				cur->ant_num = prev->ant_num;
+				prev->ant_num = 0;
+			}
+		}
         if (cur->ant_num > 0)
 			ft_printf("L%d-%s ", cur->ant_num, cur->name);
         ant_move(keeper, tmp, inc_ant, i - 1);
@@ -94,7 +99,7 @@ int *check_paths(t_map_keeper *mp, int ants)
 	t_room_links *tmp_links;
 	int moves;
 	int *res = (int *) ft_memalloc(sizeof(int) * 3);
-	int room_counter = 0;
+	int path_counter = 0;
 
 	moves = 0;
 	tmp_links = mp->rl;
@@ -103,36 +108,45 @@ int *check_paths(t_map_keeper *mp, int ants)
 	while (tmp_links != NULL && tmp_links->data->field == mp->field)
 	{
 		moves += tmp_links->data->length;
-		room_counter++;
+		path_counter++;
 		tmp_links = tmp_links->next;
 	}
 	res[0] = ants / moves;
-	res[1] = room_counter;
+	res[1] = path_counter;
 	res[2] = mp->field;
 	return (res);
 }
 
-void prepare_ants(t_room_keeper *keeper, t_map_keeper *mp, int field)
+int *prepare_ants(t_room_keeper *keeper, t_map_keeper *mp, int field, int *oper)
 {
 	t_room_links *start;
 	t_room_links *tmp;
 	int ant_num;
+	int ants = keeper->ants;
 
 	ant_num = 0;
 	start = mp->rl;
+	if (start == NULL)
+		return oper;
 	while (start->data->field < field)
 		start = start->next;
-	while (keeper->start->ant_num--)
+	while (ants--)
 	{
 		tmp = start;
 		ant_num++;
-		while (tmp->next != NULL && tmp->data->length + tmp->data->ants_counter >
+		while (tmp->next != NULL && tmp->data->length + tmp->data->ants_counter >=
 		                            tmp->next->data->length + tmp->next->data->ants_counter
 		       && tmp->next->data->field == field)
 			tmp = tmp->next;
 		in_queue(tmp->data->queue, ant_num);
 		tmp->data->ants_counter++;
 	}
+	if (oper[0] > start->data->ants_counter + start->data->length - 2)
+	{
+		oper[0] = start->data->ants_counter + start->data->length - 2;
+		oper[1] = field;
+	}
+	return (oper);
 }
 
 void move_ants(t_room_keeper *keeper, t_map_keeper *mp, int field)
@@ -166,11 +180,11 @@ void master_loop(t_room_keeper *keeper, t_map_keeper *mp)
 	int k;
 	int *best_field;
 	int min;
-	int min_field[3];
 
-	min_field[0] = MAXINT;
-	min_field[1] = 0;
-	min_field[2] = 0;
+	if (!(best_field = (int *)ft_memalloc(sizeof(int) * 3)))
+		return ;
+	best_field[0] = MAXINT;
+	best_field[1] = 0;
 	i = 1;
 	k = 0;
 	min = min_n(keeper->s_links, keeper->f_links);
@@ -185,27 +199,24 @@ void master_loop(t_room_keeper *keeper, t_map_keeper *mp)
 				break;
 			keeper->v_limit++;
 		}
-		best_field = check_paths(mp, keeper->ants);
-		if (best_field[0] < min_field[0] && best_field[1] >= min_field[1])
-		{
-			min_field[0] = best_field[0];
-			min_field[1] = best_field[1];
-			min_field[2] = best_field[2];
-		}
-		ft_printf("%d, %d, %d\n", min_field[0], min_field[1], min_field[2]);
+		best_field = prepare_ants(keeper, mp, mp->field, best_field);
+//		if (min_field[2] % 100 == 0)
+//			ft_printf("100 collisiy");
+//		ft_printf("%d, %d, %d\n", min_field[0], min_field[1], min_field[2]);
+//		break;
 		if (min == k || delete_collisions(keeper) == 0)
 			break;
 		clear_rooms(keeper);
 		keeper->n[1]->visited = 1000000;
 		keeper->v_limit = 1;
-		if (mp->field == 3)
+		if (mp->field == 10)
 			break;
+
 		mp->field++;
 		k = 0;
 		i = 1;
 	}
-	prepare_ants(keeper, mp, min_field[2]);
-	move_ants(keeper, mp, min_field[2]);
+	move_ants(keeper, mp, best_field[1]);
 //	ft_printf("");
 //	ft_printf("");
 //    while (mp->rl != NULL)

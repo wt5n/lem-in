@@ -4,7 +4,7 @@
 #include "libft/libft.h"
 
 #define VALUE_HASH_ROOMS 10000
-#define NUM_LINKS 100
+#define NUM_LINKS 10
 
 typedef struct				s_list_queue
 {
