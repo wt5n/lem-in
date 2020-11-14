@@ -3,6 +3,9 @@
 
 #include "libft/libft.h"
 
+#define VALUE_HASH_ROOMS 10000
+#define NUM_LINKS 100
+
 typedef struct				s_list_queue
 {
    int						id;
@@ -45,6 +48,7 @@ typedef 	struct	s_link
 
 typedef struct		s_room
 {
+    int             ishash;
 	char			*name;
 	int				id;
 	int             ant_num;

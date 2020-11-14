@@ -6,12 +6,11 @@ t_room *create_room(char *name, int id)
 
 	room->name = ft_strcpy_wm(name);
 	room->id = id;
-	room->links_count = 10;
+	room->links_count = NUM_LINKS;
 	room->links_id = (int**)ft_memalloc(sizeof(int*) * 2);
 	room->links_id[0] = (int*)ft_memalloc(sizeof(int) * room->links_count);
 	room->links_id[1] = (int*)ft_memalloc(sizeof(int) * room->links_count);
-	// room->links_used = (int*)ft_memalloc(sizeof(int) * 10);
-	room->links_count = 10;
+	room->ishash = get_hash(name);
 	return room;
 }
 

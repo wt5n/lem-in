@@ -1,0 +1,14 @@
+1
+##start
+start 1 1
+##end
+end 2 2
+Tqs8 3 3
+Bnw9 4 4
+A 5 5
+B 6 6
+start-Tqs8
+Bnw9-Tqs8
+Bnw9-end
+A-B
+start-A

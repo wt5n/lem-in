@@ -2,13 +2,13 @@
 
 unsigned long get_hash(unsigned char *name)
 {
-	unsigned long hash = 1000;
+	unsigned long hash = VALUE_HASH_ROOMS;
 	int c;
 
 	while ((c = *name++))
 		hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
 
-	return (hash % 1000);
+	return (hash % VALUE_HASH_ROOMS);
 }
 
  void add_next(t_room *master, t_room *slave)
