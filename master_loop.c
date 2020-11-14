@@ -40,10 +40,10 @@ void clear_rooms(t_room_keeper *keeper)
 	keeper->v_limit = 0;
 }
 
-void free_all()
+void free_all(t_room_keeper *keeper, t_map_keeper *mp)
 {
 
-};
+}
 
 void    ant_move(t_room_keeper *keeper, t_room_links *tmp, int inc_ant, int i)
 {
@@ -92,29 +92,6 @@ void    ant_move(t_room_keeper *keeper, t_room_links *tmp, int inc_ant, int i)
 			ft_printf("L%d-%s ", cur->ant_num, cur->name);
         ant_move(keeper, tmp, inc_ant, i - 1);
     }
-}
-
-int *check_paths(t_map_keeper *mp, int ants)
-{
-	t_room_links *tmp_links;
-	int moves;
-	int *res = (int *) ft_memalloc(sizeof(int) * 3);
-	int path_counter = 0;
-
-	moves = 0;
-	tmp_links = mp->rl;
-	while (tmp_links->data->field < mp->field)
-		tmp_links = tmp_links->next;
-	while (tmp_links != NULL && tmp_links->data->field == mp->field)
-	{
-		moves += tmp_links->data->length;
-		path_counter++;
-		tmp_links = tmp_links->next;
-	}
-	res[0] = ants / moves;
-	res[1] = path_counter;
-	res[2] = mp->field;
-	return (res);
 }
 
 int *prepare_ants(t_room_keeper *keeper, t_map_keeper *mp, int field, int *oper)
@@ -208,16 +185,12 @@ void master_loop(t_room_keeper *keeper, t_map_keeper *mp)
 			keeper->v_limit++;
 		}
 		best_field = prepare_ants(keeper, mp, mp->field, best_field);
-//		if (min_field[2] % 100 == 0)
-//			ft_printf("100 collisiy");
-//		ft_printf("%d, %d, %d\n", min_field[0], min_field[1], min_field[2]);
-//		break;
 		if (min == k || delete_collisions(keeper) == 0)
 			break;
 		clear_rooms(keeper);
 		keeper->n[1]->visited = 1000000;
 		keeper->v_limit = 1;
-		if (mp->field == 10)
+		if (mp->field == 5)
 			break;
 
 		mp->field++;

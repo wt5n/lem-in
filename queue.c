@@ -2,12 +2,10 @@
 
 static void push(t_list_queue **top_ref, int new_data)
 {
-	t_list_queue *new_node = (t_list_queue *) malloc (sizeof (t_list_queue));
-	if (new_node == NULL)
-	{
-		ft_printf ("Stack overflow \n");
-		exit (0);
-	}
+	t_list_queue *new_node;
+
+	if (!(new_node = (t_list_queue *) malloc (sizeof (t_list_queue))))
+		return ;
 	new_node->id = new_data;
 	new_node->next = (*top_ref);
 	(*top_ref) = new_node;

@@ -84,13 +84,13 @@ int		path_to_finish(t_room_keeper *keeper, t_map_keeper *mp)
     t_queue			*queue;
     t_room 			*current;
 
-    queue = (t_queue*)ft_memalloc(sizeof(t_queue));
+    if (!(queue = (t_queue*)ft_memalloc(sizeof(t_queue))))
+        return (NULL);
     if (add_links_to_queue(keeper->n[1]->id, queue, keeper) == 1)
         return (path_to_start(keeper, mp));
     while (queue->stack != NULL)
     {
         current = keeper->n[out_queue(queue)];
-        // ft_printf("current is %s\n", current->name);
         if (current->visited < keeper->v_limit)
         {
             current->visited = keeper->v_limit;

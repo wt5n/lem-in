@@ -33,18 +33,24 @@ void		find_count_s_f(t_room_keeper *keeper)
 
 int		main(void)
 {
-	t_room_keeper *keeper = (t_room_keeper*)ft_memalloc(sizeof(t_room_keeper));
-	keeper->n_hash = (t_room**)ft_memalloc(sizeof(t_room*) * VALUE_HASH_ROOMS);
+	t_room_keeper *keeper;
+	if (!(keeper = (t_room_keeper*)ft_memalloc(sizeof(t_room_keeper))))
+		return (NULL);
+	if (!(keeper->n_hash = (t_room**)ft_memalloc(sizeof(t_room*) * VALUE_HASH_ROOMS)))
+		return (NULL);
 	keeper->RoomCounter = 3;
 	parse_input(keeper);
-    keeper->n = (t_room**)ft_memalloc(sizeof(t_room*) * keeper->RoomCounter);
+    if (!(keeper->n = (t_room**)ft_memalloc(sizeof(t_room*) * keeper->RoomCounter)))
+		return (NULL);
 	keeper->v_limit = 1;
 	pass_to_n(keeper);
 
 	t_map_keeper *mp;
-	mp = (t_map_keeper*)ft_memalloc(sizeof(t_map_keeper));
+	if (!(mp = (t_map_keeper*)ft_memalloc(sizeof(t_map_keeper))))
+		return (NULL);
 	mp->field = 1;
-	mp->rl = (t_room_links*)ft_memalloc(sizeof(t_room_links));
+	if (!(mp->rl = (t_room_links*)ft_memalloc(sizeof(t_room_links))))
+		return (NULL);
 	find_count_s_f(keeper);
 	keeper->start->ant_num = keeper->ants;
     master_loop(keeper, mp);
