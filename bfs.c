@@ -41,25 +41,6 @@ int		main(void)
 	keeper->v_limit = 1;
 	pass_to_n(keeper);
 
-//	ft_printf("Tqs8 %d\n", get_hash("Tqs8"));
-//    ft_printf("Bnw9 %d\n", get_hash("Bnw9"));
-//    ft_printf("++%s\n", keeper->n[3]->name);
-//	ft_printf("--%s\n", keeper->n[4]->name);
-//	for (int i = 0; i < 10; i++)
-//	{
-//		if (keeper->n[4]->links_id[0][i] != 0)
-//			ft_printf("-%d\n", keeper->n[4]->links_id[0][i]);
-//	}
-////    ft_printf("Tqs8 %s\n", keeper->n_hash[get_hash("Tqs8")]->name);
-////    ft_printf("Bnw9 %s\n", keeper->n_hash[get_hash("Bnw9")]->name);
-//
-//    ft_printf("Tqs8 %d\n", keeper->n[3]->id);
-//    ft_printf("Bnw9 %d\n", keeper->n[4]->id);
-
-//    ft_printf("12 %s\n", keeper->n[12]->name);
-//    ft_printf("31 %s\n", keeper->n[31]->name);
-
-
 	t_map_keeper *mp;
 	mp = (t_map_keeper*)ft_memalloc(sizeof(t_map_keeper));
 	mp->field = 1;

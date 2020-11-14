@@ -180,7 +180,9 @@ void master_loop(t_room_keeper *keeper, t_map_keeper *mp)
 	int k;
 	int *best_field;
 	int min;
+	int iii;
 
+	iii = 0;
 	if (!(best_field = (int *)ft_memalloc(sizeof(int) * 3)))
 		return ;
 	best_field[0] = MAXINT;
@@ -189,6 +191,12 @@ void master_loop(t_room_keeper *keeper, t_map_keeper *mp)
 	k = 0;
 	min = min_n(keeper->s_links, keeper->f_links);
 	keeper->n[1]->visited = 1000000;
+	if (find_room(keeper, 1, 2) >= 0)
+	{
+		while (++iii < keeper->ants + 1)
+			ft_printf("L%d-%s ", iii ,keeper->finish->name);
+		exit(1);
+	}
 	while (1)
 	{
 		while (i != 0)
