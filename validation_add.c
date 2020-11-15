@@ -38,7 +38,7 @@ void	pass_to_n(t_room_keeper *keeper)
 	int i;
 
 	i = -1;
-	while (++i < VALUE_HASH_ROOMS)
+	while (++i < HASH_ROOMS)
 	{
 		while (keeper->n_hash[i] != NULL)
 		{

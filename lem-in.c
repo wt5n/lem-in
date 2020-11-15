@@ -1,18 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lem-in.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/15 20:15:02 by ksenaida          #+#    #+#             */
+/*   Updated: 2020/11/15 20:25:44 by ksenaida         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
-
-unsigned long get_hash(unsigned char *name)
+unsigned long	get_hash(unsigned char *name)
 {
-    unsigned long hash = VALUE_HASH_ROOMS;
+    unsigned long hash = HASH_ROOMS;
     int c;
 
     while ((c = *name++))
         hash = ((hash << 5) + hash) + c;
 
-    return (hash % VALUE_HASH_ROOMS);
+    return (hash % HASH_ROOMS);
 }
 
-void		find_count_s_f(t_room_keeper *keeper)
+void			find_count_s_f(t_room_keeper *keeper)
 {
 	int		i;
 	int		j;
@@ -31,7 +42,7 @@ void		find_count_s_f(t_room_keeper *keeper)
 	keeper->f_links = j;
 }
 
-void master_loop(t_room_keeper *keeper, t_map_keeper *mp)
+void			master_loop(t_room_keeper *keeper, t_map_keeper *mp)
 {
     int i;
     int k;
@@ -65,13 +76,11 @@ void master_loop(t_room_keeper *keeper, t_map_keeper *mp)
             keeper->v_limit++;
         }
         best_field = prepare_ants(keeper, mp, mp->field, best_field);
-        if (min == k || delete_collisions(keeper) == 0)
+        if (min == k || delete_collisions(keeper) == 0 || mp->field == 5)
             break;
         clear_rooms(keeper);
         keeper->n[1]->visd = 1000000;
         keeper->v_limit = 1;
-        if (mp->field == 5)
-            break;
         mp->field++;
         k = 0;
         i = 1;
@@ -80,29 +89,29 @@ void master_loop(t_room_keeper *keeper, t_map_keeper *mp)
     free(best_field);
 }
 
-int		main(void)
+int			main(void)
 {
-	t_room_keeper *keeper;
-    t_map_keeper *mp;
+	t_room_keeper	*r;
+	t_map_keeper	*mp;
 
-    if (!(keeper = (t_room_keeper*)ft_memalloc(sizeof(t_room_keeper))))
-        return 0;
-    if (!(keeper->n_hash = (t_room**)ft_memalloc(sizeof(t_room*) * VALUE_HASH_ROOMS)))
-        return 0;
-    keeper->roomCounter = 3;
-    parse_input(keeper);
-    if (!(keeper->n = (t_room**)ft_memalloc(sizeof(t_room*) * keeper->roomCounter)))
-        return 0;
-    keeper->v_limit = 1;
-    pass_to_n(keeper);
-    if (!(mp = (t_map_keeper*)ft_memalloc(sizeof(t_map_keeper))))
-        return 0;
-    mp->field = 1;
-    if (!(mp->rl = (t_room_links*)ft_memalloc(sizeof(t_room_links))))
-        return 0;
-    find_count_s_f(keeper);
-    keeper->start->ant_num = keeper->ants;
-    master_loop(keeper, mp);
-    free_all(keeper, mp);
+	if (!(r = (t_room_keeper*)ft_memalloc(sizeof(t_room_keeper))))
+		return (0);
+	if (!(r->n_hash = (t_room**)ft_memalloc(sizeof(t_room*) * HASH_ROOMS)))
+		return (0);
+	r->roomCounter = 3;
+	parse_input(r);
+	if (!(r->n = (t_room**)ft_memalloc(sizeof(t_room*) * r->roomCounter)))
+		return (0);
+	r->v_limit = 1;
+	pass_to_n(r);
+	if (!(mp = (t_map_keeper*)ft_memalloc(sizeof(t_map_keeper))))
+		return (0);
+	mp->field = 1;
+	if (!(mp->rl = (t_room_links*)ft_memalloc(sizeof(t_room_links))))
+		return (0);
+	find_count_s_f(r);
+	r->start->ant_num = r->ants;
+	master_loop(r, mp);
+	free_all(r, mp);
 	return (1);
 }
