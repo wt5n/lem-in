@@ -1,27 +1,5 @@
 #include "lem_in.h"
 
-void    ft_errors_lem_in(int error_num)
-{
-    if (error_num == 1)
-        write(2, "Ants number not correct!\n", 25);
-    else if (error_num == 2)
-        write(2, "Start/end error\n", 16);
-    else if (error_num == 3)
-        write(2, "Links error\n", 12);
-    else if (error_num == 4)
-        write(2, "Using L or # in the room name\n", 30);
-    else if (error_num == 5)
-        write(2, "No rooms\n", 9);
-    else if (error_num == 6)
-        write(2, "Comment error\n", 14);
-    else if (error_num == 7)
-        write(2, "Something wrong with rooms\n", 27);
-    else
-        write(2, "Unknown error\n", 14);
-    exit(2);
-}
-
-
 void    parse_ants(t_room_keeper *keeper, char *line)
 {
 	int i;
