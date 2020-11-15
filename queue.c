@@ -14,6 +14,7 @@ static void push(t_list_queue **top_ref, int new_data)
 static int pop(t_list_queue **top_ref)
 {
 	int res;
+
 	t_list_queue *top;
 	if (*top_ref == NULL)
         return 0;

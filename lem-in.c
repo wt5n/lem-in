@@ -7,7 +7,7 @@ unsigned long get_hash(unsigned char *name)
     int c;
 
     while ((c = *name++))
-        hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+        hash = ((hash << 5) + hash) + c;
 
     return (hash % VALUE_HASH_ROOMS);
 }
@@ -72,12 +72,12 @@ void master_loop(t_room_keeper *keeper, t_map_keeper *mp)
         keeper->v_limit = 1;
         if (mp->field == 5)
             break;
-
         mp->field++;
         k = 0;
         i = 1;
     }
     move_ants(keeper, mp, best_field[1]);
+    free(best_field);
 //    while (mp->rl != NULL)
 //    {
 //    	while (mp->rl->data->field < min_field[2])
@@ -99,9 +99,9 @@ int		main(void)
         return 0;
     if (!(keeper->n_hash = (t_room**)ft_memalloc(sizeof(t_room*) * VALUE_HASH_ROOMS)))
         return 0;
-    keeper->RoomCounter = 3;
+    keeper->roomCounter = 3;
     parse_input(keeper);
-    if (!(keeper->n = (t_room**)ft_memalloc(sizeof(t_room*) * keeper->RoomCounter)))
+    if (!(keeper->n = (t_room**)ft_memalloc(sizeof(t_room*) * keeper->roomCounter)))
         return 0;
     keeper->v_limit = 1;
     pass_to_n(keeper);
@@ -113,6 +113,6 @@ int		main(void)
     find_count_s_f(keeper);
     keeper->start->ant_num = keeper->ants;
     master_loop(keeper, mp);
-//    free_all();
+    free_all(keeper, mp);
 	return (1);
 }

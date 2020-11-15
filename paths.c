@@ -61,7 +61,7 @@ int		path_to_finish(t_room_keeper *keeper, t_map_keeper *mp)
 
     if (!(queue = (t_queue*)ft_memalloc(sizeof(t_queue))))
         return 0;
-    if (add_links_to_queue(keeper->n[1]->id, queue, keeper) == 1)
+	if (add_links_to_queue(keeper->n[1]->id, queue, keeper) == 1)
         return (path_to_start(keeper, mp));
     while (queue->stack != NULL)
     {
@@ -72,9 +72,12 @@ int		path_to_finish(t_room_keeper *keeper, t_map_keeper *mp)
             if (add_links_to_queue(current->id, queue, keeper) == 1)
             {
                 keeper->n[2]->prev_room = current->id;
-                return (path_to_start(keeper, mp));
+				free_queue(queue);
+				return (path_to_start(keeper, mp));
             }
         }
     }
+//    free_list_queue(queue->stack);
+    free_queue(queue);
     return (0);
 }

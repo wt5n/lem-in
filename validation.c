@@ -80,14 +80,14 @@ void    parse_rooms(t_room_keeper *keeper, char* line)
 		room = create_room(name, 2);
 	else
 	{
-		room = create_room(name, keeper->RoomCounter);
-		keeper->RoomCounter++;
+		room = create_room(name, keeper->roomCounter);
+		keeper->roomCounter++;
 	}
 	add_room(keeper, room);
-
 	if (keeper->s_c == 1 || keeper->e_c == 1)
 		start_end_rooms(keeper, room);
 	keeper->s_c > 2 || keeper->e_c > 2 ? ft_error() : 0;
+	free(name);
 }
 
 void    parse_links(t_room_keeper *keeper, char* line)
@@ -97,7 +97,7 @@ void    parse_links(t_room_keeper *keeper, char* line)
 	char    *room1;
 	char    *room2;
 
-	keeper->RoomCounter == 0 ? ft_error() : 0;
+	keeper->roomCounter == 0 ? ft_error() : 0;
 	(!keeper->start || !keeper->finish) ? ft_error() : 0;
 	(keeper->start == keeper->finish) ? ft_error() : 0;
 	str = line;
@@ -110,6 +110,8 @@ void    parse_links(t_room_keeper *keeper, char* line)
 		ft_printf("parse_links\n");
 		ft_error();
 	}
+	free(room1);
+	free(room2);
 }
 
 void    parse_input(t_room_keeper *keeper)

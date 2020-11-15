@@ -46,12 +46,16 @@ int     delete_collisions(t_room_keeper *keeper)
                     continue;
                 if (linked_room->links_id[1][tmp] == 1)
                     if (del_cols(keeper, room->id, linked_room->id, tmp))
-                        return (1);
+					{
+						free_queue(queue);
+						return (1);
+					}
                 if (room->links_id[1][i] != 1 && linked_room->visited < 1000001)
                     in_queue(queue, room->links_id[0][i]);
             }
         }
         room->visited = 1000001;
     }
+    free_queue(queue);
     return (0);
 }

@@ -33,10 +33,12 @@ t_room *create_room(char *name, int id)
 	room->name = ft_strcpy_wm(name);
 	room->id = id;
 	room->links_count = NUM_LINKS;
-	if (!(room->links_id = (int**)ft_memalloc(sizeof(int*) * 2)) ||
-		!(room->links_id[0] = (int*)ft_memalloc(sizeof(int) * room->links_count)) ||
-		!(room->links_id[1] = (int*)ft_memalloc(sizeof(int) * room->links_count)))
-		return NULL;
+	if (!(room->links_id = (int**)ft_memalloc(sizeof(int*) * 2)))
+        return (NULL);
+	if (!(room->links_id[0] = (int*)ft_memalloc(sizeof(int) * room->links_count)))
+        return (NULL);
+	if (!(room->links_id[1] = (int*)ft_memalloc(sizeof(int) * room->links_count)))
+		return (NULL);
 	return room;
 }
 
@@ -57,7 +59,7 @@ void clear_rooms(t_room_keeper *keeper)
     t_room *room;
 
     i = 0;
-    while (++i < keeper->RoomCounter)
+    while (++i < keeper->roomCounter)
     {
         j = -1;
         if (keeper->n[i] == 0)

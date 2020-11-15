@@ -13,21 +13,16 @@ set(SRC_OPERATIONS
         validation.c
         validation_add.c)
 
-add_executable(lem_in
-        lem_in.h
-        main.c
-        ${SRC_OPERATIONS})
-
-add_executable(bfs
-        bfs.c
+add_executable(lem-in
+        lem-in.c
         rooms.c
         links.c
         paths.c
         map.c
         collisions.c
+        frees.c
         ${SRC_OPERATIONS} ants.c)
 
 
 add_subdirectory(libft)
-target_link_libraries(lem_in libft)
-target_link_libraries(bfs libft)
+target_link_libraries(lem-in libft)
