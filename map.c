@@ -1,27 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/15 19:50:44 by ksenaida          #+#    #+#             */
+/*   Updated: 2020/11/15 20:02:26 by ksenaida         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
-t_map    *create_map(int length, int field)
+t_map		*create_map(int length, int field)
 {
-	t_map 	*map;
+	t_map	*map;
 
 	if (!(map = (t_map*)ft_memalloc(sizeof(t_map))))
 		return (NULL);
-    map->length = length;
+	map->length = length;
 	map->field = field;
 	if (!(map->rooms = (int*)ft_memalloc(sizeof(int) * map->length)))
-		return NULL;
+		return (NULL);
 	if (!(map->queue = (t_queue *)ft_memalloc(sizeof(t_queue))))
 		return (NULL);
-    return (map);
+	return (map);
 }
 
-void    add_map_to_map_keeper(t_room_links *rl, t_map *map)
+void		add_map_to_map_keeper(t_room_links *rl, t_map *map)
 {
-	t_room_links *tmp;
-
+	t_room_links	*tmp;
 
 	if (rl->data == NULL)
-	    rl->data = map;
+		rl->data = map;
 	else
 	{
 		if (!(tmp = (t_room_links*)ft_memalloc(sizeof(t_room_links))))
