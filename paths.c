@@ -48,7 +48,7 @@ int 	path_to_start(t_room_keeper *keeper, t_map_keeper *mp)
 		room = keeper->n[room->prev_room];
 		mark_as_used(keeper, from, room->id);
         if (room->id != 2)
-            room->visited = 1000000;
+            room->visd = 1000000;
     }
 	add_map_to_map_keeper(mp->rl, map);
     return (1);
@@ -66,9 +66,9 @@ int		path_to_finish(t_room_keeper *keeper, t_map_keeper *mp)
     while (queue->stack != NULL)
     {
         current = keeper->n[out_queue(queue)];
-        if (current->visited < keeper->v_limit)
+        if (current->visd < keeper->v_limit)
         {
-            current->visited = keeper->v_limit;
+            current->visd = keeper->v_limit;
             if (add_links_to_queue(current->id, queue, keeper) == 1)
             {
                 keeper->n[2]->prev_room = current->id;

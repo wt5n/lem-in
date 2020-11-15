@@ -76,8 +76,6 @@ void    parse_rooms(t_room_keeper *keeper, char* line)
 	while (ft_isdigit(*str))
 		str--;
 	y = ft_atoi_wr(str);
-	3
-	+
 	name = ft_strndup(start, str - start);
 	ft_strchr(name, ' ') ? ft_error() : 0;
 	if (keeper->s_c == 1)

@@ -70,7 +70,7 @@ int     add_links_to_queue(int id, t_queue *queue, t_room_keeper *keeper)
 			    }
                 return (1);
             }
-			if (keeper->n[tmp_room->links_id[0][i]]->visited < keeper->v_limit &&
+			if (keeper->n[tmp_room->links_id[0][i]]->visd < keeper->v_limit &&
 				keeper->n[tmp_room->links_id[0][i]]->in_q < keeper->v_limit)
 			{
                 keeper->n[tmp_room->links_id[0][i]]->prev_room = tmp_room->id;

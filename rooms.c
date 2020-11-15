@@ -65,7 +65,7 @@ void clear_rooms(t_room_keeper *keeper)
         if (keeper->n[i] == 0)
             continue;
         room = keeper->n[i];
-        room->visited = 0;
+        room->visd = 0;
         room->prev_room = 0;
         room->in_q = 0;
         while (++j < room->links_count)

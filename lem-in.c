@@ -47,7 +47,7 @@ void master_loop(t_room_keeper *keeper, t_map_keeper *mp)
     i = 1;
     k = 0;
     min = min_n(keeper->s_links, keeper->f_links);
-    keeper->n[1]->visited = 1000000;
+    keeper->n[1]->visd = 1000000;
     if (find_room(keeper, 1, 2) >= 0)
     {
         while (++iii < keeper->ants + 1)
@@ -68,7 +68,7 @@ void master_loop(t_room_keeper *keeper, t_map_keeper *mp)
         if (min == k || delete_collisions(keeper) == 0)
             break;
         clear_rooms(keeper);
-        keeper->n[1]->visited = 1000000;
+        keeper->n[1]->visd = 1000000;
         keeper->v_limit = 1;
         if (mp->field == 5)
             break;
