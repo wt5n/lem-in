@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 20:15:02 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/15 20:25:44 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/11/15 20:40:37 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 unsigned long	get_hash(unsigned char *name)
 {
-    unsigned long hash = HASH_ROOMS;
-    int c;
+	unsigned long hash;
+	int c;
 
-    while ((c = *name++))
-        hash = ((hash << 5) + hash) + c;
-
-    return (hash % HASH_ROOMS);
+	hash = HASH_ROOMS;
+	while ((c = *name++))
+		hash = ((hash << 5) + hash) + c;
+	return (hash % HASH_ROOMS);
 }
 
 void			find_count_s_f(t_room_keeper *keeper)
@@ -42,39 +42,47 @@ void			find_count_s_f(t_room_keeper *keeper)
 	keeper->f_links = j;
 }
 
+void			only_finish_room(t_room_keeper *keeper, t_map_keeper *mp)
+{
+	int	i;
+
+	i = -1;
+	if (find_room(keeper, 1, 2) >= 0)
+	{
+		while (++i < keeper->ants + 1)
+			ft_printf("L%d-%s ", i, keeper->finish->name);
+		free_all(keeper, mp);
+		exit(1);
+	}
+}
+
 void			master_loop(t_room_keeper *keeper, t_map_keeper *mp)
 {
     int i;
     int k;
     int *best_field;
     int min;
-    int iii;
 
-    iii = 0;
     if (!(best_field = (int *)ft_memalloc(sizeof(int) * 3)))
         return ;
     best_field[0] = MAXINT;
     best_field[1] = 0;
-    i = 1;
-    k = 0;
     min = min_n(keeper->s_links, keeper->f_links);
     keeper->n[1]->visd = 1000000;
-    if (find_room(keeper, 1, 2) >= 0)
-    {
-        while (++iii < keeper->ants + 1)
-            ft_printf("L%d-%s ", iii ,keeper->finish->name);
-        exit(1);
-    }
+	only_finish_room(keeper, mp);
     while (1)
     {
+		k = 0;
+        i = 1;
         while (i != 0)
         {
             i = path_to_finish(keeper, mp);
-            k += i;
-            if (min == k)
+            if (min == (k += i))
                 break;
             keeper->v_limit++;
         }
+		if (k == 0 && mp->field == 1)
+			ft_errors_lem_in(777);
         best_field = prepare_ants(keeper, mp, mp->field, best_field);
         if (min == k || delete_collisions(keeper) == 0 || mp->field == 5)
             break;
@@ -82,8 +90,7 @@ void			master_loop(t_room_keeper *keeper, t_map_keeper *mp)
         keeper->n[1]->visd = 1000000;
         keeper->v_limit = 1;
         mp->field++;
-        k = 0;
-        i = 1;
+
     }
     move_ants(keeper, mp, best_field[1]);
     free(best_field);
