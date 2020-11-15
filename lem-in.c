@@ -78,16 +78,6 @@ void master_loop(t_room_keeper *keeper, t_map_keeper *mp)
     }
     move_ants(keeper, mp, best_field[1]);
     free(best_field);
-//    while (mp->rl != NULL)
-//    {
-//    	while (mp->rl->data->field < min_field[2])
-//    		mp->rl = mp->rl->next;
-//    	while (mp->rl->data->queue->stack != NULL)
-//    		ft_printf(" %d", out_queue(mp->rl->data->queue));
-//    	ft_printf("\n");
-//    	mp->rl = mp->rl->next;
-//    }
-//    free_all();
 }
 
 int		main(void)
