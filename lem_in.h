@@ -52,7 +52,7 @@ typedef struct		s_room
 	int             ant_num;
 	int				**links_id;
 	int				links_count;
-	int				visited;
+	int				visd;
 	int				prev_room;
 	int				in_q;
 	struct s_room	*next;
