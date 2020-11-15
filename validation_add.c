@@ -36,14 +36,21 @@ void	find_links_name(t_room **n_hash, char *room1, char *room2)
     t_room *tmp2;
     unsigned long i;
     unsigned long j;
+    int num;
 
+    num = -1;
     i = get_hash(room1);
     j = get_hash(room2);
     tmp1 = n_hash[i];
     tmp2 = n_hash[j];
+    if (tmp1 == NULL || tmp2 == NULL)
+        ft_errors_lem_in(3);
     while (ft_strcmp(tmp1->name, room1) != 0)
         tmp1 = tmp1->next;
     while (ft_strcmp(tmp2->name, room2) != 0)
         tmp2 = tmp2->next;
+    while (++num < tmp1->links_count)
+        if (tmp1->links_id[0][num] == tmp2->id)
+            ft_errors_lem_in(3);
     add_two_links(tmp1, tmp2);
 }

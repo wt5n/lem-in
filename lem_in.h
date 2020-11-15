@@ -107,5 +107,6 @@ void move_ants(t_room_keeper *keeper, t_map_keeper *mp, int field);
 void	free_all(t_room_keeper * keeper, t_map_keeper *mp);
 //void	free_list_queue(t_list_queue *queue);
 void 	free_queue(t_queue *queue);
+void    ft_errors_lem_in(int error_num);
 
 #endif
