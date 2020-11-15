@@ -15,6 +15,8 @@ void increase_links(t_room *room)
 	while (++i < room->links_count)
 		new_links[0][i] = room->links_id[0][i];
 	free(room->links_id[0]);
+	free(room->links_id[1]);
+	free(room->links_id);
 	room->links_id = new_links;
 	room->links_count = room->links_count * 2;
 }

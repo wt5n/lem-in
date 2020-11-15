@@ -59,6 +59,8 @@ void    parse_rooms(t_room_keeper *keeper, char* line)
 	char    *str;
 	char    *start;
 	t_room  *room;
+	int x;
+	int y;
 
 	str = line;
 	start = str;
@@ -69,9 +71,13 @@ void    parse_rooms(t_room_keeper *keeper, char* line)
 	str--;
 	while (ft_isdigit(*str))
 		str--;
+	x = ft_atoi_wr(str);
 	str--;
 	while (ft_isdigit(*str))
 		str--;
+	y = ft_atoi_wr(str);
+	3
+	+
 	name = ft_strndup(start, str - start);
 	ft_strchr(name, ' ') ? ft_error() : 0;
 	if (keeper->s_c == 1)
@@ -121,13 +127,11 @@ void    parse_input(t_room_keeper *keeper)
 	line = NULL;
 	while (get_next_line(STDIN_FILENO, &line) == 1)
 	{
-	    if (ft_strcmp(line, "L 14 14") == 0)
-	        ft_printf("");
 		if ((ft_isdigit(line[0]) || ft_isdigit(line[1])) && !keeper->ants)
 			parse_ants(keeper, line);
 		else if (line[0] == '#')
 			parse_comms(keeper, line);
-		else if (ft_strchr(line, ' ') && !(ft_strchr(line, '-'))
+		else if (line[0] != ' ' && ft_strchr(line, ' ') && !(ft_strchr(line, '-'))
 		         && !(ft_strchr(line, '#')))
 			parse_rooms(keeper, line);
 		else if (ft_strchr(line, '-'))
