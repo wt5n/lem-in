@@ -1,26 +1,5 @@
 #include "lem_in.h"
 
-unsigned long get_hash(unsigned char *name)
-{
-	unsigned long hash = VALUE_HASH_ROOMS;
-	int c;
-
-	while ((c = *name++))
-		hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
-
-	return (hash % VALUE_HASH_ROOMS);
-}
-
- void add_next(t_room *master, t_room *slave)
- {
- 	t_room *tmp;
-
- 	tmp = master;
- 	while (tmp->next != NULL)
- 		tmp = tmp->next;
- 	tmp->next = slave;
- }
-
 void    print_links(t_room_keeper *keeper, int id)
 {
     t_room *room;
@@ -35,4 +14,54 @@ void    print_links(t_room_keeper *keeper, int id)
             ft_printf("%d %d\n", room->links_id[0][i], room->links_id[1][i]);
     }
     ft_printf("\n");
+}
+
+int		is_link_used(t_room *room, int target)
+{
+    int i;
+
+    i = 0;
+    if (room->id == 1)
+        return (0);
+    while (i < room->links_count)
+    {
+        // printf("i=%d [0][i]=%d\n", i, room->links_id[0][i]);
+        if (room->links_id[0][i] == target)
+        {
+            if (room->links_id[1][i] == 1) {
+//                ft_printf("the link is used\n");
+                return (1);
+            }
+        }
+        i++;
+    }
+    return (0);
+}
+
+void print_maps(t_map_keeper *mp)
+{
+    int i;
+
+    while (mp->rl != NULL)
+    {
+        i = 0;
+        ft_printf("field is %d\n", mp->rl->data->field);
+        while ((mp->rl->data->rooms[i] != 0) && (i < mp->rl->data->length))
+        {
+            ft_printf("%d ", mp->rl->data->rooms[i]);
+            i++;
+        }
+        ft_printf("\n");
+        mp->rl = mp->rl->next;
+    }
+}
+
+void        print_keeper_rooms(t_room_keeper *keeper)
+{
+    int i;
+
+    i = -1;
+    ft_printf("RoomCounter %d\n", keeper->RoomCounter);
+    while (++i < keeper->RoomCounter)
+        ft_printf("%d\n", keeper->n[i]->id);
 }

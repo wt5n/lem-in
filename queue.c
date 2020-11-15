@@ -16,10 +16,7 @@ static int pop(t_list_queue **top_ref)
 	int res;
 	t_list_queue *top;
 	if (*top_ref == NULL)
-	{
-		ft_printf ("Stack underflow \n");
-		exit (0);
-	}
+        return 0;
 	else
 	{
 		top = *top_ref;

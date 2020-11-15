@@ -1,27 +1,5 @@
 #include "lem_in.h"
 
-int		is_link_used(t_room *room, int target)
-{
-    int i;
-
-    i = 0;
-    if (room->id == 1)
-        return (0);
-    while (i < room->links_count)
-    {
-        // printf("i=%d [0][i]=%d\n", i, room->links_id[0][i]);
-        if (room->links_id[0][i] == target)
-        {
-            if (room->links_id[1][i] == 1) {
-//                ft_printf("the link is used\n");
-                return (1);
-            }
-        }
-        i++;
-    }
-	return (0);
-}
-
 int		length_of_path(t_room_keeper *keeper)
 {
 	int		length;
@@ -64,7 +42,6 @@ int 	path_to_start(t_room_keeper *keeper, t_map_keeper *mp)
 	while (--length > 0)
 	{
 		map->rooms[length] = room->id;
-//		ft_printf("length=%d room=%s ", length, room->name);
         if (room->id == 1)
             break;
 		from = room->id;
@@ -72,9 +49,7 @@ int 	path_to_start(t_room_keeper *keeper, t_map_keeper *mp)
 		mark_as_used(keeper, from, room->id);
         if (room->id != 2)
             room->visited = 1000000;
-		// print_all_links(room->name, room->links);
     }
-//	ft_printf("\n");
 	add_map_to_map_keeper(mp->rl, map);
     return (1);
 }
@@ -85,7 +60,7 @@ int		path_to_finish(t_room_keeper *keeper, t_map_keeper *mp)
     t_room 			*current;
 
     if (!(queue = (t_queue*)ft_memalloc(sizeof(t_queue))))
-        return (NULL);
+        return 0;
     if (add_links_to_queue(keeper->n[1]->id, queue, keeper) == 1)
         return (path_to_start(keeper, mp));
     while (queue->stack != NULL)

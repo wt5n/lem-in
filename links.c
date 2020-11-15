@@ -52,16 +52,12 @@ int     add_links_to_queue(int id, t_queue *queue, t_room_keeper *keeper)
 	tmp_room = keeper->n[id];
 	while (++i < tmp_room->links_count)
 	{
-		// if (tmp_room->links_id[0][i] != 0)
-        //      ft_printf("room=%d link_id=%d link_usd=%d\n", tmp_room->id,
-        //                  tmp_room->links_id[0][i], tmp_room->links_id[1][i]);
 		if ((tmp_room->links_id[0][i] != 0) && (tmp_room->links_id[1][i] == 0))
 		{
-			// ft_printf("link id is %d\n", tmp_room->links_id[0][i]);
-			if (tmp_room->links_id[0][i] == 2) // check chto eto finish
+			if (tmp_room->links_id[0][i] == 2)
 			{
-				add_prev_room(keeper, keeper->n[tmp_room->links_id[0][i]], tmp_room->id);
-//			    ft_printf("the kraynaya komnata is %s\n", tmp_room->name);
+                keeper->n[tmp_room->links_id[0][i]]->prev_room = tmp_room->id;
+                keeper->n[tmp_room->links_id[0][i]]->in_q = keeper->v_limit;
 			    if (tmp_room->id == 1 && tmp_room->links_id[0][i] == 2)
 			    {
 			    	tmp_room->links_id[0][i] = 0;
@@ -75,7 +71,8 @@ int     add_links_to_queue(int id, t_queue *queue, t_room_keeper *keeper)
 			if (keeper->n[tmp_room->links_id[0][i]]->visited < keeper->v_limit &&
 				keeper->n[tmp_room->links_id[0][i]]->in_q < keeper->v_limit)
 			{
-				add_prev_room(keeper, keeper->n[tmp_room->links_id[0][i]], tmp_room->id);
+                keeper->n[tmp_room->links_id[0][i]]->prev_room = tmp_room->id;
+                keeper->n[tmp_room->links_id[0][i]]->in_q = keeper->v_limit;
 				in_queue(queue, tmp_room->links_id[0][i]);
 			}
 		}

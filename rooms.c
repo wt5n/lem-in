@@ -1,5 +1,28 @@
 #include "lem_in.h"
 
+void add_next(t_room *master, t_room *slave)
+{
+    t_room *tmp;
+
+    tmp = master;
+    while (tmp->next != NULL)
+        tmp = tmp->next;
+    tmp->next = slave;
+}
+
+int     find_room(t_room_keeper *keeper, int r, int find)
+{
+    t_room  *room;
+    int     i;
+
+    room = keeper->n[r];
+    i = -1;
+    while (++i< room->links_count)
+        if (room->links_id[0][i] == find)
+            return (i);
+    return (-1);
+}
+
 t_room *create_room(char *name, int id)
 {
 	t_room *room ;
@@ -14,13 +37,37 @@ t_room *create_room(char *name, int id)
 		!(room->links_id[0] = (int*)ft_memalloc(sizeof(int) * room->links_count)) ||
 		!(room->links_id[1] = (int*)ft_memalloc(sizeof(int) * room->links_count)))
 		return NULL;
-	room->ishash = get_hash(name);
 	return room;
 }
 
-void	add_prev_room(t_room_keeper *keeper, t_room *room, int prev)
+void    add_room(t_room_keeper *keeper, t_room *room)
 {
+    if (keeper->n_hash[get_hash(room->name)])
+    {
+        add_next(keeper->n_hash[get_hash(room->name)], room);
+    }
+    else
+        keeper->n_hash[get_hash(room->name)] = room;
+}
 
-    room->prev_room = prev;
-	room->in_q = keeper->v_limit;
+void clear_rooms(t_room_keeper *keeper)
+{
+    int i;
+    int j;
+    t_room *room;
+
+    i = 0;
+    while (++i < keeper->RoomCounter)
+    {
+        j = -1;
+        if (keeper->n[i] == 0)
+            continue;
+        room = keeper->n[i];
+        room->visited = 0;
+        room->prev_room = 0;
+        room->in_q = 0;
+        while (++j < room->links_count)
+            room->links_id[1][j] = 0;
+    }
+    keeper->v_limit = 0;
 }

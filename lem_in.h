@@ -48,7 +48,6 @@ typedef 	struct	s_link
 
 typedef struct		s_room
 {
-    int             ishash;
 	char			*name;
 	int				id;
 	int             ant_num;
@@ -86,7 +85,6 @@ void    add_links(t_room *room, int link);
 void	add_two_links(t_room *first, t_room *second);
 int 	add_links_to_queue(int id, t_queue *queue, t_room_keeper *keeper);
 int		path_to_finish(t_room_keeper *keeper, t_map_keeper *mp);
-void	add_prev_room(t_room_keeper *keeper, t_room *room, int prev);
 void	master_loop(t_room_keeper *keeper, t_map_keeper *mp);
 void    add_room(t_room_keeper *keeper, t_room *room);
 void    start_end_rooms(t_room_keeper *keeper, t_room *room);
@@ -103,5 +101,11 @@ int     delete_collisions(t_room_keeper *keeper);
 void    print_maps(t_map_keeper *mp);
 void    print_links(t_room_keeper *keeper, int id);
 int     find_room(t_room_keeper *keeper, int r, int find);
+void	find_links_name(t_room **n_hash, char *room1, char *room2);
+void    start_end_rooms(t_room_keeper *keeper, t_room *room);
+void    pass_to_n(t_room_keeper *keeper);
+void    ant_move(t_room_keeper *keeper, t_room_links *tmp, int inc_ant, int i);
+int *prepare_ants(t_room_keeper *keeper, t_map_keeper *mp, int field, int *oper);
+void move_ants(t_room_keeper *keeper, t_map_keeper *mp, int field);
 
 #endif
