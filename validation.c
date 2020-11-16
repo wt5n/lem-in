@@ -47,8 +47,7 @@ void    parse_rooms(t_room_keeper *keeper, char* line)
 	char    *str;
 	char    *start;
 	t_room  *room;
-	int x;
-	int y;
+	int		xy[2];
 
 	str = line;
 	start = str;
@@ -59,13 +58,14 @@ void    parse_rooms(t_room_keeper *keeper, char* line)
 	str--;
 	while (ft_isdigit(*str))
 		str--;
-	x = ft_atoi_wr(str);
+	xy[0] = ft_atoi_wr(str);
 	str--;
 	while (ft_isdigit(*str))
 		str--;
-	y = ft_atoi_wr(str);
+	xy[1] = ft_atoi_wr(str);
 	name = ft_strndup(start, str - start);
 	ft_strchr(name, ' ') ? ft_errors_lem_in(7) : 0;
+	ft_strchr(name, '-') ? ft_errors_lem_in(7) : 0;
 	if (keeper->s_c == 1)
 		room = create_room(name, 1);
 	else if (keeper->e_c == 1)
@@ -76,6 +76,7 @@ void    parse_rooms(t_room_keeper *keeper, char* line)
 		keeper->room_counter++;
 	}
 	add_room(keeper, room);
+	check_dup_coor(keeper, room, xy);
 	if (keeper->s_c == 1 || keeper->e_c == 1)
 		start_end_rooms(keeper, room);
 	keeper->s_c > 2 || keeper->e_c > 2 ? ft_errors_lem_in(2) : 0;

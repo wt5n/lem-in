@@ -6,7 +6,7 @@
 /*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 20:02:03 by hlikely           #+#    #+#             */
-/*   Updated: 2020/11/15 20:06:37 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/11/16 20:50:25 by hlikely          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ void	ft_errors_lem_in(int error_num)
 		write(2, "Comment error\n", 14);
 	else if (error_num == 7)
 		write(2, "Something wrong with rooms\n", 27);
+	else if (error_num == 8)
+		write(2, "Coordinate problem\n", 19);
+	else if (error_num == 9)
+		write(2, "No map\n", 7);
 	else
 		write(2, "Unknown error\n", 14);
 	exit(2);
@@ -88,4 +92,26 @@ void	find_links_name(t_room **n_hash, char *room1, char *room2)
 		if (tmp1->links_id[0][num] == tmp2->id)
 			ft_errors_lem_in(3);
 	add_two_links(tmp1, tmp2);
+}
+
+void	check_dup_coor(t_room_keeper *keeper, t_room *room, const int *xy)
+{
+	int		i;
+	int 	j;
+
+	i = 1;
+	j = 1;
+	if (xy[0] < 0 || xy[1] < 0)
+		ft_errors_lem_in(8);
+	while (keeper->coords[0][j] != xy[0] && j < HASH_ROOMS)
+		j++;
+	while (keeper->coords[1][i] != xy[1] && i < HASH_ROOMS && keeper->coords[0][j] == xy[0])
+		i++;
+	if (i == j && room->id != i)
+		ft_errors_lem_in(8);
+	else
+	{
+		keeper->coords[0][room->id] = xy[0];
+		keeper->coords[1][room->id] = xy[1];
+	}
 }

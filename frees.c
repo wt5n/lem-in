@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:34:25 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/16 03:27:40 by wtsn             ###   ########.fr       */
+/*   Updated: 2020/11/16 20:50:25 by hlikely          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	free_keeper(t_room_keeper *keeper)
 			free(keeper->n[i]);
 		}
 	}
+	free(keeper->coords[0]);
+	free(keeper->coords[1]);
+	free(keeper->coords);
 	free(keeper->n_hash);
 	free(keeper->n);
 	free(keeper);
