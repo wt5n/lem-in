@@ -13,7 +13,7 @@ set(SRC
         validation.c
         validation_add.c
         ants.c
-        lem-in.c
+        lem_in.c
         rooms.c
         links.c
         paths.c

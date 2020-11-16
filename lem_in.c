@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem-in.c                                           :+:      :+:    :+:   */
+/*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 20:15:02 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/15 20:40:37 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/11/16 19:33:41 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-unsigned long	get_hash(unsigned char *name)
-{
-	unsigned long hash;
-	int c;
-
-	hash = HASH_ROOMS;
-	while ((c = *name++))
-		hash = ((hash << 5) + hash) + c;
-	return (hash % HASH_ROOMS);
-}
-
-void			find_count_s_f(t_room_keeper *keeper)
+void		find_count_s_f(t_room_keeper *keeper)
 {
 	int		i;
 	int		j;
@@ -42,7 +31,7 @@ void			find_count_s_f(t_room_keeper *keeper)
 	keeper->f_links = j;
 }
 
-void			only_finish_room(t_room_keeper *keeper, t_map_keeper *mp)
+void		only_finish_room(t_room_keeper *keeper, t_map_keeper *mp)
 {
 	int	i;
 
@@ -56,44 +45,49 @@ void			only_finish_room(t_room_keeper *keeper, t_map_keeper *mp)
 	}
 }
 
-void			master_loop(t_room_keeper *keeper, t_map_keeper *mp)
+void		circle(t_room_keeper *k, t_map_keeper *mp, int *bf, int min)
 {
-    int i;
-    int k;
-    int *best_field;
-    int min;
+	int	i;
+	int	j;
 
-    if (!(best_field = (int *)ft_memalloc(sizeof(int) * 3)))
-        return ;
-    best_field[0] = MAXINT;
-    best_field[1] = 0;
-    min = min_n(keeper->s_links, keeper->f_links);
-    keeper->n[1]->visd = 1000000;
-	only_finish_room(keeper, mp);
-    while (1)
-    {
-		k = 0;
-        i = 1;
-        while (i != 0)
-        {
-            i = path_to_finish(keeper, mp);
-            if (min == (k += i))
-                break;
-            keeper->v_limit++;
-        }
-		if (k == 0 && mp->field == 1)
+	while (1)
+	{
+		j = 0;
+		i = 1;
+		while (i != 0)
+		{
+			i = path_to_finish(k, mp);
+			if (min == (j += i))
+				break ;
+			k->v_limit++;
+		}
+		if (j == 0 && mp->field == 1)
 			ft_errors_lem_in(777);
-        best_field = prepare_ants(keeper, mp, mp->field, best_field);
-        if (min == k || delete_collisions(keeper) == 0 || mp->field == 5)
-            break;
-        clear_rooms(keeper);
-        keeper->n[1]->visd = 1000000;
-        keeper->v_limit = 1;
-        mp->field++;
+		bf = prepare_ants(k, mp, mp->field, bf);
+		if (min == j || delete_collisions(k) == 0 || mp->field == 5)
+			break ;
+		clear_rooms(k);
+		k->n[1]->visd = 1000000;
+		k->v_limit = 1;
+		mp->field++;
+	}
+}
 
-    }
-    move_ants(keeper, mp, best_field[1]);
-    free(best_field);
+void		master_loop(t_room_keeper *keeper, t_map_keeper *mp)
+{
+	int	*best_field;
+	int	min;
+
+	if (!(best_field = (int *)ft_memalloc(sizeof(int) * 2)))
+		return ;
+	best_field[0] = MAXINT;
+	best_field[1] = 0;
+	min = min_n(keeper->s_links, keeper->f_links);
+	keeper->n[1]->visd = 1000000;
+	only_finish_room(keeper, mp);
+	circle(keeper, mp, best_field, min);
+	move_ants(keeper, mp, best_field[1]);
+	free(best_field);
 }
 
 int			main(void)
@@ -105,9 +99,9 @@ int			main(void)
 		return (0);
 	if (!(r->n_hash = (t_room**)ft_memalloc(sizeof(t_room*) * HASH_ROOMS)))
 		return (0);
-	r->roomCounter = 3;
+	r->room_counter = 3;
 	parse_input(r);
-	if (!(r->n = (t_room**)ft_memalloc(sizeof(t_room*) * r->roomCounter)))
+	if (!(r->n = (t_room**)ft_memalloc(sizeof(t_room*) * r->room_counter)))
 		return (0);
 	r->v_limit = 1;
 	pass_to_n(r);

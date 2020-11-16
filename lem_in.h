@@ -101,5 +101,6 @@ void					move_ants(t_room_keeper *keeper, t_map_keeper *mp,
 void					free_all(t_room_keeper *keeper, t_map_keeper *mp);
 void					free_queue(t_queue *queue);
 void					ft_errors_lem_in(int error_num);
+unsigned long			get_hash(unsigned char *name);
 
 #endif
