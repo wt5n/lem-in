@@ -12,21 +12,22 @@
 
 # include "lem_in.h"
 
-void	print_chains(t_room_links *s)
+void	print_chains(t_room_keeper *keeper, t_room_links *s)
 {
 	t_room_links	*tmp;
 	int				i;
 
-	i = -1;
 	tmp = s;
-	ft_printf("Chains of the choosen field");
+	ft_printf("Chains of the chosen field\n");
 	while (s != NULL)
 	{
+		i = -1;
 		while (++i < s->data->length)
-			printf("%d -> \n", s->data->rooms[i]);
-		printf("\n");
+			ft_printf("%s ", keeper->n[s->data->rooms[i]]->name);
 		s = s->next;
+		ft_printf("\n");
 	}
+	ft_printf("\n");
 }
 
 void	show_help(void)

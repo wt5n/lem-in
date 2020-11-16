@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 19:39:44 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/16 20:26:43 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/11/16 21:31:56 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ void	find_flags(int argc, char **argv, t_bonuses *bon)
 	}
 	while (++i < argc)
 	{
+		ft_printf("%s\n", argv[i]);
 		if (ft_strcmp(argv[i], "-n") == 0)
 			bon->numbers = 1;
-		if (ft_strcmp(argv[i], "-c") == 1)
+		if (ft_strcmp(argv[i], "-c") == 0)
 			bon->chains = 1;
 	}
 }
