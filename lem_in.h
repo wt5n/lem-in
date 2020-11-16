@@ -70,6 +70,7 @@ typedef struct			s_room_keeper
 	int					s_links;
 	int					f_links;
 	int					v_limit;
+	int 				**coords;
 	t_bonuses			*bon;
 }						t_room_keeper;
 

@@ -101,6 +101,12 @@ int			lem_in(t_bonuses *bon)
 	if (!(k->n_hash = (t_room**)ft_memalloc(sizeof(t_room*) * HASH_ROOMS)))
 		return (0);
 	k->room_counter = 3;
+	if (!(k->coords = (int**)ft_memalloc(sizeof(int*) * 2)))
+		return (0);
+	if (!(k->coords[0] = (int*)ft_memalloc(sizeof(int) * HASH_ROOMS)))
+		return (0);
+	if (!(k->coords[1] = (int*)ft_memalloc(sizeof(int) * HASH_ROOMS)))
+		return (0);
 	parse_input(k);
 	if (!(k->n = (t_room**)ft_memalloc(sizeof(t_room*) * k->room_counter)))
 		return (0);
