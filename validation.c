@@ -114,6 +114,8 @@ void    parse_input(t_room_keeper *keeper)
 	while (get_next_line(STDIN_FILENO, &line) == 1)
 	{
 		keeper->file[i] = ft_strdup(line);
+		if (ft_strcmp(line, "\n"))
+			ft_errors_lem_in(135);
 		if ((ft_isdigit(line[0]) || ft_isdigit(line[1])) && !keeper->ants)
 			parse_ants(keeper, line);
 		else if (line[0] == '#')

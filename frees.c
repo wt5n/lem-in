@@ -33,6 +33,7 @@ void	free_keeper(t_room_keeper *keeper)
 	free(keeper->coords);
 	free(keeper->n_hash);
 	free(keeper->n);
+	free((keeper->bon));
 	free(keeper);
 }
 

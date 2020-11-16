@@ -34,7 +34,6 @@ void	find_flags(int argc, char **argv, t_bonuses *bon)
 	}
 	while (++i < argc)
 	{
-		ft_printf("%s\n", argv[i]);
 		if (ft_strcmp(argv[i], "-n") == 0)
 			bon->numbers = 1;
 		if (ft_strcmp(argv[i], "-c") == 0)

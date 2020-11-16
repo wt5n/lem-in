@@ -103,9 +103,9 @@ void	check_dup_coor(t_room_keeper *keeper, t_room *room, const int *xy)
 	j = 1;
 	if (xy[0] < 0 || xy[1] < 0)
 		ft_errors_lem_in(8);
-	while (keeper->coords[0][j] != xy[0] && j < HASH_ROOMS)
+	while (j < HASH_ROOMS && keeper->coords[0][j] != xy[0])
 		j++;
-	while (keeper->coords[1][i] != xy[1] && i < HASH_ROOMS && keeper->coords[0][j] == xy[0])
+	while (i < HASH_ROOMS && keeper->coords[1][i] != xy[1] && keeper->coords[0][j - 1] == xy[0])
 		i++;
 	if (i == j && room->id != i)
 		ft_errors_lem_in(8);
