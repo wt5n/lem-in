@@ -6,11 +6,28 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 14:42:46 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/16 21:04:00 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/11/16 21:23:31 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "lem_in.h"
+
+void	print_chains(t_room_links *s)
+{
+	t_room_links	*tmp;
+	int				i;
+
+	i = -1;
+	tmp = s;
+	ft_printf("Chains of the choosen field");
+	while (s != NULL)
+	{
+		while (++i < s->data->length)
+			printf("%d -> \n", s->data->rooms[i]);
+		printf("\n");
+		s = s->next;
+	}
+}
 
 void	show_help(void)
 {

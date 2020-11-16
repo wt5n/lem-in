@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 18:59:56 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/16 20:30:11 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/11/16 21:19:21 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void		move_ants(t_room_keeper *keeper, t_map_keeper *mp, int field)
 	start = mp->rl;
 	while (start->data->field < field)
 		start = start->next;
+	print_chains(start);
 	while (keeper->finish->ant_num != keeper->ants)
 	{
 		tmp = start;
