@@ -72,6 +72,7 @@ typedef struct			s_room_keeper
 	int					v_limit;
 	int 				**coords;
 	t_bonuses			*bon;
+	char 				**file;
 }						t_room_keeper;
 
 void					in_queue(t_queue *q, int x);
@@ -114,6 +115,8 @@ void					show_help(void);
 void					about(void);
 void					credits(void);
 int						lem_in(t_bonuses *bon);
+void					check_dup_coor(t_room_keeper *keeper,
+								t_room *room, const int *xy);
 
 
 #endif
