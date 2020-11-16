@@ -13,7 +13,7 @@ void    parse_ants(t_room_keeper *keeper, char *line)
 		    ft_errors_lem_in(1);
 		if (*line && (*line == '-'))
             ft_errors_lem_in(1);
-		while (*(line + i) && *(line + i) == '+' || ft_isdigit(*(line + i)))
+		while ((*(line + i) && *(line + i) == '+') || ft_isdigit(*(line + i)))
 			i++;
 		keeper->ants = ft_atoi_wr(line);
 		if (keeper->ants <= 0 || line[i] != '\0')
@@ -106,11 +106,14 @@ void    parse_links(t_room_keeper *keeper, char* line)
 
 void    parse_input(t_room_keeper *keeper)
 {
-	char *line;
+	char	*line;
+	int		i;
 
 	line = NULL;
+	i = 0;
 	while (get_next_line(STDIN_FILENO, &line) == 1)
 	{
+		keeper->file[i] = ft_strdup(line);
 		if ((ft_isdigit(line[0]) || ft_isdigit(line[1])) && !keeper->ants)
 			parse_ants(keeper, line);
 		else if (line[0] == '#')
@@ -123,5 +126,6 @@ void    parse_input(t_room_keeper *keeper)
 		else
 			ft_errors_lem_in(0);
 		free(line);
+		i++;
 	}
 }

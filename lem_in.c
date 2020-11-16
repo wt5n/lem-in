@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 20:15:02 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/16 20:14:51 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/11/16 22:01:14 by hlikely          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void		master_loop(t_room_keeper *keeper, t_map_keeper *mp)
 	keeper->n[1]->visd = 1000000;
 	only_finish_room(keeper, mp);
 	circle(keeper, mp, best_field, min);
+	print_file(keeper);
 	move_ants(keeper, mp, best_field[1]);
 	free(best_field);
 }
@@ -97,19 +98,11 @@ int			lem_in(t_bonuses *bon)
 
 	if (!(k = (t_room_keeper*)ft_memalloc(sizeof(t_room_keeper))))
 		return (0);
-	k->bon = bon;
-	if (!(k->n_hash = (t_room**)ft_memalloc(sizeof(t_room*) * HASH_ROOMS)))
-		return (0);
-	k->room_counter = 3;
-	if (!(k->coords = (int**)ft_memalloc(sizeof(int*) * 2)))
-		return (0);
-	if (!(k->coords[0] = (int*)ft_memalloc(sizeof(int) * HASH_ROOMS)))
-		return (0);
-	if (!(k->coords[1] = (int*)ft_memalloc(sizeof(int) * HASH_ROOMS)))
-		return (0);
+	create_keeper(k);
 	parse_input(k);
 	if (!(k->n = (t_room**)ft_memalloc(sizeof(t_room*) * k->room_counter)))
 		return (0);
+	k->bon = bon;
 	k->v_limit = 1;
 	pass_to_n(k);
 	if (!(mp = (t_map_keeper*)ft_memalloc(sizeof(t_map_keeper))))

@@ -118,6 +118,8 @@ int						lem_in(t_bonuses *bon);
 void					check_dup_coor(t_room_keeper *keeper,
 								t_room *room, const int *xy);
 void					print_chains(t_room_keeper *keeper, t_room_links *s);
+void 					create_keeper(t_room_keeper *keeper);
+void					print_file(t_room_keeper *keeper);
 
 
 #endif
