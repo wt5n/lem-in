@@ -18,32 +18,31 @@ void	show_help(void)
 	ft_printf("	./lem-in < name_of_map\n");
 	ft_printf("Flags:\n");
 	ft_printf("-n. Show number of lines\n");
-	ft_printf("-c. Show chaines\n");
-	ft_printf("Obrabotka oshibok (bez flafa)\n");
+	ft_printf("-c. Show chains\n");
 	ft_printf("--about. Description of project\n");
 	ft_printf("--credits. Information about project creators\n");
 }
 
 void	about(void)
 {
-	ft_putstr("Lem in project. The goal of project is to find the quicest");
-	ft_putstr(" way to get N antc across the farm.\n");
+	ft_putstr("Lem in project. The goal of project is to find the quickest");
+	ft_putstr(" way to get N ants across the farm.\n");
 	ft_putstr("Program receive the data describing the ant farm from thr");
-	ft_putstr(" standart output in the following format:\n");
+	ft_putstr(" standard output in the following format:\n");
 	ft_putstr("		number_of_ants\n");
 	ft_putstr("		the_rooms\n");
 	ft_putstr("		the_links\n");
 	ft_putstr("Quickest wat means the solution with least number of lines\n\n");
 	ft_putstr("Rules of the game:\n");
-	ft_putstr(" - At the beggining all the ants in the room ##start. The goal");
+	ft_putstr(" - At the beginning all the ants in the room ##start. The goal");
 	ft_putstr(" is bring them to the room ##finish with as few turns as");
 	ft_putstr(" possible.\n");
-	ft_putstr(" - Each room can containt only one ant at a time, except rooms");
+	ft_putstr(" - Each room can contains only one ant at a time, except rooms");
 	ft_putstr(" ##start and ##end.\n");
-	ft_putstr(" - All ant itn thr ##start room at the beggining of the game\n");
+	ft_putstr(" - All ant itn thr ##start room at the beginning of the game\n");
 	ft_putstr(" - Moved ants must be displayed every turn, ony moved\n");
-	ft_putstr(" - At each turn you can move each ant only once throught a");
-	ft_putstr(" tube (the room at receiving end mst be empy)\n");
+	ft_putstr(" - At each turn you can move each ant only once through a");
+	ft_putstr(" tube (the room at receiving end mst be empty)\n");
 }
 
 void	credits(void)
