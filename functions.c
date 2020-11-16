@@ -61,7 +61,7 @@ void        print_keeper_rooms(t_room_keeper *keeper)
     int i;
 
     i = -1;
-    ft_printf("roomCounter %d\n", keeper->roomCounter);
-    while (++i < keeper->roomCounter)
+    ft_printf("room_counter %d\n", keeper->room_counter);
+    while (++i < keeper->room_counter)
         ft_printf("%d\n", keeper->n[i]->id);
 }

@@ -5,23 +5,24 @@ set(CMAKE_C_STANDARD 99)
 
 include_directories(inc)
 
-set(SRC_OPERATIONS
+set(SRC
         queue.c
         functions.c
         rooms.c
         links.c
         validation.c
-        validation_add.c)
-
-add_executable(lem-in
+        validation_add.c
+        ants.c
         lem-in.c
         rooms.c
         links.c
         paths.c
         map.c
         collisions.c
-        frees.c
-        ${SRC_OPERATIONS} ants.c)
+        frees.c)
+
+add_executable(lem-in
+        ${SRC} )
 
 
 add_subdirectory(libft)

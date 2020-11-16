@@ -68,7 +68,7 @@ void	clear_rooms(t_room_keeper *keeper)
 	t_room	*room;
 
 	i = 0;
-	while (++i < keeper->roomCounter)
+	while (++i < keeper->room_counter)
 	{
 		j = -1;
 		if (keeper->n[i] == 0)
