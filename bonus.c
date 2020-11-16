@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 14:42:46 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/15 15:03:03 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/11/16 19:35:50 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	show_help(void)
 {
-	ft_printf("Usage example:\n")
-	ft_printf("	./lem-in < name_of_map\n")
-	ft_printf("Flags:\n")
+	ft_printf("Usage example:\n");
+	ft_printf("	./lem-in < name_of_map\n");
+	ft_printf("Flags:\n");
 	ft_printf("-n. Show number of lines\n");
 	ft_printf("-c. Show chaines\n");
 	ft_printf("Obrabotka oshibok (bez flafa)\n");
@@ -29,7 +29,7 @@ void	about(void)
 	ft_putstr("Lem in project. The goal of project is to find the quicest");
 	ft_putstr(" way to get N antc across the farm.\n");
 	ft_putstr("Program receive the data describing the ant farm from thr");
-	ft_putstr(" standart output in the following format:\n")
+	ft_putstr(" standart output in the following format:\n");
 	ft_putstr("		number_of_ants\n");
 	ft_putstr("		the_rooms\n");
 	ft_putstr("		the_links\n");
@@ -50,5 +50,5 @@ void	credits(void)
 {
 	ft_printf("The project 'Why doth weary prostitution scour not Cupid’s");
 	ft_printf(" emancipation? O capital insolence!' was createb by\n");
-	ft_printf("Ksenaida and Hlikely\n")
+	ft_printf("Ksenaida and Hlikely\n");
 }

@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 20:15:02 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/16 19:33:41 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/11/16 20:14:51 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,29 +90,30 @@ void		master_loop(t_room_keeper *keeper, t_map_keeper *mp)
 	free(best_field);
 }
 
-int			main(void)
+int			lem_in(t_bonuses *bon)
 {
-	t_room_keeper	*r;
+	t_room_keeper	*k;
 	t_map_keeper	*mp;
 
-	if (!(r = (t_room_keeper*)ft_memalloc(sizeof(t_room_keeper))))
+	if (!(k = (t_room_keeper*)ft_memalloc(sizeof(t_room_keeper))))
 		return (0);
-	if (!(r->n_hash = (t_room**)ft_memalloc(sizeof(t_room*) * HASH_ROOMS)))
+	k->bon = bon;
+	if (!(k->n_hash = (t_room**)ft_memalloc(sizeof(t_room*) * HASH_ROOMS)))
 		return (0);
-	r->room_counter = 3;
-	parse_input(r);
-	if (!(r->n = (t_room**)ft_memalloc(sizeof(t_room*) * r->room_counter)))
+	k->room_counter = 3;
+	parse_input(k);
+	if (!(k->n = (t_room**)ft_memalloc(sizeof(t_room*) * k->room_counter)))
 		return (0);
-	r->v_limit = 1;
-	pass_to_n(r);
+	k->v_limit = 1;
+	pass_to_n(k);
 	if (!(mp = (t_map_keeper*)ft_memalloc(sizeof(t_map_keeper))))
 		return (0);
 	mp->field = 1;
 	if (!(mp->rl = (t_room_links*)ft_memalloc(sizeof(t_room_links))))
 		return (0);
-	find_count_s_f(r);
-	r->start->ant_num = r->ants;
-	master_loop(r, mp);
-	free_all(r, mp);
+	find_count_s_f(k);
+	k->start->ant_num = k->ants;
+	master_loop(k, mp);
+	free_all(k, mp);
 	return (1);
 }

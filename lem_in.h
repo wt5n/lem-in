@@ -51,6 +51,12 @@ typedef struct			s_room
 	struct s_room		*next;
 }						t_room;
 
+typedef struct 			s_bonuses
+{
+	int					numbers;
+	int 				chains;
+}						t_bonuses;
+
 typedef struct			s_room_keeper
 {
 	int					room_counter;
@@ -64,6 +70,7 @@ typedef struct			s_room_keeper
 	int					s_links;
 	int					f_links;
 	int					v_limit;
+	t_bonuses			*bon;
 }						t_room_keeper;
 
 void					in_queue(t_queue *q, int x);
@@ -102,5 +109,10 @@ void					free_all(t_room_keeper *keeper, t_map_keeper *mp);
 void					free_queue(t_queue *queue);
 void					ft_errors_lem_in(int error_num);
 unsigned long			get_hash(unsigned char *name);
+void					show_help(void);
+void					about(void);
+void					credits(void);
+int						lem_in(t_bonuses *bon);
+
 
 #endif

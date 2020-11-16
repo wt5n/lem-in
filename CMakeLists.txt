@@ -19,7 +19,9 @@ set(SRC
         paths.c
         map.c
         collisions.c
-        frees.c)
+        frees.c
+        bonus.c
+        main.c)
 
 add_executable(lem-in
         ${SRC} )

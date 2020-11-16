@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 18:59:56 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/16 03:19:45 by wtsn             ###   ########.fr       */
+/*   Updated: 2020/11/16 20:30:11 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,6 @@ void		move_ants(t_room_keeper *keeper, t_map_keeper *mp, int field)
 		ft_printf("\n");
 		operation_count++;
 	}
-	ft_printf("%d\n", operation_count);
+	if (keeper->bon->numbers == 1)
+		ft_printf("\nNumber of lines: %d\n", operation_count);
 }
