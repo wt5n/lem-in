@@ -49,6 +49,7 @@ void		parse_rooms(t_room_keeper *keeper, char *line)
 	str = line;
 	start = str;
 	name = NULL;
+	room = NULL;
 	(str[0] == 'L' || str[0] == '#') ? ft_errors_lem_in(4) : 0;
 	while (*str != '\0')
 		str++;

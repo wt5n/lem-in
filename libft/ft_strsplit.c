@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include "libft.h"
 
-int	ft_nwords(char const *s, char c)
+int			ft_nwords(char const *s, char c)
 {
 	int		i;
 	int		words;

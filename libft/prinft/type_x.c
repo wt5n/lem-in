@@ -119,7 +119,7 @@ static char	*one_more_func(t_printf *list, unsigned long long x, char *t)
 void		type_x(t_printf *list)
 {
 	unsigned long long	x;
-	char		*t;
+	char				*t;
 
 	t = NULL;
 	if (ft_strcmp(list->length, "l") == 0)

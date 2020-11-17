@@ -104,19 +104,11 @@ static void	partofthesystem(t_printf *list, long double x)
 void		type_f(t_printf *list)
 {
 	long double	x;
-	//void		*xx;
-
-	//if ((xx = (va_arg(list->ap, void*))) == NULL)
-	//{
-	//	ft_putstr_cow("0.000000", list);
-	//	return ;
-	//}
 
 	if (ft_strcmp(list->length, "L") == 0)
 		x = (long double)va_arg(list->ap, long double);
 	else
 		x = va_arg(list->ap, double);
-	//na sluchay NULLa
 	if (x != 0)
 		list->len_of_x = ft_len_of_int(x) + list->precision;
 	else

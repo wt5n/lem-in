@@ -17,5 +17,5 @@ int	mod_n(int a)
 	if (a < 0)
 		return (a * -1);
 	else
-		return a;
+		return (a);
 }

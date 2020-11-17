@@ -99,7 +99,7 @@ static void	one_more_func(t_printf *list, unsigned long long x)
 void		type_u(t_printf *list)
 {
 	unsigned long long	x;
-	char		*t;
+	char				*t;
 
 	if (ft_strcmp(list->length, "l") == 0)
 		x = (unsigned long)va_arg(list->ap, unsigned long int);

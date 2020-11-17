@@ -14,7 +14,7 @@
 
 int	type_p(t_printf *list)
 {
-	char		*str;
+	char			*str;
 	unsigned long	a;
 
 	a = (unsigned long)(va_arg(list->ap, unsigned long int));

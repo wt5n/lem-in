@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 19:22:56 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/03/03 17:38:18 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/11/17 16:57:33 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int		ap_number(t_double d1, unsigned long long *arr, int countofel, int pow)
 	int		i;
 	int		n;
 
-
 	i = 0;
 	while (i < countofel)
 		arr[i++] = 0;
@@ -87,14 +86,11 @@ int		ap_number(t_double d1, unsigned long long *arr, int countofel, int pow)
 		}
 	}
 	n = d1.part.e - 1023;
-	if (n < 0)
-		return (n);
-	return (0);
+	return (n < 0 ? n : 0);
 }
 
 void	handling_float_part2(t_printf *list, char *tmp, long long n, int s)
 {
-
 	while (*tmp == '0' && n > 1)
 	{
 		tmp++;
@@ -139,8 +135,6 @@ void	handling_float(long double d, int countofel, int pow, t_printf *list)
 {
 	t_double			d1;
 	unsigned long long	*arr;
-	// malloc ne nuzen, no bez nego lomaetsya
-	//unsigned long long	arr[15];
 	int					i;
 	char				*tmp;
 	long long			n;
@@ -151,7 +145,6 @@ void	handling_float(long double d, int countofel, int pow, t_printf *list)
 		return ;
 	}
 	n = 98;
-	i = 0;
 	d1.d = d;
 	arr = (unsigned long long*)malloc(sizeof(unsigned long long) * countofel);
 	n += ap_number(d1, arr, countofel, pow);

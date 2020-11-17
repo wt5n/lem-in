@@ -12,25 +12,25 @@
 
 #include "../printf.h"
 
-void	ap_number_lf(t_double_1 d1, unsigned long long *arr, int countofel, int pow)
+void	ap_number_lf(t_double_1 d1, unsigned long long *arr, int ctf, int pow)
 {
 	int		i;
 
 	i = 0;
-	while (i < countofel)
+	while (i < ctf)
 		arr[i++] = 0;
-	addit(arr, countofel - 1, d1.part1.m);
+	addit(arr, ctf - 1, d1.part1.m);
 	while (pow--)
-		mult(arr, 0, 5, countofel);
+		mult(arr, 0, 5, ctf);
 	pow = d1.part1.e - 16383;
 	if (pow > 0)
 		while (pow--)
-			mult(arr, 0, 2, countofel);
+			mult(arr, 0, 2, ctf);
 	else
 	{
 		while (pow < 0)
 		{
-			mult(arr, 0, 5, countofel);
+			mult(arr, 0, 5, ctf);
 			pow++;
 		}
 		while (pow++ < ((d1.part1.e - 16383) * -1))

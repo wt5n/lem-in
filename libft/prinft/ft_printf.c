@@ -107,8 +107,6 @@ void		display(t_printf *list)
 		type_p(list);
 	else if (list->type == 'b')
 		type_b(list);
-	// else if (list->type == 'e' || list->type == 'E')
-	// 	type_e(list);
 	else
 		type_other(list);
 }

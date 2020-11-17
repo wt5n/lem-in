@@ -6,7 +6,7 @@
 /*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 15:33:17 by hlikely           #+#    #+#             */
-/*   Updated: 2020/10/10 15:34:46 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/11/17 16:52:33 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 int	max_n(int a, int b)
 {
 	if (a > b)
-		return a;
+		return (a);
 	else
-		return b;
+		return (b);
 }
-

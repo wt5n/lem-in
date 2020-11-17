@@ -84,7 +84,7 @@ void	stars(t_printf *list)
 		list->i++;
 	}
 	else if (list->f_copy[list->i] == '.')
-	{	
+	{
 		list->precision = x;
 		list->i += 2;
 	}

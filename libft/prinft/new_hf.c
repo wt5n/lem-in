@@ -84,15 +84,11 @@ int		ap_number(t_double d1, unsigned long long *arr, int countofel, int pow)
 			mult(arr, 0, 5, countofel);
 			pow++;
 		}
-		//while (pow++ < ((d1.part.e - 1023) * -1))
-		//	divis(arr, 15, 10);
 	}
 	n = d1.part.e - 1023;
 	if (n < 0)
 		return (n);
 	return (0);
-	//((d1.part.e - 1023) < 0) ? n = n : n = 0;
-	//printf("%d", d1.part.e - 1023);
 }
 
 void	handling_float_part2(t_printf *list, char *tmp, long long n, int s)
@@ -124,8 +120,6 @@ void	handling_float(long double d, int countofel, int pow, t_printf *list)
 {
 	t_double			d1;
 	unsigned long long	*arr;
-	// malloc ne nuzen, no bez nego lomaetsya
-	//unsigned long long	arr[15];
 	int					i;
 	char				*tmp;
 	long long			n;

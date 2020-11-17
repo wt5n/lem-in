@@ -61,7 +61,7 @@ t_printf	*width(t_printf *list)
 
 t_printf	*precision(t_printf *list)
 {
-	if (list->f_copy[list->i] == '.' && list->f_copy[list->i+1] != '*')
+	if (list->f_copy[list->i] == '.' && list->f_copy[list->i + 1] != '*')
 	{
 		list->i++;
 		while (list->f_copy[list->i] >= '0' && list->f_copy[list->i] <= '9')
@@ -71,7 +71,7 @@ t_printf	*precision(t_printf *list)
 			list->i++;
 		}
 	}
-	else if (list->f_copy[list->i+1] == '*')
+	else if (list->f_copy[list->i + 1] == '*')
 		stars(list);
 	else
 		list->np = 'y';
