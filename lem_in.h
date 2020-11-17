@@ -51,10 +51,10 @@ typedef struct			s_room
 	struct s_room		*next;
 }						t_room;
 
-typedef struct 			s_bonuses
+typedef struct			s_bonuses
 {
 	int					numbers;
-	int 				chains;
+	int					chains;
 }						t_bonuses;
 
 typedef struct			s_room_keeper
@@ -70,9 +70,9 @@ typedef struct			s_room_keeper
 	int					s_links;
 	int					f_links;
 	int					v_limit;
-	int 				**coords;
+	int					**coords;
 	t_bonuses			*bon;
-	char 				**file;
+	char				**file;
 }						t_room_keeper;
 
 void					in_queue(t_queue *q, int x);
@@ -103,6 +103,8 @@ void					find_links_name(t_room **n_hash, char *room1,
 														char *room2);
 void					ant_move(t_room_keeper *k, t_room_links *tmp,
 													int inc_ant, int i);
+void					ant_move2(t_room_keeper *k, t_room_links *tmp,
+				   									int inc_ant, int i);
 int						*prepare_ants(t_room_keeper *k, t_map_keeper *mp,
 														int f, int *oper);
 void					move_ants(t_room_keeper *keeper, t_map_keeper *mp,
@@ -118,9 +120,8 @@ int						lem_in(t_bonuses *bon);
 void					check_dup_coor(t_room_keeper *keeper,
 								t_room *room, const int *xy);
 void					print_chains(t_room_keeper *keeper, t_room_links *s);
-void 					create_keeper(t_room_keeper *keeper);
+void					create_keeper(t_room_keeper *keeper);
 void					print_file(t_room_keeper *keeper);
 void					ft_minus(int *array);
-
 
 #endif

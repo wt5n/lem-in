@@ -1,6 +1,6 @@
 #include "lem_in.h"
 
-void    parse_ants(t_room_keeper *keeper, char *line)
+void		parse_ants(t_room_keeper *keeper, char *line)
 {
 	int i;
 
@@ -10,18 +10,18 @@ void    parse_ants(t_room_keeper *keeper, char *line)
 		if (keeper->ants)
 			break ;
 		if (*line && (*line == ' '))
-		    ft_errors_lem_in(1);
+			ft_errors_lem_in(1);
 		if (*line && (*line == '-'))
-            ft_errors_lem_in(1);
+			ft_errors_lem_in(1);
 		while ((*(line + i) && *(line + i) == '+') || ft_isdigit(*(line + i)))
 			i++;
 		keeper->ants = ft_atoi_wr(line);
 		if (keeper->ants <= 0 || line[i] != '\0')
-            ft_errors_lem_in(1);
+			ft_errors_lem_in(1);
 	}
 }
 
-void    parse_comms(t_room_keeper *keeper, char *line)
+void		parse_comms(t_room_keeper *keeper, char *line)
 {
 	if ((keeper->s_c || keeper->e_c) && !keeper->ants)
 		ft_errors_lem_in(6);
@@ -30,20 +30,20 @@ void    parse_comms(t_room_keeper *keeper, char *line)
 	else if (ft_strcmp(line, "##end") == 0)
 		keeper->e_c++;
 	else if (line[0] == '#' && line[1] == '#' && (keeper->s_c || keeper->e_c)
-	         && (ft_strcmp(line, "##start") != 0)
-	         && (ft_strcmp(line, "##end") != 0))
+				&& (ft_strcmp(line, "##start") != 0)
+				&& (ft_strcmp(line, "##end") != 0))
 		ft_errors_lem_in(6);
 	else if (line[0] == '#' && (ft_strcmp(line, "##start") != 0
-	                            && (ft_strcmp(line, "##end") != 0)))
+					&& (ft_strcmp(line, "##end") != 0)))
 		;
 }
 
-void    parse_rooms(t_room_keeper *keeper, char* line)
+void		parse_rooms(t_room_keeper *keeper, char *line)
 {
-	char    *name;
-	char    *str;
-	char    *start;
-	t_room  *room;
+	char	*name;
+	char	*str;
+	char	*start;
+	t_room	*room;
 	int		xy[2];
 
 	str = line;
@@ -80,12 +80,12 @@ void    parse_rooms(t_room_keeper *keeper, char* line)
 	free(name);
 }
 
-void    parse_links(t_room_keeper *keeper, char* line)
+void		parse_links(t_room_keeper *keeper, char *line)
 {
-	char    *str;
-	char    *minus;
-	char    *room1;
-	char    *room2;
+	char *str;
+	char *minus;
+	char *room1;
+	char *room2;
 
 	keeper->room_counter == 0 ? ft_errors_lem_in(5) : 0;
 	(!keeper->start || !keeper->finish) ? ft_errors_lem_in(2) : 0;
@@ -101,7 +101,7 @@ void    parse_links(t_room_keeper *keeper, char* line)
 	free(room2);
 }
 
-void    parse_input(t_room_keeper *keeper)
+void		parse_input(t_room_keeper *keeper)
 {
 	char	*line;
 	int		i;
@@ -117,8 +117,8 @@ void    parse_input(t_room_keeper *keeper)
 			parse_ants(keeper, line);
 		else if (line[0] == '#')
 			parse_comms(keeper, line);
-		else if (line[0] != ' ' && ft_strchr(line, ' ') && !(ft_strchr(line, '-'))
-		         && !(ft_strchr(line, '#')))
+		else if (line[0] != ' ' && ft_strchr(line, ' ')
+			&& !(ft_strchr(line, '-')) && !(ft_strchr(line, '#')))
 			parse_rooms(keeper, line);
 		else if (ft_strchr(line, '-'))
 			parse_links(keeper, line);

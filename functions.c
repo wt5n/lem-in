@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 19:29:51 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/17 15:31:01 by wtsn             ###   ########.fr       */
+/*   Updated: 2020/11/17 15:34:12 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ unsigned long	get_hash(unsigned char *name)
 	return (hash % HASH_ROOMS);
 }
 
-void	create_keeper(t_room_keeper *k)
+void			create_keeper(t_room_keeper *k)
 {
 	if (!(k->n_hash = (t_room**)ft_memalloc(sizeof(t_room*) * HASH_ROOMS)))
 		return ;
@@ -40,7 +40,7 @@ void	create_keeper(t_room_keeper *k)
 	ft_minus(k->coords[1]);
 }
 
-void	print_file(t_room_keeper *keeper)
+void			print_file(t_room_keeper *keeper)
 {
 	int i;
 
@@ -55,7 +55,7 @@ void	print_file(t_room_keeper *keeper)
 	ft_printf("\n");
 }
 
-void	ft_minus(int *array)
+void			ft_minus(int *array)
 {
 	int i;
 

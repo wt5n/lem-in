@@ -6,7 +6,7 @@
 /*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 20:02:03 by hlikely           #+#    #+#             */
-/*   Updated: 2020/11/17 15:18:19 by wtsn             ###   ########.fr       */
+/*   Updated: 2020/11/17 15:35:02 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	find_links_name(t_room **n_hash, char *room1, char *room2)
 
 void	check_dup_coor(t_room_keeper *keeper, t_room *room, const int *xy)
 {
-	int 	i;
+	int	i;
 
 	i = 0;
 	if (xy[0] < 0 || xy[1] < 0)
