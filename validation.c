@@ -23,20 +23,17 @@ void    parse_ants(t_room_keeper *keeper, char *line)
 
 void    parse_comms(t_room_keeper *keeper, char *line)
 {
-	int i;
-
-	i = 0;
 	if ((keeper->s_c || keeper->e_c) && !keeper->ants)
 		ft_errors_lem_in(6);
 	if (ft_strcmp(line, "##start") == 0)
 		keeper->s_c++;
 	else if (ft_strcmp(line, "##end") == 0)
 		keeper->e_c++;
-//	else if (line[i] == '#' && (keeper->s_c || keeper->e_c)
-//	         && (ft_strcmp(line, "##start") != 0)
-//	         && (ft_strcmp(line, "##end") != 0))
-//		ft_error();
-	else if (line[i] == '#' && (ft_strcmp(line, "##start") != 0
+	else if (line[0] == '#' && line[1] == '#' && (keeper->s_c || keeper->e_c)
+	         && (ft_strcmp(line, "##start") != 0)
+	         && (ft_strcmp(line, "##end") != 0))
+		ft_errors_lem_in(6);
+	else if (line[0] == '#' && (ft_strcmp(line, "##start") != 0
 	                            && (ft_strcmp(line, "##end") != 0)))
 		;
 }
@@ -58,11 +55,11 @@ void    parse_rooms(t_room_keeper *keeper, char* line)
 	str--;
 	while (ft_isdigit(*str))
 		str--;
-	xy[0] = ft_atoi_wr(str);
+	xy[1] = ft_atoi_wr(str);
 	str--;
 	while (ft_isdigit(*str))
 		str--;
-	xy[1] = ft_atoi_wr(str);
+	xy[0] = ft_atoi_wr(str);
 	name = ft_strndup(start, str - start);
 	ft_strchr(name, ' ') ? ft_errors_lem_in(7) : 0;
 	ft_strchr(name, '-') ? ft_errors_lem_in(7) : 0;
@@ -91,8 +88,8 @@ void    parse_links(t_room_keeper *keeper, char* line)
 	char    *room2;
 
 	keeper->room_counter == 0 ? ft_errors_lem_in(5) : 0;
-	(!keeper->start || !keeper->finish) ? ft_error() : 0;
-	(keeper->start == keeper->finish) ? ft_error() : 0;
+	(!keeper->start || !keeper->finish) ? ft_errors_lem_in(2) : 0;
+	(keeper->start == keeper->finish) ? ft_errors_lem_in(2) : 0;
 	str = line;
 	minus = ft_strchr(str, '-');
 	room1 = ft_strndup(str, minus - str);
@@ -114,7 +111,7 @@ void    parse_input(t_room_keeper *keeper)
 	while (get_next_line(STDIN_FILENO, &line) == 1)
 	{
 		keeper->file[i] = ft_strdup(line);
-		if (ft_strcmp(line, "\n"))
+		if (ft_strcmp(line, "") == 0)
 			ft_errors_lem_in(135);
 		if ((ft_isdigit(line[0]) || ft_isdigit(line[1])) && !keeper->ants)
 			parse_ants(keeper, line);

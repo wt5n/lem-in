@@ -6,7 +6,7 @@
 /*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 20:02:03 by hlikely           #+#    #+#             */
-/*   Updated: 2020/11/16 20:50:25 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/11/17 15:18:19 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,22 +96,20 @@ void	find_links_name(t_room **n_hash, char *room1, char *room2)
 
 void	check_dup_coor(t_room_keeper *keeper, t_room *room, const int *xy)
 {
-	int		i;
-	int 	j;
+	int 	i;
 
-	i = 1;
-	j = 1;
+	i = 0;
 	if (xy[0] < 0 || xy[1] < 0)
 		ft_errors_lem_in(8);
-	while (j < HASH_ROOMS && keeper->coords[0][j] != xy[0])
-		j++;
-	while (i < HASH_ROOMS && keeper->coords[1][i] != xy[1] && keeper->coords[0][j - 1] == xy[0])
-		i++;
-	if (i == j && room->id != i)
-		ft_errors_lem_in(8);
-	else
+	while (i < HASH_ROOMS)
 	{
-		keeper->coords[0][room->id] = xy[0];
-		keeper->coords[1][room->id] = xy[1];
+		if (keeper->coords[0][i] == xy[0])
+		{
+			if (keeper->coords[1][i] == xy[1])
+				ft_errors_lem_in(8);
+		}
+		i++;
 	}
+	keeper->coords[0][room->id] = xy[0];
+	keeper->coords[1][room->id] = xy[1];
 }

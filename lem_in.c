@@ -41,7 +41,7 @@ void		only_finish_room(t_room_keeper *keeper, t_map_keeper *mp)
 		while (++i < keeper->ants + 1)
 			ft_printf("L%d-%s ", i, keeper->finish->name);
 		free_all(keeper, mp);
-		exit(1);
+		exit(0);
 	}
 }
 
