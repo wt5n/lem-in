@@ -35,6 +35,7 @@ set(SRC libft/ft_atoi.c
         libft/ft_isalnum.c
         libft/ft_isalpha.c
         libft/ft_isascii.c
+        libft/ft_free_two_demention.c
         libft/ft_isdigit.c
         libft/ft_islower.c
         libft/ft_isprint.c
@@ -101,7 +102,6 @@ set(SRC libft/ft_atoi.c
         libft/ft_tolower.c
         libft/ft_toupper.c
         libft/get_next_line.c
-        libft/ft_strcpy_wm.c
         ${PrintfSRC})
 
 add_library(libft STATIC ${SRC})
