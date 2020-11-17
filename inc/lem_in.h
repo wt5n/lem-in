@@ -74,6 +74,7 @@ typedef struct			s_room_keeper
 	int					**coords;
 	t_bonuses			*bon;
 	char				**file;
+	char				**names;
 }						t_room_keeper;
 
 void					in_queue(t_queue *q, int x);
@@ -92,8 +93,8 @@ void					start_end_rooms(t_room_keeper *keeper, t_room *room);
 void					parse_ants(t_room_keeper *keeper, char *line);
 void					parse_comms(t_room_keeper *keeper, char *line);
 void					parse_rooms(t_room_keeper *keeper, char *line);
-void					parse_links(t_room_keeper *keeper, char *line);
-void					parse_input(t_room_keeper *keeper);
+int						parse_links(t_room_keeper *keeper, char *line);
+void					parse_input(t_room_keeper *keeper, int t);
 void					pass_to_n(t_room_keeper *keeper);
 t_map					*create_map(int length, int field);
 void					add_map_to_map_keeper(t_room_links *rl, t_map *map);
@@ -126,5 +127,6 @@ void					print_file(t_room_keeper *keeper);
 void					ft_minus(int *array);
 void					valid_room(t_room_keeper *k, t_room *room,
 														char *name, int *xy);
+void					check_dup_name(t_room_keeper *keeper, char *name, t_room *room);
 
 #endif
