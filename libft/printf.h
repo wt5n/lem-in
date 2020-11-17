@@ -1,4 +1,4 @@
-	/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   printf.h                                           :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:42:52 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/28 20:25:24 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/11/17 21:08:54 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PRINTF_H
 
 # include "libft/libft.h"
-
 
 typedef	struct				s_printf
 {
@@ -89,13 +88,19 @@ void						u_print_without_minus(t_printf *list, char *t);
 void						u_presicion_over_len(t_printf *list, char *t);
 void						u_print_with_minus(t_printf *list, char *t);
 void						type_x(t_printf *list);
-void						x_print_without_minus(t_printf *list, long long x, char *t);
-void						x_presicion_over_len(t_printf *list, long long x, char *t);
-void						x_print_with_minus(t_printf *list, long long x, char *t);
+void						x_print_without_minus(t_printf *list, long long x,
+								char *t);
+void						x_presicion_over_len(t_printf *list, long long x,
+								char *t);
+void						x_print_with_minus(t_printf *list, long long x,
+								char *t);
 void						type_o(t_printf *list);
-void						o_print_with_minus(t_printf *list, unsigned long long x, char *t);
-void						o_presicion_over_len(t_printf *list, unsigned long long x, char *t);
-void						o_print_without_minus(t_printf *list, unsigned long long x, char *t);
+void						o_print_with_minus(t_printf *list,
+								unsigned long long x, char *t);
+void						o_presicion_over_len(t_printf *list,
+								unsigned long long x, char *t);
+void						o_print_without_minus(t_printf *list,
+								unsigned long long x, char *t);
 void						sharp_x(t_printf *list);
 void						ft_putchar_cow(char c, t_printf *list);
 void						ft_putstr_cow(char const *s, t_printf *list);
@@ -112,8 +117,8 @@ int							lennum(long long n);
 char						*adv_ft_itoa(long long n, int base, char c);
 size_t						lennum_base(long long n, int base);
 void						type_f(t_printf *list);
-void						handling_float(long double d, int countofel, int pow, \
-t_printf *list);
+void						handling_float(long double d, int countofel,
+								int pow, t_printf *list);
 char						*nole(void);
 void						addit(unsigned long long *arr, int i, \
 unsigned long long num);
@@ -121,11 +126,15 @@ void						mult(unsigned long long *arr, int i, int num, \
 int end);
 void						rounding(char *tmp, int p);
 void						f_print_with_minus1(t_printf *list, long double x);
-void						f_presicion_over_len1(t_printf *list, long double x);
-void						f_print_without_minus1(t_printf *list, long double x);
-void						handling_float_lf(long double d, int countofel, int pow, t_printf *list);
+void						f_presicion_over_len1(t_printf *list,
+								long double x);
+void						f_print_without_minus1(t_printf *list,
+								long double x);
+void						handling_float_lf(long double d, int countofel,
+								int pow, t_printf *list);
 int							withnull(char *str, char *res, int len, int x);
 char						*full_str(unsigned long long *arr, int i);
 void						stars(t_printf *list);
+void						nulz(long double d, t_printf *list);
 
 #endif

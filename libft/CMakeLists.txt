@@ -12,7 +12,6 @@ set(PrintfSRC printf/ft_printf.c
         printf/ft_printf.c
         printf/handling_f.c
         printf/handling_lf.c
-        printf/new_hf.c
         printf/parsing.c
         printf/type_b.c
         printf/type_c.c
@@ -25,7 +24,8 @@ set(PrintfSRC printf/ft_printf.c
         printf/type_p.c
         printf/type_s.c
         printf/type_u.c
-        printf/type_x.c)
+        printf/type_x.c
+        printf/nulz.c)
 
 set(SRC libft/ft_atoi.c
         libft/ft_atoi_wr.c

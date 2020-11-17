@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lem_in.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/17 21:09:22 by ksenaida          #+#    #+#             */
+/*   Updated: 2020/11/17 21:09:36 by ksenaida         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LEM_IN_LEM_IN_H
 # define LEM_IN_LEM_IN_H
 
@@ -127,6 +139,7 @@ void					print_file(t_room_keeper *keeper);
 void					ft_minus(int *array);
 void					valid_room(t_room_keeper *k, t_room *room,
 														char *name, int *xy);
-void					check_dup_name(t_room_keeper *keeper, char *name, t_room *room);
+void					check_dup_name(t_room_keeper *keeper, char *name,
+							t_room *room);
 
 #endif

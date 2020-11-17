@@ -6,7 +6,6 @@ SRC = add_func.c \
        ft_printf.c \
        handling_f.c \
        handling_lf.c \
-       new_hf.c \
        parsing.c \
        type_b.c \
        type_c.c \
@@ -19,7 +18,8 @@ SRC = add_func.c \
        type_p.c \
        type_s.c \
        type_u.c \
-       type_x.c
+       type_x.c \
+       nulz.c
 
 OBJ = $(SRC:%.c=%.o)
 

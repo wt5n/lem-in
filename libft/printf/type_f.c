@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 19:52:53 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/17 18:30:03 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/11/17 21:01:04 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,7 @@ void		type_f(t_printf *list)
 		x = (long double)va_arg(list->ap, long double);
 	else
 		x = va_arg(list->ap, double);
-	if (x != 0)
-		list->len_of_x = ft_len_of_int(x) + list->precision;
-	else
-		list->len_of_x = 8;
+	list->len_of_x = (x != 0) ? ft_len_of_int(x) + list->precision : 8;
 	partofthesystem(list, x);
 	if (list->flags[3] == '#' && list->precision == 0)
 		list->widthofline--;

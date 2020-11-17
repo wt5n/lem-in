@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 19:22:56 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/17 18:41:00 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/11/17 21:04:27 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,20 +115,6 @@ void	handling_float_part2(t_printf *list, char *tmp, long long n, int s)
 		ft_putchar_cow('.', list);
 	while (list->precision--)
 		ft_putchar_cow(*tmp++, list);
-}
-
-void	nulz(long double d, t_printf *list)
-{
-	if (d == -__DBL_MIN__)
-		ft_putchar_cow('-', list);
-	ft_putchar_cow('0', list);
-	if (list->precision)
-		ft_putchar_cow('.', list);
-	while (list->precision > 0)
-	{
-		ft_putchar_cow('0', list);
-		list->precision--;
-	}
 }
 
 void	handling_float(long double d, int countofel, int pow, t_printf *list)
