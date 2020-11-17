@@ -44,3 +44,22 @@ void		add_map_to_map_keeper(t_room_links *rl, t_map *map)
 		rl->next = tmp;
 	}
 }
+
+void		valid_room(t_room_keeper *keeper, t_room *room, char *name, int *xy)
+{
+	ft_strchr(name, ' ') ? ft_errors_lem_in(7) : 0;
+	ft_strchr(name, '-') ? ft_errors_lem_in(7) : 0;
+	if (keeper->s_c == 1)
+		room = create_room(name, 1);
+	else if (keeper->e_c == 1)
+		room = create_room(name, 2);
+	else
+	{
+		room = create_room(name, keeper->room_counter);
+		keeper->room_counter++;
+	}
+	add_room(keeper, room);
+	check_dup_coor(keeper, room, xy);
+	if (keeper->s_c == 1 || keeper->e_c == 1)
+		start_end_rooms(keeper, room);
+}

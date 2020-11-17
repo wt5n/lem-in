@@ -61,21 +61,7 @@ void		parse_rooms(t_room_keeper *keeper, char *line)
 		str--;
 	xy[0] = ft_atoi_wr(str);
 	name = ft_strndup(start, str - start);
-	ft_strchr(name, ' ') ? ft_errors_lem_in(7) : 0;
-	ft_strchr(name, '-') ? ft_errors_lem_in(7) : 0;
-	if (keeper->s_c == 1)
-		room = create_room(name, 1);
-	else if (keeper->e_c == 1)
-		room = create_room(name, 2);
-	else
-	{
-		room = create_room(name, keeper->room_counter);
-		keeper->room_counter++;
-	}
-	add_room(keeper, room);
-	check_dup_coor(keeper, room, xy);
-	if (keeper->s_c == 1 || keeper->e_c == 1)
-		start_end_rooms(keeper, room);
+	valid_room(keeper, room, name, xy);
 	keeper->s_c > 2 || keeper->e_c > 2 ? ft_errors_lem_in(2) : 0;
 	free(name);
 }

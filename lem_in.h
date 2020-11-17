@@ -104,7 +104,7 @@ void					find_links_name(t_room **n_hash, char *room1,
 void					ant_move(t_room_keeper *k, t_room_links *tmp,
 													int inc_ant, int i);
 void					ant_move2(t_room_keeper *k, t_room_links *tmp,
-				   									int inc_ant, int i);
+													int inc_ant, int i);
 int						*prepare_ants(t_room_keeper *k, t_map_keeper *mp,
 														int f, int *oper);
 void					move_ants(t_room_keeper *keeper, t_map_keeper *mp,
@@ -123,5 +123,7 @@ void					print_chains(t_room_keeper *keeper, t_room_links *s);
 void					create_keeper(t_room_keeper *keeper);
 void					print_file(t_room_keeper *keeper);
 void					ft_minus(int *array);
+void					valid_room(t_room_keeper *k, t_room *room,
+														char *name, int *xy);
 
 #endif
