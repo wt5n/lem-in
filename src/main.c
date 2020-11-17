@@ -6,11 +6,11 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 19:39:44 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/17 16:05:07 by wtsn             ###   ########.fr       */
+/*   Updated: 2020/11/17 17:14:50 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "../inc/lem_in.h"
 
 void	find_flags(int argc, char **argv, t_bonuses *bon)
 {

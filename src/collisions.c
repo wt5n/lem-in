@@ -6,11 +6,11 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 19:00:54 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/15 19:30:58 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/11/17 17:14:51 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "../inc/lem_in.h"
 
 int		del_cols2(t_room_keeper *keeper, int room, int linked_room, int num_lrm)
 {

@@ -6,11 +6,11 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 19:32:52 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/15 19:42:05 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/11/17 17:14:50 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "../inc/lem_in.h"
 
 void	increase_links(t_room *room)
 {

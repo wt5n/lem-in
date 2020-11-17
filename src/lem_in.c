@@ -6,11 +6,11 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 20:15:02 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/16 22:01:14 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/11/17 17:14:51 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "../inc/lem_in.h"
 
 void		find_count_s_f(t_room_keeper *keeper)
 {

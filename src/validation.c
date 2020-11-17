@@ -1,4 +1,4 @@
-#include "lem_in.h"
+#include "../inc/lem_in.h"
 
 void		parse_ants(t_room_keeper *keeper, char *line)
 {

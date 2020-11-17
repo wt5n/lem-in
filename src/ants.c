@@ -6,11 +6,11 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 18:59:56 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/17 16:31:58 by wtsn             ###   ########.fr       */
+/*   Updated: 2020/11/17 17:14:51 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "../inc/lem_in.h"
 
 void		ant_move(t_room_keeper *k, t_room_links *tmp, int inc_ant, int i)
 {

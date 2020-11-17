@@ -6,11 +6,11 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 20:10:06 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/15 20:14:01 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/11/17 17:14:51 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "../inc/lem_in.h"
 
 void	add_next(t_room *master, t_room *slave)
 {

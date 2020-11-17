@@ -1,7 +1,7 @@
 #ifndef LEM_IN_LEM_IN_H
 # define LEM_IN_LEM_IN_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 # define HASH_ROOMS 10000
 # define NUM_LINKS 10

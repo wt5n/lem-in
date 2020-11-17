@@ -6,11 +6,11 @@
 /*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 20:10:34 by hlikely           #+#    #+#             */
-/*   Updated: 2020/11/15 20:14:17 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/11/17 17:14:51 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "../inc/lem_in.h"
 
 static void		push(t_list_queue **top_ref, int new_data)
 {
