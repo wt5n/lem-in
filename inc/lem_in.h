@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 21:09:22 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/17 21:09:36 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/11/17 21:40:19 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,5 +141,6 @@ void					valid_room(t_room_keeper *k, t_room *room,
 														char *name, int *xy);
 void					check_dup_name(t_room_keeper *keeper, char *name,
 							t_room *room);
+void					find_flags(int argc, char **argv, t_bonuses *bon);
 
 #endif
