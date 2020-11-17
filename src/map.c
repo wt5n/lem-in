@@ -59,7 +59,23 @@ void		valid_room(t_room_keeper *keeper, t_room *room, char *name, int *xy)
 		keeper->room_counter++;
 	}
 	add_room(keeper, room);
+	check_dup_name(keeper, name, room);
 	check_dup_coor(keeper, room, xy);
 	if (keeper->s_c == 1 || keeper->e_c == 1)
 		start_end_rooms(keeper, room);
+}
+
+void		check_dup_name(t_room_keeper *keeper, char *name, t_room *room)
+{
+	int	i;
+
+	i = 0;
+	while (i < HASH_ROOMS)
+	{
+		if (keeper->names[i] != NULL)
+			if (ft_strcmp(keeper->names[i], name) == 0)
+				ft_errors_lem_in(8);
+		i++;
+	}
+	keeper->names[room->id] = ft_strdup(name);
 }

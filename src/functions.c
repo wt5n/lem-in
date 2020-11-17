@@ -36,6 +36,8 @@ void			create_keeper(t_room_keeper *k)
 		return ;
 	if (!(k->file = (char **)ft_memalloc(sizeof(char*) * 150000)))
 		return ;
+	if (!(k->names = (char **)ft_memalloc(sizeof(char*) * HASH_ROOMS)))
+		return ;
 	ft_minus(k->coords[0]);
 	ft_minus(k->coords[1]);
 }

@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 20:15:02 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/17 17:14:51 by wtsn             ###   ########.fr       */
+/*   Updated: 2020/11/17 20:35:55 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void		only_finish_room(t_room_keeper *keeper, t_map_keeper *mp)
 	i = -1;
 	if (find_room(keeper, 1, 2) >= 0)
 	{
+		print_file(keeper);
 		while (++i < keeper->ants + 1)
 			ft_printf("L%d-%s ", i, keeper->finish->name);
 		free_all(keeper, mp);
@@ -99,7 +100,9 @@ int			lem_in(t_bonuses *bon)
 	if (!(k = (t_room_keeper*)ft_memalloc(sizeof(t_room_keeper))))
 		return (0);
 	create_keeper(k);
-	parse_input(k);
+	parse_input(k, 0);
+	if (k->start == NULL || k->finish == NULL)
+		ft_errors_lem_in(5);
 	if (!(k->n = (t_room**)ft_memalloc(sizeof(t_room*) * k->room_counter)))
 		return (0);
 	k->bon = bon;

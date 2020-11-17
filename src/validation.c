@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/17 19:12:54 by ksenaida          #+#    #+#             */
+/*   Updated: 2020/11/17 20:52:51 by ksenaida         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/lem_in.h"
 
 void		parse_ants(t_room_keeper *keeper, char *line)
@@ -51,15 +63,14 @@ void		parse_rooms(t_room_keeper *keeper, char *line)
 	name = NULL;
 	room = NULL;
 	(str[0] == 'L' || str[0] == '#') ? ft_errors_lem_in(4) : 0;
+	ft_words(line) != 3 ? ft_errors_lem_in(34123) : 0;
 	while (*str != '\0')
 		str++;
-	str--;
-	while (ft_isdigit(*str))
-		str--;
+	while (ft_isdigit(*(--str)))
+		;
 	xy[1] = ft_atoi_wr(str);
-	str--;
-	while (ft_isdigit(*str))
-		str--;
+	while (ft_isdigit(*(--str)))
+		;
 	xy[0] = ft_atoi_wr(str);
 	name = ft_strndup(start, str - start);
 	valid_room(keeper, room, name, xy);
@@ -67,7 +78,7 @@ void		parse_rooms(t_room_keeper *keeper, char *line)
 	free(name);
 }
 
-void		parse_links(t_room_keeper *keeper, char *line)
+int			parse_links(t_room_keeper *keeper, char *line)
 {
 	char *str;
 	char *minus;
@@ -86,9 +97,10 @@ void		parse_links(t_room_keeper *keeper, char *line)
 		ft_errors_lem_in(3);
 	free(room1);
 	free(room2);
+	return (1);
 }
 
-void		parse_input(t_room_keeper *keeper)
+void		parse_input(t_room_keeper *keeper, int t)
 {
 	char	*line;
 	int		i;
@@ -104,14 +116,15 @@ void		parse_input(t_room_keeper *keeper)
 			parse_ants(keeper, line);
 		else if (line[0] == '#')
 			parse_comms(keeper, line);
-		else if (line[0] != ' ' && ft_strchr(line, ' ')
+		else if (line[0] != ' ' && ft_strchr(line, ' ') && t != 1
 			&& !(ft_strchr(line, '-')) && !(ft_strchr(line, '#')))
 			parse_rooms(keeper, line);
 		else if (ft_strchr(line, '-'))
-			parse_links(keeper, line);
+			t = parse_links(keeper, line);
 		else
 			ft_errors_lem_in(0);
 		free(line);
 		i++;
 	}
+	ft_free_two_demention(keeper->names, HASH_ROOMS - 1);
 }

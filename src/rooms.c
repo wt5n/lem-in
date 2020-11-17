@@ -41,7 +41,7 @@ t_room	*create_room(char *name, int id)
 
 	if (!(r = (t_room *)ft_memalloc(sizeof(t_room))))
 		return (NULL);
-	r->name = ft_strcpy_wm(name);
+	r->name = ft_strdup(name);
 	r->id = id;
 	r->links_count = NUM_LINKS;
 	if (!(r->links_id = (int**)ft_memalloc(sizeof(int*) * 2)))
