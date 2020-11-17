@@ -55,10 +55,10 @@ t_room	*create_room(char *name, int id)
 
 void	add_room(t_room_keeper *keeper, t_room *room)
 {
-	if (keeper->n_hash[get_hash(room->name)])
-		add_next(keeper->n_hash[get_hash(room->name)], room);
+	if (keeper->n_hash[get_hash((unsigned char*)room->name)])
+		add_next(keeper->n_hash[get_hash((unsigned char*)room->name)], room);
 	else
-		keeper->n_hash[get_hash(room->name)] = room;
+		keeper->n_hash[get_hash((unsigned char*)room->name)] = room;
 }
 
 void	clear_rooms(t_room_keeper *keeper)

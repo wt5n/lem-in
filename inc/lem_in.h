@@ -1,7 +1,8 @@
 #ifndef LEM_IN_LEM_IN_H
 # define LEM_IN_LEM_IN_H
 
-# include "../libft/libft.h"
+# include "../libft/libft/libft.h"
+# include "../libft/printf.h"
 
 # define HASH_ROOMS 10000
 # define NUM_LINKS 10
@@ -104,7 +105,7 @@ void					find_links_name(t_room **n_hash, char *room1,
 void					ant_move(t_room_keeper *k, t_room_links *tmp,
 													int inc_ant, int i);
 void					ant_move2(t_room_keeper *k, t_room_links *tmp,
-													int inc_ant, int i);
+																int i);
 int						*prepare_ants(t_room_keeper *k, t_map_keeper *mp,
 														int f, int *oper);
 void					move_ants(t_room_keeper *keeper, t_map_keeper *mp,

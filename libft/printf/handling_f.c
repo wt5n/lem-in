@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_hf.c                                           :+:      :+:    :+:   */
+/*   handling_f.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 19:22:56 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/29 22:07:19 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/11/17 18:41:00 by hlikely          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,7 @@ int		ap_number(t_double d1, unsigned long long *arr, int countofel, int pow)
 		}
 	}
 	n = d1.part.e - 1023;
-	if (n < 0)
-		return (n);
-	return (0);
+	return (n < 0 ? n : 0);
 }
 
 void	handling_float_part2(t_printf *list, char *tmp, long long n, int s)
@@ -108,12 +106,29 @@ void	handling_float_part2(t_printf *list, char *tmp, long long n, int s)
 	}
 	if (((list->precision == 0 && list->np == 'n') || list->precision))
 		rounding(tmp, list->precision + n);
-	while (n--)
+	while (n > 0)
+	{
 		ft_putchar_cow(*tmp++, list);
+		n--;
+	}
 	if (list->precision || list->flags[3] == '#')
 		ft_putchar_cow('.', list);
 	while (list->precision--)
 		ft_putchar_cow(*tmp++, list);
+}
+
+void	nulz(long double d, t_printf *list)
+{
+	if (d == -__DBL_MIN__)
+		ft_putchar_cow('-', list);
+	ft_putchar_cow('0', list);
+	if (list->precision)
+		ft_putchar_cow('.', list);
+	while (list->precision > 0)
+	{
+		ft_putchar_cow('0', list);
+		list->precision--;
+	}
 }
 
 void	handling_float(long double d, int countofel, int pow, t_printf *list)
@@ -126,13 +141,10 @@ void	handling_float(long double d, int countofel, int pow, t_printf *list)
 
 	if (d == 0 || d == __DBL_MIN__ || d == -__DBL_MIN__)
 	{
-		if (d == -__DBL_MIN__)
-			list->floatminimum = 1;
-		d = 1;
-		list->floatzero = 1;
+		nulz(d, list);
+		return ;
 	}
 	n = 98;
-	i = 0;
 	d1.d = d;
 	arr = (unsigned long long*)malloc(sizeof(unsigned long long) * countofel);
 	n += ap_number(d1, arr, countofel, pow);

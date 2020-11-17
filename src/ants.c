@@ -35,13 +35,13 @@ void		ant_move(t_room_keeper *k, t_room_links *tmp, int inc_ant, int i)
 	}
 	else
 	{
-		ant_move2(k, tmp, inc_ant, i);
+		ant_move2(k, tmp, i);
 		cur->ant_num > 0 ? ft_printf("L%d-%s ", cur->ant_num, cur->name) : 0;
 		ant_move(k, tmp, inc_ant, i - 1);
 	}
 }
 
-void		ant_move2(t_room_keeper *k, t_room_links *tmp, int inc_ant, int i)
+void		ant_move2(t_room_keeper *k, t_room_links *tmp, int i)
 {
 	t_room *prev;
 	t_room *cur;

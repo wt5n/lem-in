@@ -1,24 +1,50 @@
-NAME = libft.a
+NAME = libftprintf.a
 
-SRCS = ./*.c
+SRC = add_func.c \
+       adv_itoa.c \
+       ap_arith.c \
+       ft_printf.c \
+       handling_f.c \
+       handling_lf.c \
+       new_hf.c \
+       parsing.c \
+       type_b.c \
+       type_c.c \
+       type_di.c \
+       type_di_add.c \
+       type_f.c \
+       type_f_add.c \
+       type_o.c \
+       type_other.c \
+       type_p.c \
+       type_s.c \
+       type_u.c \
+       type_x.c
 
-OBJECTS = ./*.o
+OBJ = $(SRC:%.c=%.o)
 
-INCLUDES = ./
+HDR = printf.h
+LIBFT = libft/
+FLAGS = -Wall -Wextra -Werror
+LIBFTO = ./libft/*.o
 
 all: $(NAME)
 
-$(NAME): $(SRCS) libft.h
-	gcc -Wall -Werror -Wextra -I$(INCLUDES) -c $(SRCS)
-	ar rc $(NAME) $(OBJECTS)
-	ranlib $(NAME)
+$(NAME): $(OBJ1) $(SRC1) $(LIBFT) $(HDR)
+	make -C $(LIBFT)
+	ar rc $(NAME) $(OBJ1) $(LIBFTO)
+
+%.o:%.c
+	gcc -c -Wall -Wextra -Werror -I$(HDR) $<
 
 clean:
-	rm -f $(OBJECTS)
+	rm -rf $(OBJ1)
+	make -C $(LIBFT) clean
 
 fclean: clean
-	rm -f $(NAME)
+	rm -rf $(NAME)
+	make -C $(LIBFT) fclean
 
 re: fclean all
 
-.PHONY: re fclean clean all
+.PHONY: all clean fclean re

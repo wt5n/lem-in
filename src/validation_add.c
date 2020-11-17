@@ -78,8 +78,8 @@ void	find_links_name(t_room **n_hash, char *room1, char *room2)
 	int				num;
 
 	num = -1;
-	i = get_hash(room1);
-	j = get_hash(room2);
+	i = get_hash((unsigned char*)room1);
+	j = get_hash((unsigned char*)room2);
 	tmp1 = n_hash[i];
 	tmp2 = n_hash[j];
 	if (tmp1 == NULL || tmp2 == NULL)
