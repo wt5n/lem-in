@@ -6,11 +6,11 @@
 /*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:17:42 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/24 16:23:10 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/11/18 00:37:21 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../printf.h"
+#include "../inc/printf.h"
 
 void		display_gap(t_printf *list, char c, int len, int update_len)
 {

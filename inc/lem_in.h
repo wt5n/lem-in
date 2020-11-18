@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 21:09:22 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/17 21:40:19 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/11/18 01:38:10 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LEM_IN_LEM_IN_H
 
 # include "../libft/libft/libft.h"
-# include "../libft/printf.h"
+# include "../libft/inc/printf.h"
 
 # define HASH_ROOMS 10000
 # define NUM_LINKS 10

@@ -6,11 +6,11 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 21:04:22 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/11/17 21:04:38 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/11/18 00:37:21 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../printf.h"
+#include "../inc/printf.h"
 
 void	nulz(long double d, t_printf *list)
 {

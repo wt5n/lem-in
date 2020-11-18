@@ -6,11 +6,11 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:26:55 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/29 19:48:23 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/11/18 00:37:21 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../printf.h"
+#include "../inc/printf.h"
 
 static void	di_print_without_minus1(t_printf *list, long long x)
 {

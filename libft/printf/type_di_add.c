@@ -6,11 +6,11 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 17:07:22 by hlikely           #+#    #+#             */
-/*   Updated: 2020/10/23 16:45:16 by wtsn             ###   ########.fr       */
+/*   Updated: 2020/11/18 00:37:21 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../printf.h"
+#include "../inc/printf.h"
 
 static void	one_more_func(t_printf *list, long long x)
 {

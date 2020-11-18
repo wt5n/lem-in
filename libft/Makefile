@@ -1,29 +1,48 @@
 NAME = libftprintf.a
 
-SRC = add_func.c \
-       adv_itoa.c \
-       ap_arith.c \
-       ft_printf.c \
-       handling_f.c \
-       handling_lf.c \
-       parsing.c \
-       type_b.c \
-       type_c.c \
-       type_di.c \
-       type_di_add.c \
-       type_f.c \
-       type_f_add.c \
-       type_o.c \
-       type_other.c \
-       type_p.c \
-       type_s.c \
-       type_u.c \
-       type_x.c \
-       nulz.c
+SRC1 = printf/add_func.c \
+       printf/adv_itoa.c \
+       printf/ap_arith.c \
+       printf/ft_printf.c \
+       printf/handling_f.c \
+       printf/handling_lf.c \
+       printf/nulz.c \
+       printf/parsing.c \
+       printf/type_b.c \
+       printf/type_c.c \
+       printf/type_di.c \
+       printf/type_di_add.c \
+       printf/type_f.c \
+       printf/type_f_add.c \
+       printf/type_o.c \
+       printf/type_other.c \
+       printf/type_p.c \
+       printf/type_s.c \
+       printf/type_u.c \
+       printf/type_x.c
 
-OBJ = $(SRC:%.c=%.o)
+OBJ1 = add_func.o \
+       adv_itoa.o \
+       ap_arith.o \
+       ft_printf.o \
+       handling_f.o \
+       handling_lf.o \
+       nulz.o \
+       parsing.o \
+       type_b.o \
+       type_c.o \
+       type_di.o \
+       type_di_add.o \
+       type_f.o \
+       type_f_add.o \
+       type_o.o \
+       type_other.o \
+       type_p.o \
+       type_s.o \
+       type_u.o \
+       type_x.o
 
-HDR = printf.h
+HDR = ./inc/
 LIBFT = libft/
 FLAGS = -Wall -Wextra -Werror
 LIBFTO = ./libft/*.o

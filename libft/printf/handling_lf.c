@@ -6,11 +6,11 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 17:02:28 by hlikely           #+#    #+#             */
-/*   Updated: 2020/11/17 18:30:03 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/11/18 00:37:21 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../printf.h"
+#include "../inc/printf.h"
 
 void	ap_number_lf(t_double_1 d1, unsigned long long *arr, int ctf, int pow)
 {

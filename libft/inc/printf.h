@@ -6,14 +6,14 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:42:52 by hlikely           #+#    #+#             */
-/*   Updated: 2020/11/17 21:08:54 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/11/18 01:38:11 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRINTF_H
 # define PRINTF_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 typedef	struct				s_printf
 {

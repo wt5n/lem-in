@@ -6,7 +6,7 @@
 /*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 16:08:24 by hlikely           #+#    #+#             */
-/*   Updated: 2020/10/23 16:41:57 by wtsn             ###   ########.fr       */
+/*   Updated: 2020/11/18 01:38:10 by wtsn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <ctype.h>
 # include <limits.h>
 # include <stdarg.h>
-# include "../printf.h"
+# include "../inc/printf.h"
 
 # define MAXINT 2147483647
 # define MININT -2147483648
